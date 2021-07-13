@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1366" height="762" viewBox="0 0 1366 762">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.759" y2="0.869" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#009bdf" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x2="0.736" y2="0.962" xlink:href="#linear-gradient"/>
+    <clipPath id="clip-Background">
+      <rect width="1366" height="762"/>
+    </clipPath>
+  </defs>
+  <g id="Background" clip-path="url(#clip-Background)">
+    <path id="Path_4" data-name="Path 4" d="M589,0c325.3,0,589,156.545,589,349.653S1052.485,756.978,428.242,783.961,0,542.76,0,349.653,263.7,0,589,0Z" transform="translate(-363)" opacity="0.6" fill="url(#linear-gradient)"/>
+    <path id="Path_2" data-name="Path 2" d="M586.288,0c325.235,0,588.891,143.234,588.891,319.923S911.523,639.845,586.288,639.845,133.436,422.6-2.6,319.923,261.053,0,586.288,0Z" transform="translate(719.92 39.794)" opacity="0.6" fill="url(#linear-gradient-2)"/>
+    <path id="Path_544" data-name="Path 544" d="M586.288,0c325.235,0,588.891,143.234,588.891,319.923S911.523,639.845,586.288,639.845,133.436,422.6-2.6,319.923,261.053,0,586.288,0Z" transform="translate(57.92 39.794)" opacity="0.6" fill="url(#linear-gradient-2)"/>
+  </g>
+</svg>

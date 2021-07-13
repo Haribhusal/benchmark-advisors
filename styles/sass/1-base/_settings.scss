@@ -1,0 +1,21 @@
+.slick-prev {
+    transform: scaleX(-1) !important;
+    left: -50px !important;
+}
+.slick-next {
+    right: -50px !important;
+}
+.slick-arrow {
+    height: 40px !important;
+    width: 40px !important;
+    padding: 15px !important;
+    border-radius: 40px;
+    background-color: rgba($p, 0.1) !important;
+    border: 1px solid transparent;
+    @include tsn();
+
+    &:hover {
+        border: 1px solid $p;
+        padding: 13px !important;
+    }
+}

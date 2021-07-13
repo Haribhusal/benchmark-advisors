@@ -1,0 +1,183 @@
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+// fonts
+
+.object_cover {
+    object-fit: cover;
+    object-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.text_big {
+    font-size: 56px !important;
+    line-height: 60px !important;
+}
+
+.gap {
+    gap: 15px;
+}
+.font_p {
+    font-family: "ReservationBlack", sans-serif !important;
+}
+
+body {
+    font-family: "Open Sans", sans-serif !important;
+}
+
+.btn_p {
+    background-color: $p !important;
+}
+.btn_big {
+    padding: 15px 30px !important;
+}
+
+// colors
+
+.text_w {
+    color: #fff !important;
+}
+.text_p {
+    color: $p !important;
+}
+
+.text_t {
+    color: $t !important;
+}
+// bg
+.btn_p_dim {
+    background-color: rgba($p, 0.1) !important;
+}
+
+.bg_white {
+    background-color: #fff;
+}
+// corners
+.rounded_big {
+    border-radius: 1000px !important;
+}
+.rounded_medium {
+    border-radius: 15px;
+}
+
+// fontsize
+
+.f10 {
+    font-size: 10px !important;
+}
+.f11 {
+    font-size: 11px !important;
+}
+.f12 {
+    font-size: 12px !important;
+}
+
+.f13 {
+    font-size: 13px !important;
+}
+.f14 {
+    font-size: 14px !important;
+}
+.f15 {
+    font-size: 15px !important;
+}
+.f16 {
+    font-size: 16px !important;
+}
+.f17 {
+    font-size: 17px !important;
+}
+.f18 {
+    font-size: 18px !important;
+}
+.f19 {
+    font-size: 19px !important;
+}
+.f20 {
+    font-size: 20px !important;
+}
+.fw100 {
+    font-weight: 100 !important;
+}
+.fw200 {
+    font-weight: 200 !important;
+}
+.fw300 {
+    font-weight: 300 !important;
+}
+.fw400 {
+    font-weight: 400 !important;
+}
+.fw500 {
+    font-weight: 500 !important;
+}
+.fw600 {
+    font-weight: 600 !important;
+}
+.fw700 {
+    font-weight: 700 !important;
+}
+.fw800 {
+    font-weight: 800 !important;
+}
+.fw900 {
+    font-weight: 900 !important;
+}
+
+.bg_gray {
+    background-color: #eee;
+}
+// buttons
+
+.btn_hovered {
+    border: 1px solid transparent;
+    display: flex;
+    height: 40px;
+    background-color: transparent;
+    // overflow: hidden;
+    padding: 0px;
+    .label {
+        // visibility: hidden;
+        display: none;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    .icon {
+        height: 40px;
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba($p, 0.1);
+        border-radius: 40px;
+    }
+    &:hover {
+        .label {
+            width: 100%;
+            visibility: visible;
+            background-color: rgba($p, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            border-radius: 40px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            padding-left: 15px;
+            color: #fff;
+            padding-right: 0;
+        }
+        .icon {
+            border-top-left-radius: 0px;
+            background-color: rgba($p, 1);
+            border-bottom-left-radius: 0px;
+            img {
+                filter: brightness(0) invert(1);
+            }
+        }
+    }
+}
