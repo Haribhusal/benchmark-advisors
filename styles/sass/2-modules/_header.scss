@@ -9,6 +9,13 @@ header {
         .nav-link {
             font-size: 14px !important;
             padding: 10px 20px !important;
+            cursor: pointer !important;
         }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    header {
+        background-color: #fff;
     }
 }

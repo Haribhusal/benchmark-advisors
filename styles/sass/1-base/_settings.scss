@@ -1,9 +1,24 @@
+::selection {
+    background-color: $p;
+    color: #fff;
+}
+
 .slick-prev {
     transform: scaleX(-1) !important;
     left: -50px !important;
 }
 .slick-next {
     right: -50px !important;
+}
+
+@media screen and (max-width: 992px) {
+    .slick-next {
+        right: 0 !important;
+    }
+    .slick-prev {
+        transform: scaleX(-1) !important;
+        left: -0 !important;
+    }
 }
 .slick-arrow {
     height: 40px !important;
@@ -17,5 +32,353 @@
     &:hover {
         border: 1px solid $p;
         padding: 13px !important;
+    }
+}
+
+ul,
+li,
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.header_logo {
+    max-width: 70px !important;
+}
+
+.btn {
+    &:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    &:hover {
+        background-color: #fff !important;
+        color: $p !important;
+        box-shadow: 0px 10px 30px rgba(#000, 0.08);
+    }
+}
+.btn_p {
+    img {
+        filter: brightness(0) invert(1);
+    }
+    &:hover {
+        img {
+            filter: brightness(1) invert(0);
+        }
+    }
+}
+
+.featurewrapper {
+    @include tsn();
+
+    background-color: rgba($p, 0.1);
+    border-radius: 10px;
+    .icon {
+        img {
+            height: 20px;
+            @include tsn();
+
+            filter: brightness(1) invert(0);
+        }
+    }
+    .arrow {
+        opacity: 0;
+        background-color: #fff;
+        height: 30px;
+        width: 30px;
+        text-align: center;
+        border-radius: 30px;
+        line-height: 30px;
+        position: relative;
+        left: -10px;
+        @include tsn();
+    }
+    &:hover {
+        background-color: $p;
+        cursor: pointer;
+        color: #fff !important;
+        .icon {
+            img {
+                filter: brightness(0) invert(1);
+            }
+        }
+        .arrow {
+            opacity: 1;
+            background-color: #fff;
+            height: 30px;
+            width: 30px;
+            text-align: center;
+            border-radius: 30px;
+            line-height: 30px;
+            position: relative;
+            left: 0;
+        }
+    }
+}
+
+.investorwrapper {
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+    max-height: 300px;
+    box-shadow: 0px 20px 30px rgba(#000, 0.08);
+    .moredetails {
+        display: none;
+    }
+    .details {
+        @include tsn();
+    }
+    &:hover {
+        .details {
+            background-color: #fff;
+            position: relative;
+            z-index: 99;
+            margin-top: -100px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        .moredetails {
+            display: block;
+        }
+    }
+    .invested {
+        position: absolute;
+        background-color: green;
+        padding: 2px 13px;
+        border-radius: 100px;
+        color: #fff;
+        top: 15px;
+        right: 15px;
+    }
+}
+
+.otherInvestors {
+    .investorwrapper {
+        &:hover {
+            .details {
+                margin-top: 0px !important;
+            }
+        }
+    }
+}
+
+.datawrapper {
+    .item {
+        border-bottom: 1px solid #eee;
+        padding: 10px 0;
+        .data-blurred {
+            position: relative;
+            user-select: none;
+            pointer-events: none;
+            &::after {
+                position: absolute;
+                user-select: none;
+                pointer-events: none;
+                height: 100%;
+                width: 100%;
+                backdrop-filter: blur(6px);
+                top: 0;
+                content: "";
+                z-index: 09;
+                left: 0;
+            }
+        }
+    }
+}
+.datawrapper_single {
+    .item {
+        border: none !important;
+    }
+}
+.tabwrapper {
+    .nav {
+        border: none !important;
+        a {
+            font-family: "ReservationBlack", sans-serif !important;
+            background-color: transparent !important;
+            border-bottom: 2px solid transparent !important;
+            color: #555555;
+            border: none;
+            padding: 10px 0 !important;
+            margin-right: 30px !important;
+        }
+        a.active {
+            color: $p;
+            border-bottom: 2px solid $p !important;
+        }
+    }
+}
+
+.bankerwrapper {
+    position: relative;
+    margin-bottom: 30px;
+    .invested {
+        position: absolute;
+        background-color: green;
+        padding: 2px 13px;
+        border-radius: 100px;
+        color: #fff;
+        top: 15px;
+        right: 15px;
+    }
+}
+
+.investor_profile {
+    .contactdetails {
+        .detail {
+            img {
+                height: 15px;
+                margin-right: 10px;
+            }
+        }
+    }
+}
+.portfoliowrapper {
+    position: relative;
+    .image {
+        img {
+            height: 100px;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    .profile {
+        margin-top: -25px;
+        margin-left: 10px;
+        img {
+            border-radius: 10px;
+        }
+    }
+    .invested {
+        position: absolute;
+        color: green;
+        padding: 2px 13px;
+        border-radius: 100px;
+        background-color: #fff;
+        top: 15px;
+        right: 15px;
+    }
+}
+.portfolioData {
+    .dataitem {
+        padding: 10px 0;
+    }
+}
+
+.data-blurred {
+    position: relative;
+    user-select: none;
+    pointer-events: none;
+    &::after {
+        position: absolute;
+        user-select: none;
+        pointer-events: none;
+        height: 100%;
+        width: 100%;
+        backdrop-filter: blur(6px);
+        top: 0;
+        content: "";
+        z-index: 09;
+        left: 0;
+    }
+}
+
+.servicewrapper {
+    .infoicon {
+        position: relative;
+        cursor: pointer;
+        .infodata {
+            position: absolute;
+            width: 200px;
+            padding: 10px;
+            font-size: 12px;
+            background-color: #fff;
+            left: 50%;
+            top: 100%;
+            transform: translateX(-50%);
+            box-shadow: 0px 10px 30px rgba(#000, 0.2);
+            border-radius: 10px;
+            &::before {
+                border-bottom: 10px solid #fff;
+                position: absolute;
+                top: -15px;
+                left: 50%;
+                transform: translateX(-50%);
+                content: "";
+                border-top: 10px solid transparent;
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+            }
+        }
+        .icon {
+            height: 30px;
+            width: 30px;
+            border-radius: 30px;
+            line-height: 30px;
+            background-color: rgba($p, 0.2);
+            text-align: center;
+            color: #777;
+            cursor: pointer;
+        }
+    }
+}
+
+.keycontacts {
+    .contactWrapper {
+        border-radius: 10px;
+        .image {
+            img {
+                max-height: 170px;
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+            }
+        }
+        .details {
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+    }
+    .contacts {
+        .item {
+            img {
+                height: 15px;
+            }
+        }
+    }
+}
+
+.tags {
+    list-style: none;
+    margin: 10px 0;
+    padding: 0;
+    li {
+        display: inline-block;
+        border-radius: 100px;
+        background-color: rgba(#000, 0.08);
+        font-size: 12px;
+        padding: 5px 13px;
+        color: #777;
+    }
+}
+
+.btn_get_investment {
+    background-color: rgba($p, 0.1);
+    border-radius: 100px;
+    color: $p !important;
+}
+
+header {
+    .navbar {
+        .dropdown-menu {
+            border: none !important;
+            z-index: 99999 !important;
+            box-shadow: 0px 10px 30px rgba($p, 0.1);
+        }
+        .dropdown-item {
+            &:focus {
+                background-color: rgba($p, 0.1) !important;
+                color: $p !important;
+            }
+        }
     }
 }

@@ -78,7 +78,7 @@ const InvestNow = () => {
                                 <p className="text-muted f14">
                                     New Baneshwor 10, Kathmandu, Nepal
                                 </p>
-                                <div className="tagswrapper d-flex gap">
+                                <div className="tagswrapper flex-wrap d-flex gap">
                                     <div className="tag f12 text-uppercase bg_gray py-2 px-3 rounded_big">
                                         Design and Development
                                     </div>
@@ -120,7 +120,7 @@ const InvestNow = () => {
                                 <p className="text-muted f14">
                                     New Baneshwor 10, Kathmandu, Nepal
                                 </p>
-                                <div className="tagswrapper d-flex gap">
+                                <div className="tagswrapper flex-wrap d-flex gap">
                                     <div className="tag f12 text-uppercase bg_gray py-2 px-3 rounded_big">
                                         Design and Development
                                     </div>
@@ -160,7 +160,7 @@ const InvestNow = () => {
                                 <p className="text-muted f14">
                                     New Baneshwor 10, Kathmandu, Nepal
                                 </p>
-                                <div className="tagswrapper d-flex gap">
+                                <div className="tagswrapper flex-wrap d-flex gap">
                                     <div className="tag f12 text-uppercase bg_gray py-2 px-3 rounded_big">
                                         Design and Development
                                     </div>
@@ -201,7 +201,7 @@ const InvestNow = () => {
                                 <p className="text-muted f14">
                                     New Baneshwor 10, Kathmandu, Nepal
                                 </p>
-                                <div className="tagswrapper d-flex gap">
+                                <div className="tagswrapper flex-wrap d-flex gap">
                                     <div className="tag f12 text-uppercase bg_gray py-2 px-3 rounded_big">
                                         Design and Development
                                     </div>

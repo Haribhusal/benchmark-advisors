@@ -7,6 +7,8 @@ import Highlights from '../components/Highlights'
 import InvestNow from '../components/InvestNow'
 import JoinStartup from '../components/JoinStartup'
 import UpcomingEvents from '../components/UpcomingEvents'
+import OurStory from '../components/OurStory'
+import Footer from '../components/Footer'
 export default function Home() {
   return (
     <main className="page" style={{
@@ -25,6 +27,8 @@ export default function Home() {
       <InvestNow />
       <JoinStartup />
       <UpcomingEvents />
+      <OurStory />
+      <Footer />
 
     </main >
   )
