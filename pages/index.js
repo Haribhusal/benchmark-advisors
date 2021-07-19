@@ -9,6 +9,7 @@ import JoinStartup from '../components/JoinStartup'
 import UpcomingEvents from '../components/UpcomingEvents'
 import OurStory from '../components/OurStory'
 import Footer from '../components/Footer'
+import Head from 'next/head'
 export default function Home() {
   return (
     <main className="page" style={{
@@ -19,6 +20,10 @@ export default function Home() {
       backgroundAttachment: 'fixed'
 
     }} >
+      <Head>
+        <title>Benchmark Advisors</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <HeroSlider />
       <OnBoarding />
       <HowItWorks />
