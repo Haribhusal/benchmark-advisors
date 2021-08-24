@@ -23,7 +23,7 @@ const JoinStartup = () => {
                                     <h2 className="title font_p text_big">Join Benchmark as an Startup and Boost Your Business</h2>
                                 </div>
                                 <div className="buttonwrapper mt-5">
-                                    <Link href="#">
+                                    <Link href="/join-startup">
                                         <a>
                                             <button className="btn btn_p rounded_big font_p text_w btn_big btn_text_p">Get Started
                                                 <Image src='/icons/right-arrow.svg' height={15} width={15} />

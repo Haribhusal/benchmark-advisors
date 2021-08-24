@@ -1,31 +1,42 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import useSWR from 'swr'
 
-function Footer() {
+const fetcher = async () => {
+  const response = await fetch('https://benchmark.promotingnepal.com/api/setting')
+  // const response = await fetch(`${process.env.BASE_URL}setting`)
+  const data = await response.json();
+  return data
+}
+
+const Footer = () => {
+
+  const { data, error } = useSWR('settings', fetcher);
+  if (error) return 'An error occured';
+  if (!data) return '';
+  const settings = data[0];
+
+
   return (
-    <footer className="">
+    <footer className="py-5">
       <div className="container">
         <div className="row">
           <div className="col-sm-6">
             <div className="leftwrapper">
               <div className="logowrapper">
-                <Image src="/images/logo.png" className="img-fluid" height={100} width={130} layout="" priority />
+                <Image src={settings.logo} width={120} height={90} />
+                <h6 className="title"> {settings.site_title}</h6>
+                <h2>
+
+                </h2>
               </div>
-              <div className="textwrapper">
-                <p className="text-muted f14">
-                  Lorem ipsum dolor sit amet, ipsum dolo dipiscing elit, sed
-                  do eiusmod tempor incididunt consectetur adipiscing elit,
-                  ipsum dolo dipiscing elit, sed do eiusmod tempor
-                </p>
-              </div>
+
               <div className="sponsor">
                 <div className="titlewrapper my-3">
                   <h6 className="title font_p f18 fw500">
                     Tech Partner
                   </h6>
                 </div>
-
-
                 <div className="techpartner d-flex gap align-items-center">
                   <Image src="/images/tcs.svg" height={70} width={100} priority />
                   <strong className="textwrapper">
@@ -39,10 +50,14 @@ function Footer() {
           <div className="col-sm-6">
             <div className="rightwrapper">
               <div className="textwrapper">
-                <p className="text-muted f14 mb-5">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione minus nobis tempora quaerat ipsa, alias culpa tempore temporibus optio pariatur sit quisquam placeat provident neque quis, cupiditate sequi? Saepe, suscipit!
+                <h6 className="title">
+                  {settings.about_title}
+                </h6>
+                <p className="text-muted">
+                  {settings.about_text}
                 </p>
               </div>
+
               <div className="row">
                 <div className="col-sm-6">
                   <div className="menuwrapper">
@@ -51,9 +66,9 @@ function Footer() {
                     </div>
                     <div className="menu">
                       <ul>
-                        <li className="text-muted f14">New Baneshwor, Kathmandu</li>
-                        <li className="text-muted f14">info@benchmarkadventures.com</li>
-                        <li className="text-muted f14">+977-98XXXXXXX</li>
+                        <li className="text-muted f14">{settings.address}</li>
+                        <li className="text-muted f14">{settings.email}</li>
+                        <li className="text-muted f14">{settings.mobile_no}, {settings.phone_no}</li>
                       </ul>
                     </div>
                   </div>
@@ -66,40 +81,27 @@ function Footer() {
                     <div className="menu">
                       <ul>
                         <li className="text-muted f14">
-                          <Link href="">
-                            <a className="link text_t">
+                          <Link href={settings.facebook_url}>
+                            <a target="_blank" className="link text_t">
                               Facebook
                             </a>
                           </Link>
                         </li>
                         <li className="text-muted f14">
-                          <Link href="">
-                            <a className="link text_t">
+                          <Link href={settings.instagram_url}>
+                            <a target="_blank" className="link text_t">
                               Instagram
                             </a>
                           </Link>
                         </li>
                         <li className="text-muted f14">
-                          <Link href="">
-                            <a className="link text_t">
+                          <Link href={settings.twitter_url}>
+                            <a target="_blank" className="link text_t">
                               Twitter
                             </a>
                           </Link>
                         </li>
-                        <li className="text-muted f14">
-                          <Link href="">
-                            <a className="link text_t">
-                              Clubhouse
-                            </a>
-                          </Link>
-                        </li>
-                        <li className="text-muted f14">
-                          <Link href="">
-                            <a className="link text_t">
-                              Medium
-                            </a>
-                          </Link>
-                        </li>
+
 
                       </ul>
                     </div>
@@ -145,4 +147,9 @@ function Footer() {
   )
 }
 
+
+
 export default Footer;
+
+
+
