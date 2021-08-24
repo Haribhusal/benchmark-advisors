@@ -1,39 +1,87 @@
-import React, { Component, useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
 
-const JoinStartup = (props) => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data) => console.log("hey");
-
+const JoinStartup = () => {
   const [activeForm, setActiveForm] = useState(1);
-  const {
-    startupName,
-    startupCategory,
-    startupSubcategory,
-    provience,
-    district,
-    municipality,
-    location,
-    contactNumber,
-    startupEmail,
-    terms,
-    personFirstName,
-    personLastName,
-    personContact,
-    personEmail,
-    personAddress,
-    doc1,
-    doc2,
-    doc3,
-  } = props;
+  const [values, setValues] = useState({
+    startup_name: "",
+    company_category_id: "",
+    startupSubcategory: "",
+    province_id: "",
+    district_id: "",
+    municipality_id: "",
+    location: "",
+    contact_number: "",
+    email: "",
+    terms: "",
+    personal_name: "",
+    personal_contact_number: "",
+    personal_email: "",
+    personal_address: "",
+    pan_status: "",
+    pan_number: "",
+    company_since: "",
+    number_of_emplyee: "",
+    doc1: "",
+    doc2: "",
+    doc3: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const {
+      startupName,
+      startupCategory,
+      startupSubcategory,
+      provience,
+      district,
+      municipality,
+      location,
+      contactNumber,
+      startupEmail,
+      terms,
+      personFirstName,
+      personLastName,
+      personContact,
+      personEmail,
+      personAddress,
+      doc1,
+      doc2,
+      doc3,
+    } = values;
+
+    const user = {
+      startupName,
+      startupCategory,
+      startupSubcategory,
+      provience,
+      district,
+      municipality,
+      location,
+      contactNumber,
+      startupEmail,
+      terms,
+      personFirstName,
+      personLastName,
+      personContact,
+      personEmail,
+      personAddress,
+      doc1,
+      doc2,
+      doc3,
+    };
+
+    await axios.post(
+      "https://benchmark.promotingnepal.com/api/startup/signup",
+      user
+    );
+  };
+
   return (
     <main
       className="page"
@@ -49,7 +97,7 @@ const JoinStartup = (props) => {
         <div className="container">
           <div className="row">
             <div className="col-sm-7">
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form>
                 {/* Step 1 */}
 
                 {activeForm == 1 && (
@@ -74,9 +122,7 @@ const JoinStartup = (props) => {
                               Enter your Startup's Name
                             </label>
                             <input
-                              {...register("startupName", {
-                                required: true,
-                              })}
+                              name="startupName"
                               type="text"
                               className="form-control"
                               placeholder="Startup Name"
@@ -91,12 +137,9 @@ const JoinStartup = (props) => {
                               Enter your Startup Category
                             </label>
                             <select
-                              name=""
+                              name="startupCategory"
                               id=""
                               className="form-control"
-                              {...register("startupCategory", {
-                                required: true,
-                              })}
                             >
                               <option value="1">Category 1</option>
                               <option value="2">Category 2</option>
@@ -110,12 +153,9 @@ const JoinStartup = (props) => {
                               Enter your Startup Subcategory
                             </label>
                             <select
-                              name=""
+                              name="startupSubcategory"
                               id=""
                               className="form-control"
-                              {...register("startupSubcategory", {
-                                required: true,
-                              })}
                             >
                               <option value="1">1</option>
                               <option value="2">2</option>
@@ -132,12 +172,9 @@ const JoinStartup = (props) => {
                               Enter Provience
                             </label>
                             <select
-                              name=""
+                              name="provience"
                               id=""
                               className="form-control"
-                              {...register("provience", {
-                                required: true,
-                              })}
                             >
                               <option value="1">Provience 1</option>
                               <option value="2">Provience 2</option>
@@ -151,12 +188,9 @@ const JoinStartup = (props) => {
                               Enter District
                             </label>
                             <select
-                              name=""
+                              name="district"
                               id=""
                               className="form-control"
-                              {...register("district", {
-                                required: true,
-                              })}
                             >
                               <option value="1">District 1</option>
                               <option value="2">District 2</option>
@@ -170,12 +204,9 @@ const JoinStartup = (props) => {
                               Enter Municipality
                             </label>
                             <select
-                              name=""
+                              name="municipality"
                               id=""
                               className="form-control"
-                              {...register("municipality", {
-                                required: true,
-                              })}
                             >
                               <option value="1">Municipality 1</option>
                               <option value="2">Municipality 2</option>
@@ -191,10 +222,8 @@ const JoinStartup = (props) => {
                               Enter your Startup's Location
                             </label>
                             <input
-                              {...register("location", {
-                                required: true,
-                              })}
                               type="text"
+                              name="location"
                               className="form-control"
                               placeholder="Startup Location"
                             />
@@ -208,9 +237,7 @@ const JoinStartup = (props) => {
                               Enter your Startup's Contact Number
                             </label>
                             <input
-                              {...register("contactNumber", {
-                                required: true,
-                              })}
+                              name="contactNumber"
                               type="text"
                               className="form-control"
                               placeholder="Startup Contact Number"
@@ -223,9 +250,7 @@ const JoinStartup = (props) => {
                               Enter your Startup's Email
                             </label>
                             <input
-                              {...register("startupEmail", {
-                                required: true,
-                              })}
+                              name="startupEmail"
                               type="text"
                               className="form-control"
                               placeholder="Startup Email"
@@ -272,9 +297,7 @@ const JoinStartup = (props) => {
                             Enter Your First Name
                           </label>
                           <input
-                            {...register("personFirstName", {
-                              required: true,
-                            })}
+                            name="personFirstName"
                             type="text"
                             className="form-control"
                             placeholder="Your First Name"
@@ -287,9 +310,7 @@ const JoinStartup = (props) => {
                             Enter Your Last Name
                           </label>
                           <input
-                            {...register("personLastName", {
-                              required: true,
-                            })}
+                            name="personLastName"
                             type="text"
                             className="form-control"
                             placeholder="Your Last Name"
@@ -304,9 +325,7 @@ const JoinStartup = (props) => {
                             Enter Contact Number
                           </label>
                           <input
-                            {...register("personContact", {
-                              required: true,
-                            })}
+                            name="personContact"
                             type="tel"
                             className="form-control"
                             placeholder="Your Contact Number"
@@ -319,9 +338,7 @@ const JoinStartup = (props) => {
                             Enter Your Email Address
                           </label>
                           <input
-                            {...register("personEmail", {
-                              required: true,
-                            })}
+                            name="personEmail"
                             type="email"
                             className="form-control"
                             placeholder="Your Email Address"
@@ -336,9 +353,7 @@ const JoinStartup = (props) => {
                             Enter Your Address
                           </label>
                           <input
-                            {...register("personAddress", {
-                              required: true,
-                            })}
+                            name="personAddress"
                             type="tel"
                             className="form-control"
                             placeholder="Your Address"
@@ -389,9 +404,7 @@ const JoinStartup = (props) => {
                             Choose Document 1
                           </label>
                           <input
-                            {...register("doc1", {
-                              required: true,
-                            })}
+                            name="doc1"
                             type="file"
                             className="form-control"
                             placeholder="Document 1"
@@ -406,9 +419,7 @@ const JoinStartup = (props) => {
                             Choose Document 2
                           </label>
                           <input
-                            {...register("doc2", {
-                              required: true,
-                            })}
+                            name="doc2"
                             type="file"
                             className="form-control"
                             placeholder="Document 2"
@@ -423,9 +434,7 @@ const JoinStartup = (props) => {
                             Choose Document 3
                           </label>
                           <input
-                            {...register("doc3", {
-                              required: true,
-                            })}
+                            name="doc3"
                             type="file"
                             className="form-control"
                             placeholder="Document 3"
@@ -460,7 +469,7 @@ const JoinStartup = (props) => {
                     <div className="row">
                       <div className="col-sm-12">
                         <div className="titlewrapper">
-                          <h3 className="title font_p">Confirm Informations</h3>
+                          <h3 className="title font_p">Hey</h3>
                           <p className="text-muted small">
                             Lorem ipsum dolor, sit amet consectetur adipisicing
                             elit. Corrupti incidunt repudiandae quo.
@@ -475,49 +484,49 @@ const JoinStartup = (props) => {
                           <tbody>
                             <tr>
                               <td className="text-muted small">Startup Name</td>
-                              <td>{startupName} Hey</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Startup Category
                               </td>
-                              <td>{startupCategory}</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Startup Subcategory
                               </td>
-                              <td>{startupSubcategory}</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td className="text-muted small">Provience</td>
-                              <td>{provience}</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td className="text-muted small">District</td>
-                              <td>{district}</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td className="text-muted small">Municipality</td>
-                              <td>{municipality}</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Startup Location
                               </td>
-                              <td>{location}</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Startup Contact Number
                               </td>
-                              <td>{contactNumber}</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Startup Email Address
                               </td>
-                              <td>{startupEmail}</td>
+                              <td></td>
                             </tr>
                           </tbody>
                         </table>
@@ -529,31 +538,31 @@ const JoinStartup = (props) => {
                               <td className="text-muted small">
                                 Person First Name
                               </td>
-                              <td>{personFirstName}</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Person Last Name
                               </td>
-                              <td>{personLastName}</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Person Contact Number
                               </td>
-                              <td>{personContact}</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Person Email Address
                               </td>
-                              <td>{personEmail}</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Person Address
                               </td>
-                              <td>{personAddress}</td>
+                              <td></td>
                             </tr>
                           </tbody>
                         </table>
@@ -566,19 +575,19 @@ const JoinStartup = (props) => {
                               <td className="text-muted small">
                                 Startup Document 1
                               </td>
-                              <td>{doc1}</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Startup Document 2
                               </td>
-                              <td>{doc2}</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Startup Document 3
                               </td>
-                              <td className="overflow-hidden">{doc3}</td>
+                              <td className="overflow-hidden"></td>
                             </tr>
                           </tbody>
                         </table>
@@ -621,6 +630,23 @@ const JoinStartup = (props) => {
                     </div>
                   </div>
                 )}
+
+                {activeForm == 5 && (
+                  <div className="formwrapper">
+                    <div className="row">
+                      <div className="col-sm-12">
+                        <div className="titlewrapper">
+                          <h3 className="title font_p">Thank you!</h3>
+                          <p className="text-muted small">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing
+                            elit. Corrupti incidunt repudiandae quo.
+                          </p>
+                        </div>
+                        <hr />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </form>
             </div>
 
@@ -650,3 +676,24 @@ const JoinStartup = (props) => {
 };
 
 export default JoinStartup;
+
+//  {
+//   "startup_name": "Techcare",
+//   "company_category_id": "1",
+//   "startupSubcategory": "1",
+//   "provience": "1",
+//   "district": "1",
+//   "municipality": "1",
+//   "location": "test",
+//   "contactNumber": "test",
+//   "startupEmail": "bhusalhari89@gmail.com",
+//   "terms": "1",
+//   "personFirstName": "Hari",
+//   "personLastName": "Bhusal",
+//   "personContact": "9847458523",
+//   "personEmail": "bhusalhari89@gmail.com",
+//   "personAddress": "shankhamul",
+//   "doc1": "",
+//   "doc2": "",
+//   "doc3": ""
+// }
