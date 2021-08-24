@@ -1,7 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import useSWR from "swr";
 
 import Link from "next/link";
+
+const categoryFetcher = async () => {
+  const response = await fetch(
+    "https://benchmark.promotingnepal.com/api/announcements"
+  );
+  // const response = await fetch(`${process.env.BASE_URL}setting`)
+  const data = await response.json();
+  return data;
+};
 
 const JoinStartup = () => {
   const [activeForm, setActiveForm] = useState(1);
@@ -81,6 +91,11 @@ const JoinStartup = () => {
       user
     );
   };
+
+  const { data, error } = useSWR("categories", categoryFetcher);
+  if (error) return "An error occured";
+  if (!data) return "";
+  const categories = data;
 
   return (
     <main
