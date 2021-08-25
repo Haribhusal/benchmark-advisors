@@ -1,5 +1,5 @@
 import Meta from "./Meta";
-import Header from '../components/Header'
+import Header from "../components/Header";
 import Footer from "./Footer";
 
 const Layout = ({ children }) => {
@@ -9,7 +9,6 @@ const Layout = ({ children }) => {
       <Header />
       {children}
       <Footer />
-
     </>
   );
 };

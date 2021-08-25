@@ -1,65 +1,53 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import useSWR from 'swr'
+import Image from "next/image";
+import Link from "next/link";
+import useSWR from "swr";
 
 const fetcher = async () => {
-  const response = await fetch('https://benchmark.promotingnepal.com/api/setting')
+  const response = await fetch(
+    "https://benchmark.promotingnepal.com/api/setting"
+  );
   // const response = await fetch(`${process.env.BASE_URL}setting`)
   const data = await response.json();
-  return data
-}
+  return data;
+};
 
 const Footer = () => {
-
-  const { data, error } = useSWR('settings', fetcher);
-  if (error) return 'An error occured';
-  if (!data) return '';
+  const { data, error } = useSWR("settings", fetcher);
+  if (error) return "An error occured";
+  if (!data) return "";
   const settings = data[0];
 
-
   return (
-    <footer className="py-5">
+    <footer
+      className="py-5 page"
+      style={{
+        backgroundImage: `url("/background/bg.svg")`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+        backdropFilter: "20px",
+      }}
+    >
       <div className="container">
         <div className="row">
-          <div className="col-sm-6">
+          <div className="col-sm-4">
             <div className="leftwrapper">
               <div className="logowrapper">
                 <Image src={settings.logo} width={120} height={90} />
                 <h6 className="title"> {settings.site_title}</h6>
-                <h2>
-
-                </h2>
+                <h2></h2>
               </div>
 
-              <div className="sponsor">
-                <div className="titlewrapper my-3">
-                  <h6 className="title font_p f18 fw500">
-                    Tech Partner
-                  </h6>
-                </div>
-                <div className="techpartner d-flex gap align-items-center">
-                  <Image src="/images/tcs.svg" height={70} width={100} priority />
-                  <strong className="textwrapper">
-                    Techcare Softwares
-                  </strong>
-                </div>
+              <div className="textwrapper">
+                <p className="text-muted small">{settings.about_text}</p>
               </div>
             </div>
-
           </div>
-          <div className="col-sm-6">
+          <div className="col-sm-8">
             <div className="rightwrapper">
-              <div className="textwrapper">
-                <h6 className="title">
-                  {settings.about_title}
-                </h6>
-                <p className="text-muted">
-                  {settings.about_text}
-                </p>
-              </div>
-
               <div className="row">
-                <div className="col-sm-6">
+                <div className="col-sm-4">
                   <div className="menuwrapper">
                     <div className="titlewrapper">
                       <h6 className="title mb-3 font_p fw800">Contact Us</h6>
@@ -68,15 +56,19 @@ const Footer = () => {
                       <ul>
                         <li className="text-muted f14">{settings.address}</li>
                         <li className="text-muted f14">{settings.email}</li>
-                        <li className="text-muted f14">{settings.mobile_no}, {settings.phone_no}</li>
+                        <li className="text-muted f14">
+                          {settings.mobile_no}, {settings.phone_no}
+                        </li>
                       </ul>
                     </div>
                   </div>
                 </div>
-                <div className="col-sm-6">
+                <div className="col-sm-4">
                   <div className="menuwrapper">
                     <div className="titlewrapper">
-                      <h6 className="title mb-3 font_p fw800">Social Account</h6>
+                      <h6 className="title mb-3 font_p fw800">
+                        Social Account
+                      </h6>
                     </div>
                     <div className="menu">
                       <ul>
@@ -101,9 +93,25 @@ const Footer = () => {
                             </a>
                           </Link>
                         </li>
-
-
                       </ul>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-sm-4">
+                  <div className="sponsor">
+                    <div className="titlewrapper">
+                      <h6 className="title font_p f18 fw500">Tech Partner</h6>
+                    </div>
+                    <div className="techpartner d-flex gap flex-column align-items-start">
+                      <Image
+                        src="/images/tcs.svg"
+                        height={70}
+                        width={100}
+                        priority
+                      />
+                      <strong className="textwrapper">
+                        Techcare Softwares
+                      </strong>
                     </div>
                   </div>
                 </div>
@@ -116,7 +124,8 @@ const Footer = () => {
             <div className="leftwrapper">
               <div className="textwrapper">
                 <p className="text-muted f12 mb-0">
-                  &copy; Benchmark Adventures Pvt. Ltd. 2021, All Rights Reserved
+                  &copy; Benchmark Adventures Pvt. Ltd. 2021, All Rights
+                  Reserved
                 </p>
               </div>
             </div>
@@ -126,9 +135,7 @@ const Footer = () => {
               <div className="linkswrapper d-flex">
                 <div className="link">
                   <Link href="#">
-                    <a className="link f12 text_t px-3">
-                      Privacy Policy
-                    </a>
+                    <a className="link f12 text_t px-3">Privacy Policy</a>
                   </Link>
                 </div>
                 <div className="link">
@@ -144,12 +151,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  )
-}
-
-
+  );
+};
 
 export default Footer;
-
-
-
