@@ -31,7 +31,7 @@ export default function SingleProduct() {
   return (
     <>
       <Meta
-        title={`${event.title} - Drinksmandu`}
+        title={`${event.title} - Benchmark Advisors`}
         description={event.description}
       />
       <main

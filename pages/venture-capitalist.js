@@ -554,7 +554,6 @@ export default function AdvisoryAndConsulting() {
             </div>
           </div>
         </section>
-        <OurStory />
       </main>
     </>
   );

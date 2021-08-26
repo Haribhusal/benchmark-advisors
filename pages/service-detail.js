@@ -235,7 +235,6 @@ export default function ServiceDetails() {
             </div>
           </div>
         </section>
-        <OurStory />
       </main>
     </>
   );

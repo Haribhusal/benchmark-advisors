@@ -53,7 +53,7 @@ export default function Home() {
         <InvestNow />
         <JoinStartup />
         <UpcomingEvents />
-        <OurStory />
+        {/* <OurStory /> */}
       </main>
     </>
   );

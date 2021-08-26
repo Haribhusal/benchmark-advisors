@@ -33,13 +33,13 @@ const KeyPartners = () => {
             <div className="col-sm-3" key={partner.id}>
               <Link href={partner.url}>
                 <a className="">
-                  <div className="partnerwrapper mb-3 shadow rounded_medium p-3 text-center bg_white">
+                  <div className="partnerwrapper mb-4  rounded_medium p-3 text-center bg_white">
                     <div className="image">
                       <Image
                         src={partner.imagepath}
-                        style={{ height: "80px" }}
-                        height={98}
-                        width={128}
+                        height={100}
+                        width={100}
+                        objectFit="contain"
                         priority
                       />
                     </div>

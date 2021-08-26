@@ -85,6 +85,7 @@ ol {
 
     background-color: rgba($p, 0.1);
     border-radius: 10px;
+    position: relative;
     .icon {
         img {
             height: 20px;
@@ -101,8 +102,8 @@ ol {
         text-align: center;
         border-radius: 30px;
         line-height: 30px;
-        position: relative;
-        left: -10px;
+        position: absolute;
+        right: 30px;
         @include tsn();
     }
     &:hover {
@@ -117,13 +118,8 @@ ol {
         .arrow {
             opacity: 1;
             background-color: #fff;
-            height: 30px;
-            width: 30px;
-            text-align: center;
-            border-radius: 30px;
-            line-height: 30px;
-            position: relative;
-            left: 0;
+            
+            right: 15px;
         }
     }
 }

@@ -17,6 +17,7 @@ const Highlights = () => {
   if (error) return "An error occured";
   if (!data) return "";
   const highlights = data;
+  console.log(highlights);
 
   return (
     <section className="howitworks py-5">
@@ -39,48 +40,57 @@ const Highlights = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-sm-6">
-            <div className="videowrapper bg_white rounded_medium my-3">
-              <div className="thumbnail">
-                <div className="overlay"></div>
-                <Image
-                  src="/images/videobg.png"
-                  height={200}
-                  width={400}
-                  layout={"responsive"}
-                  priority
-                />
-              </div>
-              <div className="textwrapper bg_white p-4 rounded_medium">
-                <div className="subtitle fw300 f14 text_p">HIGHLIGHTS</div>
-                <Link href="#">
-                  <a>
-                    <h3 className="title text_t f20 font_p">
-                      Accelerating Asia Demo Day
-                    </h3>
-                  </a>
-                </Link>
-                <p className="text-muted f14">
-                  Lorem ipsum dolor sit amet, ipsum dolo dipiscing elit, sed do
-                  eiusmod tempor incididunt
-                </p>
-                <div className="buttonwrapper d-flex justify-content-start">
-                  <button className="btn_hovered">
-                    <div className="label font_p">Explore</div>
-                    <div className="icon">
-                      <img src="/icons/right-arrow.svg" alt="" />
+          {highlights[0] && (
+            <div className="col-sm-6">
+              <div className="videowrapper bg_white rounded_medium my-3">
+                <div className="thumbnail">
+                  <div className="overlay"></div>
+                  <Image
+                    src={highlights[0].imagepath}
+                    height={200}
+                    width={400}
+                    layout={"responsive"}
+                    priority
+                  />
+                </div>
+                <div className="textwrapper bg_white p-4 rounded_medium">
+                  <div className="titlewrapper d-flex justify-content-between align-items-center">
+                    <div className="subtitle fw300 f14 text_p">HIGHLIGHTS</div>
+                    <div className="date text-muted bg_p_dim text_p small">
+                      Event Date :{" "}
+                      <span className="pl-1">
+                        {highlights[0].published_date}
+                      </span>
                     </div>
-                    <div className="spacing"></div>
-                  </button>
+                  </div>
+                  <Link href={`/highlights/${highlights[0].title}`}>
+                    <a>
+                      <h3 className="title text_t f20 font_p">
+                        {highlights[0].title}
+                      </h3>
+                    </a>
+                  </Link>
+                  <p className="text-muted f14">
+                    {highlights[0].description.slice(0, 200)}...
+                  </p>
+                  <div className="buttonwrapper d-flex justify-content-start">
+                    <button className="btn_hovered">
+                      <div className="label font_p">Explore</div>
+                      <div className="icon">
+                        <img src="/icons/right-arrow.svg" alt="" />
+                      </div>
+                      <div className="spacing"></div>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
           <div className="col-sm-6">
             <div className="factswrapper pl-3 my-3">
               <div className="row">
                 <div className="col-sm-12 ">
-                  {highlights.map((highlight) => (
+                  {highlights.slice(1).map((highlight) => (
                     <div
                       className="bg_white rounded_medium mb-4"
                       key={highlight.title}
@@ -97,7 +107,7 @@ const Highlights = () => {
                             <div className="subtitle fw300 f14 text_p">
                               HIGHLIGHTS
                             </div>
-                            <Link href="#">
+                            <Link href={`/highlights/${highlight.title}`}>
                               <a>
                                 <h3 className="title text_t f18 font_p">
                                   {highlight.title}

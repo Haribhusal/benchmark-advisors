@@ -484,7 +484,6 @@ export default function TechStartups() {
             </div>
           </div>
         </section>
-        <OurStory />
       </main>
     </>
   );

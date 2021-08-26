@@ -40,7 +40,9 @@ const Footer = () => {
               </div>
 
               <div className="textwrapper">
-                <p className="text-muted small">{settings.about_text}</p>
+                <p className="text-muted small">
+                  {settings.about_text.slice(0, 250)}...
+                </p>
               </div>
             </div>
           </div>
