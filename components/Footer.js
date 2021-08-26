@@ -136,6 +136,11 @@ const Footer = () => {
             <div className="rightwrapper">
               <div className="linkswrapper d-flex">
                 <div className="link">
+                  <Link href="/faq">
+                    <a className="link f12 text_t px-3">Faq</a>
+                  </Link>
+                </div>
+                <div className="link">
                   <Link href="#">
                     <a className="link f12 text_t px-3">Privacy Policy</a>
                   </Link>

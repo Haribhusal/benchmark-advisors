@@ -50,6 +50,9 @@ ol {
     padding: 0;
     list-style: none;
 }
+a{
+    color: #333;
+}
 .header_logo {
     max-width: 70px !important;
 }
@@ -415,4 +418,30 @@ header {
 }
 .f14{
     line-height: 26px;
+}
+
+.form-control{
+    border: 1px solid #eee;
+    background-color:rgba($p, 0.08);
+    &:hover{
+        border: 1px solid $p;
+
+    }
+    &:focus{
+        border: 1px solid $p;
+        box-shadow: none;
+        outline: none;
+
+    }
+}
+.downloadModalForm{
+    padding: 15px;
+   
+}
+
+.modal{
+
+    .title{
+        font-size: 18px !important;
+    }
 }

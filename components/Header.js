@@ -1,8 +1,23 @@
 import Image from "next/image";
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import Link from "next/link";
+import useSWR from "swr";
+
+const documentCategoryFetcher = async () => {
+  const response = await fetch(
+    "https://benchmark.promotingnepal.com/api/document-category"
+  );
+  const data = await response.json();
+  return data;
+};
 
 const Header = () => {
+  const { data, error } = useSWR("docCategories", documentCategoryFetcher);
+  if (error) return "An error occured";
+  if (!data) return "";
+  const docCategories = data.data;
+  console.log(docCategories);
+
   return (
     <header className="px-3">
       <div className="headerWrapper">
@@ -19,16 +34,96 @@ const Header = () => {
                 <Link href="/startups">
                   <Nav className="nav-link">Startups</Nav>
                 </Link>
-                <Link href="/investors">
-                  <Nav className="nav-link">Investors</Nav>
-                </Link>
-                <Link href="/advisory-consulting">
-                  <Nav className="nav-link">Services</Nav>
-                </Link>
+                <NavDropdown
+                  title="Investors"
+                  className="customDropdown"
+                  id="doxs"
+                >
+                  <Link href="/downloads">
+                    <a>
+                      <div className="dropdown_item_icon d-flex">
+                        <div className="image">
+                          <img
+                            src="/images/angel-investors.png"
+                            className="img-fluid"
+                            alt=""
+                          />
+                        </div>
+                        <div className="info">
+                          <h6 className="title font_p">Angel Investors</h6>
+                          <p className="text-muted small">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit. Alias, adipisci.
+                          </p>
+                        </div>
+                        <div className="arrow">
+                          <img src="/icons/right-arrow.svg" alt="" />
+                        </div>
+                      </div>
+                    </a>
+                  </Link>
+                  <Link href="/downloads">
+                    <a>
+                      <div className="dropdown_item_icon d-flex">
+                        <div className="image">
+                          <img
+                            src="/images/consulting.png"
+                            className="img-fluid"
+                            alt=""
+                          />
+                        </div>
+                        <div className="info">
+                          <h6 className="title font_p">
+                            Venture Capitalists(VC)
+                          </h6>
+                          <p className="text-muted small">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit. Alias, adipisci.
+                          </p>
+                        </div>
+                        <div className="arrow">
+                          <img src="/icons/right-arrow.svg" alt="" />
+                        </div>
+                      </div>
+                    </a>
+                  </Link>
+                  <Link href="/downloads">
+                    <a>
+                      <div className="dropdown_item_icon d-flex">
+                        <div className="image">
+                          <img
+                            src="/images/investment-banker.png"
+                            className="img-fluid"
+                            alt=""
+                          />
+                        </div>
+                        <div className="info">
+                          <h6 className="title font_p">Investment Banker</h6>
+                          <p className="text-muted small">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit. Alias, adipisci.
+                          </p>
+                        </div>
+                        <div className="arrow">
+                          <img src="/icons/right-arrow.svg" alt="" />
+                        </div>
+                      </div>
+                    </a>
+                  </Link>
 
-                <Link href="/faq">
-                  <Nav className="nav-link">FAQ</Nav>
-                </Link>
+                  <Link href="/downloads">
+                    <a>
+                      <div className="dropdown_item_icon d-flex">
+                        <p className="text-muted f16 mb-0">
+                          View all categories
+                        </p>
+                        <div className="arrow">
+                          <img src="/icons/right-arrow.svg" alt="" />
+                        </div>
+                      </div>
+                    </a>
+                  </Link>
+                </NavDropdown>
                 <Nav.Link href="#link">Incubators &amp; Accelerators</Nav.Link>
 
                 <NavDropdown title="Pages" id="basic-nav-dropdown">
@@ -61,6 +156,37 @@ const Header = () => {
                   <Link href="/venture-capitalist">
                     <a className="dropdown-item">Venture Capitalist</a>
                   </Link>
+                </NavDropdown>
+
+                <NavDropdown
+                  title="Free Documents"
+                  className="customDropdown"
+                  id="doxs"
+                >
+                  {docCategories.map((item) => (
+                    <Link href={`/downloads/${item.slug}`} key={item.slug}>
+                      <a>
+                        <div className="dropdown_item_icon d-flex">
+                          <div className="image">
+                            <img
+                              src="/images/agreements.png"
+                              className="img-fluid"
+                              alt=""
+                            />
+                          </div>
+                          <div className="info w-100">
+                            <h6 className="title font_p">{item.title}</h6>
+                            <p className="text-muted small">
+                              {item.description}
+                            </p>
+                          </div>
+                          <div className="arrow">
+                            <img src="/icons/right-arrow.svg" alt="" />
+                          </div>
+                        </div>
+                      </a>
+                    </Link>
+                  ))}
                 </NavDropdown>
               </Nav>
               <Nav className="ml-auto">
