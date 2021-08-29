@@ -22,6 +22,7 @@ const DownloadDocument = ({ docs }) => {
     await axios
       .post("https://benchmark.promotingnepal.com/api/brochure-download", data)
       .then((response) => response.data.message);
+    console.log(response);
   };
 
   return (
@@ -96,19 +97,18 @@ const DownloadDocument = ({ docs }) => {
                   value={doc.id}
                   {...register("file_id")}
                 />
-                <input
-                  type="submit"
-                  className="btn btn_p"
-                  value="Get Document"
-                />
+                <div className="buttonwrapper">
+                  <Modal.Footer className="d-flex justify-content-between">
+                    <Button variant="custom" onClick={handleClose}>
+                      Cancel
+                    </Button>
+                    <Button type="submit" variant="primary">
+                      Get Document
+                    </Button>
+                  </Modal.Footer>
+                </div>
               </form>
             </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Cancel
-              </Button>
-              <Button variant="primary">Get Document</Button>
-            </Modal.Footer>
           </Modal>
         </div>
       ))}

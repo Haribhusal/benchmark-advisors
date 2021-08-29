@@ -1,22 +1,22 @@
+import Reat, { useState, useEffect } from "react";
+import axios from "axios";
 import Image from "next/image";
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import Link from "next/link";
-import useSWR from "swr";
-
-const documentCategoryFetcher = async () => {
-  const response = await fetch(
-    "https://benchmark.promotingnepal.com/api/document-category"
-  );
-  const data = await response.json();
-  return data;
-};
 
 const Header = () => {
-  const { data, error } = useSWR("docCategories", documentCategoryFetcher);
-  if (error) return "An error occured";
-  if (!data) return "";
-  const docCategories = data.data;
-  console.log(docCategories);
+  const [docCategory, setDocCategory] = useState([]);
+  useEffect(() => {
+    axios
+      .get("https://benchmark.promotingnepal.com/api/document-category")
+      .then((res) => {
+        const docs = res.data;
+        setDocCategory(docs.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <header className="px-3">
@@ -163,7 +163,7 @@ const Header = () => {
                   className="customDropdown"
                   id="doxs"
                 >
-                  {docCategories.map((item) => (
+                  {docCategory.map((item) => (
                     <Link href={`/downloads/${item.slug}`} key={item.slug}>
                       <a>
                         <div className="dropdown_item_icon d-flex">

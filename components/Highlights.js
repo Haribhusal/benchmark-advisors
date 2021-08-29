@@ -17,7 +17,6 @@ const Highlights = () => {
   if (error) return "An error occured";
   if (!data) return "";
   const highlights = data;
-  console.log(highlights);
 
   return (
     <section className="howitworks py-5">

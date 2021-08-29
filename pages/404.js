@@ -32,11 +32,7 @@ const ErrorPage = () => {
                       <button className="btn btn_p rounded_big font_p text_w px-5 py-3">
                         Go to Homepage
                         <span>
-                          <img
-                            src="/icons/right-arrow.svg"
-                            alt=""
-                            className="ml-2"
-                          />
+                          <i className="las la-arrow-left"></i>
                         </span>
                       </button>
                     </a>

@@ -1,22 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import useSWR from "swr";
-
-const servicesFetcher = async () => {
-  const response = await fetch(
-    "https://benchmark.promotingnepal.com/api/services"
-  );
-  // const response = await fetch(`${process.env.BASE_URL}setting`)
-  const data = await response.json();
-  return data;
-};
+import axios from "axios";
 
 const OnBoarding = () => {
-  const { data, error } = useSWR("services", servicesFetcher);
-  if (error) return "An error occured";
-  if (!data) return "";
-  const services = data;
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://benchmark.promotingnepal.com/api/services")
+      .then((res) => {
+        // console.log("res", res);
+        setServices(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <section className="onboarding py-5">
       <div className="container">

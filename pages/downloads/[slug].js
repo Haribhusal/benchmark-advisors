@@ -33,7 +33,6 @@ const DocumentCategory = () => {
     );
     // const response = await fetch(`${process.env.BASE_URL}setting`)
     const data = await documents.json();
-    console.log("testDoc", data.data);
     setDocument(data);
 
     return data;

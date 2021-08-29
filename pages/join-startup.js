@@ -1,102 +1,32 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
-
+import { useForm } from "react-hook-form";
 import Link from "next/link";
 
-const categoryFetcher = async () => {
-  const response = await fetch(
-    "https://benchmark.promotingnepal.com/api/announcements"
-  );
-  // const response = await fetch(`${process.env.BASE_URL}setting`)
-  const data = await response.json();
-  return data;
-};
-
 const JoinStartup = () => {
-  const [activeForm, setActiveForm] = useState(1);
-  const [values, setValues] = useState({
-    startup_name: "",
-    company_category_id: "",
-    startupSubcategory: "",
-    province_id: "",
-    district_id: "",
-    municipality_id: "",
-    location: "",
-    contact_number: "",
-    email: "",
-    terms: "",
-    personal_name: "",
-    personal_contact_number: "",
-    personal_email: "",
-    personal_address: "",
-    pan_status: "",
-    pan_number: "",
-    company_since: "",
-    number_of_emplyee: "",
-    doc1: "",
-    doc2: "",
-    doc3: "",
-  });
+  const [document, setDocument] = useState();
 
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const {
-      startupName,
-      startupCategory,
-      startupSubcategory,
-      provience,
-      district,
-      municipality,
-      location,
-      contactNumber,
-      startupEmail,
-      terms,
-      personFirstName,
-      personLastName,
-      personContact,
-      personEmail,
-      personAddress,
-      doc1,
-      doc2,
-      doc3,
-    } = values;
-
-    const user = {
-      startupName,
-      startupCategory,
-      startupSubcategory,
-      provience,
-      district,
-      municipality,
-      location,
-      contactNumber,
-      startupEmail,
-      terms,
-      personFirstName,
-      personLastName,
-      personContact,
-      personEmail,
-      personAddress,
-      doc1,
-      doc2,
-      doc3,
-    };
-
-    await axios.post(
-      "https://benchmark.promotingnepal.com/api/startup/signup",
-      user
+  useEffect(async () => {
+    const response = await fetch(
+      "https://benchmark.promotingnepal.com/api/document/list"
     );
-  };
 
-  const { data, error } = useSWR("categories", categoryFetcher);
-  if (error) return "An error occured";
-  if (!data) return "";
-  const categories = data;
+    const data = await response.json();
+    const documentNeeded = data.data;
+    console.log("documentsNeeded", documentNeeded);
+    return documentNeeded;
+    setDocument(documentNeeded);
+  }, []);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
+
+  const [activeForm, setActiveForm] = useState(1);
   return (
     <main
       className="page"
@@ -112,7 +42,7 @@ const JoinStartup = () => {
         <div className="container">
           <div className="row">
             <div className="col-sm-7">
-              <form>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 {/* Step 1 */}
 
                 {activeForm == 1 && (
@@ -137,7 +67,8 @@ const JoinStartup = () => {
                               Enter your Startup's Name
                             </label>
                             <input
-                              name="startupName"
+                              {...register("startup_name")}
+                              name="startup_name"
                               type="text"
                               className="form-control"
                               placeholder="Startup Name"
@@ -146,35 +77,20 @@ const JoinStartup = () => {
                         </div>
                       </div>
                       <div className="row">
-                        <div className="col-sm-6">
+                        <div className="col-sm-12">
                           <div className="form-group">
                             <label htmlFor="" className="small text-muted">
                               Enter your Startup Category
                             </label>
                             <select
-                              name="startupCategory"
+                              name="company_category_id"
                               id=""
                               className="form-control"
+                              {...register("company_category_id")}
                             >
                               <option value="1">Category 1</option>
                               <option value="2">Category 2</option>
                               <option value="3">Category 3</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="col-sm-6">
-                          <div className="form-group">
-                            <label htmlFor="" className="small text-muted">
-                              Enter your Startup Subcategory
-                            </label>
-                            <select
-                              name="startupSubcategory"
-                              id=""
-                              className="form-control"
-                            >
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
                             </select>
                           </div>
                         </div>
@@ -187,9 +103,10 @@ const JoinStartup = () => {
                               Enter Provience
                             </label>
                             <select
-                              name="provience"
+                              name="province_id"
                               id=""
                               className="form-control"
+                              {...register("province_id")}
                             >
                               <option value="1">Provience 1</option>
                               <option value="2">Provience 2</option>
@@ -203,7 +120,8 @@ const JoinStartup = () => {
                               Enter District
                             </label>
                             <select
-                              name="district"
+                              {...register("district_id")}
+                              name="district_id"
                               id=""
                               className="form-control"
                             >
@@ -219,7 +137,8 @@ const JoinStartup = () => {
                               Enter Municipality
                             </label>
                             <select
-                              name="municipality"
+                              {...register("municipality_id")}
+                              name="municipality_id"
                               id=""
                               className="form-control"
                             >
@@ -238,7 +157,8 @@ const JoinStartup = () => {
                             </label>
                             <input
                               type="text"
-                              name="location"
+                              {...register("personal_address")}
+                              name="personal_address"
                               className="form-control"
                               placeholder="Startup Location"
                             />
@@ -252,7 +172,8 @@ const JoinStartup = () => {
                               Enter your Startup's Contact Number
                             </label>
                             <input
-                              name="contactNumber"
+                              {...register("contact_number")}
+                              name="contact_number"
                               type="text"
                               className="form-control"
                               placeholder="Startup Contact Number"
@@ -265,7 +186,8 @@ const JoinStartup = () => {
                               Enter your Startup's Email
                             </label>
                             <input
-                              name="startupEmail"
+                              {...register("email")}
+                              name="email"
                               type="text"
                               className="form-control"
                               placeholder="Startup Email"
@@ -306,29 +228,17 @@ const JoinStartup = () => {
                     </div>
 
                     <div className="row">
-                      <div className="col-sm-6">
+                      <div className="col-sm-12">
                         <div className="form-group">
                           <label htmlFor="" className="small text-muted">
-                            Enter Your First Name
+                            Enter Your Name
                           </label>
                           <input
-                            name="personFirstName"
+                            {...register("personal_name")}
+                            name="personal_name"
                             type="text"
                             className="form-control"
-                            placeholder="Your First Name"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-sm-6">
-                        <div className="form-group">
-                          <label htmlFor="" className="small text-muted">
-                            Enter Your Last Name
-                          </label>
-                          <input
-                            name="personLastName"
-                            type="text"
-                            className="form-control"
-                            placeholder="Your Last Name"
+                            placeholder="Your Name"
                           />
                         </div>
                       </div>
@@ -340,7 +250,8 @@ const JoinStartup = () => {
                             Enter Contact Number
                           </label>
                           <input
-                            name="personContact"
+                            {...register("personal_contact_number")}
+                            name="personal_contact_number"
                             type="tel"
                             className="form-control"
                             placeholder="Your Contact Number"
@@ -353,7 +264,8 @@ const JoinStartup = () => {
                             Enter Your Email Address
                           </label>
                           <input
-                            name="personEmail"
+                            {...register("personal_email")}
+                            name="personal_email"
                             type="email"
                             className="form-control"
                             placeholder="Your Email Address"
@@ -361,22 +273,6 @@ const JoinStartup = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-sm-12">
-                        <div className="form-group">
-                          <label htmlFor="" className="small text-muted">
-                            Enter Your Address
-                          </label>
-                          <input
-                            name="personAddress"
-                            type="tel"
-                            className="form-control"
-                            placeholder="Your Address"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
                     <div className="row">
                       <div className="col-sm-12 d-flex justify-content-between">
                         <button
@@ -412,51 +308,24 @@ const JoinStartup = () => {
                         <hr />
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-sm-12">
-                        <div className="form-group">
-                          <label htmlFor="" className="small text-muted">
-                            Choose Document 1
-                          </label>
-                          <input
-                            name="doc1"
-                            type="file"
-                            className="form-control"
-                            placeholder="Document 1"
-                          />
+                    {document.map((doc) => (
+                      <div className="row" key={doc.id}>
+                        <div className="col-sm-12">
+                          <div className="form-group">
+                            <label htmlFor="" className="small text-muted">
+                              Choose Document for {doc.title}
+                            </label>
+                            <input
+                              {...register("files[]")}
+                              name="files[]"
+                              type="file"
+                              className="form-control"
+                              placeholder="Document 1"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-sm-12">
-                        <div className="form-group">
-                          <label htmlFor="" className="small text-muted">
-                            Choose Document 2
-                          </label>
-                          <input
-                            name="doc2"
-                            type="file"
-                            className="form-control"
-                            placeholder="Document 2"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-sm-12">
-                        <div className="form-group">
-                          <label htmlFor="" className="small text-muted">
-                            Choose Document 3
-                          </label>
-                          <input
-                            name="doc3"
-                            type="file"
-                            className="form-control"
-                            placeholder="Document 3"
-                          />
-                        </div>
-                      </div>
-                    </div>
+                    ))}
 
                     <div className="row">
                       <div className="col-sm-12 d-flex justify-content-between">

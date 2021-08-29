@@ -1,22 +1,18 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import useSWR from "swr";
 
-const fetcher = async () => {
-  const response = await fetch(
-    "https://benchmark.promotingnepal.com/api/setting"
-  );
-  // const response = await fetch(`${process.env.BASE_URL}setting`)
-  const data = await response.json();
-  return data;
-};
+// "https://benchmark.promotingnepal.com/api/setting"
 
 const Footer = () => {
-  const { data, error } = useSWR("settings", fetcher);
-  if (error) return "An error occured";
-  if (!data) return "";
-  const settings = data[0];
-
+  const [settings, setSettings] = useState({
+    logo: "/images/logo.png",
+    about_text: "hey",
+    facebook_url: "",
+    instagram_url: "",
+    twitter_url: "",
+  });
   return (
     <footer
       className="py-5 page"
@@ -141,12 +137,12 @@ const Footer = () => {
                   </Link>
                 </div>
                 <div className="link">
-                  <Link href="#">
+                  <Link href="/policy">
                     <a className="link f12 text_t px-3">Privacy Policy</a>
                   </Link>
                 </div>
                 <div className="link">
-                  <Link href="#">
+                  <Link href="/terms">
                     <a className="link f12 text_t px-3">
                       Terms &amp; Conditions
                     </a>
