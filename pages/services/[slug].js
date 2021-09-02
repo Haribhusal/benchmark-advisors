@@ -169,33 +169,33 @@ export default function SingleSubService() {
                 </div>
               </div>
               <div className="row">
-                {/* {team.map((member) => ( */}
+                {team.map((member) => (
                   <div className="col-sm-6" >
                     <div className="contactWrapper mb-4 bg_white d-flex">
                       <div className="image">
-                        {/* <img src={member.imagepath} alt="" /> */}
+                        <img src={member.imagepath} alt="" />
                       </div>
                       <div className="d-flex align-items-center p-4">
                         <div className="">
-                          {/* <h5 className="name title font_p">{member.name}</h5> */}
+                          <h5 className="name title font_p">{member.name}</h5>
                           <p className="text-muted mb-3 f14">
-                            {/* {member.designation} */}
+                            {member.designation}
                           </p>
                           <div className="contacts">
                             <div className="item text-muted f14">
                               <i className="las la-phone f16 mr-2"></i>
-                              {/* {member.phone} */}
+                              {member.phone}
                             </div>
                             <div className="item text-muted f14">
                               <i className="las la-envelope f16 mr-2"></i>
-                              {/* {member.email} */}
+                              {member.email}
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-              {/* ))}  */}
+              ))} 
               </div>
             </div>
           </div>
