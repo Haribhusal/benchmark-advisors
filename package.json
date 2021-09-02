@@ -2,11 +2,11 @@
   "name": "next-js-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://afsanefadaei.ir",
+  "homepage": "http://bmanepal.com/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
