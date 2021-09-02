@@ -32,7 +32,7 @@ export default function SingleSubService() {
   const { slug } = router.query
   const [subService, setSubService] = useState()
   const [features, setFeatures] = useState()
-  const[team,setTeam] = useState()
+  const[teammember,setTeamMember] = useState()
 
   useEffect(() => {
     axios.get(`https://benchmark.promotingnepal.com/api/team/featurelist/${slug}`)
@@ -43,7 +43,7 @@ export default function SingleSubService() {
       console.log('features', features)
       console.log('teams', teams)
       setFeatures(features);
-      setTeam(teams)
+      setTeamMember(teams)
     }).catch(error => {
       
       console.log(error)
@@ -169,7 +169,7 @@ export default function SingleSubService() {
                 </div>
               </div>
               <div className="row">
-                {team.map((member) => (
+                {teammember?.map((member) => (
                   <div className="col-sm-6" >
                     <div className="contactWrapper mb-4 bg_white d-flex">
                       <div className="image">
