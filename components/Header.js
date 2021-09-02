@@ -6,6 +6,7 @@ import Link from "next/link";
 
 const Header = () => {
   const [docCategory, setDocCategory] = useState([]);
+  const[showDropdown, setShowDropdown] = useState(false);
   useEffect(() => {
     axios
       .get("https://benchmark.promotingnepal.com/api/document-category")
@@ -159,11 +160,13 @@ const Header = () => {
                 </NavDropdown>
 
                 <NavDropdown
+                // collapseOnSelect={false}
                   title="Free Documents"
                   className="customDropdown"
-                  id="doxs"
+                  id="navbarScrollingDropdown"
                 >
                   {docCategory.map((item) => (
+                     <NavDropdown.Item>
                     <Link href={`/downloads/${item.slug}`} key={item.slug}>
                       <a>
                         <div className="dropdown_item_icon d-flex">
@@ -186,6 +189,7 @@ const Header = () => {
                         </div>
                       </a>
                     </Link>
+                    </NavDropdown.Item>
                   ))}
                 </NavDropdown>
               </Nav>

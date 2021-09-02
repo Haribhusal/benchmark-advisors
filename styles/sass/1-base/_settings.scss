@@ -445,3 +445,10 @@ header {
         font-size: 18px !important;
     }
 }
+.successMessae{
+    background-color: rgba($p,0.1);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: $p;
+}

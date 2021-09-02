@@ -18,7 +18,7 @@ const eventsFetcher = async () => {
 
 export default function SingleProduct() {
   const { data, error } = useSWR("events", eventsFetcher);
-  if (error) return "An error occured";
+  if (error) return null;
   if (!data) return "";
   const events = data;
 

@@ -12,7 +12,7 @@ const fetcher = async () => {
 const FaqComponent = () => {
   const [open, setOpen] = useState(false);
   const { data, error } = useSWR("faqs", fetcher);
-  if (error) return "An error occured";
+  if (error) return null;
   const faqs = data;
   if (!data) return "";
 

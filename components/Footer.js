@@ -2,17 +2,28 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+const imageFooter = process.env.NEXT_PUBLIC_BASE_URL;
 
 // "https://benchmark.promotingnepal.com/api/setting"
 
 const Footer = () => {
-  const [settings, setSettings] = useState({
-    logo: "/images/logo.png",
-    about_text: "hey",
-    facebook_url: "",
-    instagram_url: "",
-    twitter_url: "",
-  });
+  console.log('ig',imageFooter);
+  
+  const [siteSettings, setSiteSettings]= useState({});
+  console.log("responseSettings", siteSettings.logo)
+  
+  useEffect(() => {
+    
+    axios.get('https://benchmark.promotingnepal.com/api/setting')
+    .then(res=> {
+      console.log('response', res);
+      setSiteSettings(res?.data[0]);
+    
+    }).catch(error=>{
+      console.log(error)
+    })
+   
+  }, [])
   return (
     <footer
       className="py-5 page"
@@ -30,14 +41,15 @@ const Footer = () => {
           <div className="col-sm-4">
             <div className="leftwrapper">
               <div className="logowrapper">
-                <Image src={settings.logo} width={120} height={90} />
-                <h6 className="title"> {settings.site_title}</h6>
+              <img src={siteSettings.logo} className="img-fluid" style={{height: '90px'}}/>
+                <h6 className="title"> 
+                {siteSettings?.site_title}
+                </h6>
                 <h2></h2>
               </div>
-
               <div className="textwrapper">
                 <p className="text-muted small">
-                  {settings.about_text.slice(0, 250)}...
+                  {siteSettings?.about_text?.slice(0, 250)}...
                 </p>
               </div>
             </div>
@@ -52,10 +64,15 @@ const Footer = () => {
                     </div>
                     <div className="menu">
                       <ul>
-                        <li className="text-muted f14">{settings.address}</li>
-                        <li className="text-muted f14">{settings.email}</li>
                         <li className="text-muted f14">
-                          {settings.mobile_no}, {settings.phone_no}
+                          {siteSettings.address}
+                          </li>
+                        <li className="text-muted f14">
+                          {siteSettings.email}
+                          </li>
+                        <li className="text-muted f14">
+
+                          {siteSettings.mobile_no}, {siteSettings.phone_no}
                         </li>
                       </ul>
                     </div>
@@ -71,21 +88,21 @@ const Footer = () => {
                     <div className="menu">
                       <ul>
                         <li className="text-muted f14">
-                          <Link href={settings.facebook_url}>
+                          <Link href="">
                             <a target="_blank" className="link text_t">
                               Facebook
                             </a>
                           </Link>
                         </li>
                         <li className="text-muted f14">
-                          <Link href={settings.instagram_url}>
+                          <Link href="">
                             <a target="_blank" className="link text_t">
                               Instagram
                             </a>
                           </Link>
                         </li>
                         <li className="text-muted f14">
-                          <Link href={settings.twitter_url}>
+                          <Link href="">
                             <a target="_blank" className="link text_t">
                               Twitter
                             </a>

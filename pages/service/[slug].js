@@ -18,7 +18,7 @@ export default function SingleService() {
   };
 
   const { data, error } = useSWR("services", servicesFetcher);
-  if (error) return "An error occured";
+  if (error) return null;
   if (!data) return "";
   const services = data;
 
@@ -83,7 +83,6 @@ export default function SingleService() {
                 </div>
               </div>
             </div>
-
             <SubServices slug={slug} />
           </div>
         </section>

@@ -1,62 +1,90 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Spinner } from "react-bootstrap";
 import axios from "axios";
-
 import { useForm } from "react-hook-form";
+import { useRouter } from 'next/router'
 
-import useSWR from "swr";
+const DownloadDocument = (props) => {
 
-const DownloadDocument = ({ docs }) => {
-  const { register, handleSubmit } = useForm();
-  // const onSubmit = (data, e) => console.log(data, e);
-  const onError = (errors, e) => console.log(errors, e);
+  const [show, setShow] = useState();
+  const router = useRouter();
+  const [btnDisable, setBtnDisable] = useState(false);
+  const [hideForm, setHideForm] = useState(true);
 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const onSubmit = async (data, e) => {
-    e.preventDefault();
-
-    await axios
-      .post("https://benchmark.promotingnepal.com/api/brochure-download", data)
-      .then((response) => response.data.message);
-    console.log(response);
+  const handleClose = () => {
+    setShow({show: false});
+    
+  }
+  const handleShow = () => {
+    setShow(true)
   };
 
+  const [loadingBtn, setLoadingBtn] = useState(false);
+
+
+  const { register, handleSubmit } = useForm();
+ 
+  const [successMessage, setSuccessMessage] =useState();
+
+
+  const onSubmit = async (data, e) => {
+    console.log('from data',props.id)
+    
+    e.preventDefault();
+    setLoadingBtn(true)
+    setBtnDisable(true)
+    const formData = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      file_id: props.id
+
+    }
+
+    axios.post('https://benchmark.promotingnepal.com/api/brochure-download', formData)
+    .then(res => {
+      setSuccessMessage(res.data.message);
+      setLoadingBtn(false)
+      setHideForm(false)
+    })
+    .catch(err => {
+    console.log(err)
+    })
+  };
+  
   return (
     <>
-      {docs?.data?.map((doc) => (
-        <div className="col-sm-4" onClick={handleShow} key={doc.id}>
+  
+        <div className="col-sm-4" onClick={handleShow } key={props.id}>
           <div className="docwrapper">
             <div className="icon">
               <i className="las la-file-alt"></i>
             </div>
             <div className="label">
-              <h5 className="title mb-0">{doc.title}</h5>
+              <h5 className="title mb-0">{props.title} </h5>
             </div>
             <div className="arrow">
               <i className="las la-download"></i>
             </div>
           </div>
+
+
           <Modal
             centered
             show={show}
-            onHide={handleClose}
-            backdrop="static"
-            keyboard={false}
           >
             <Modal.Header>
               <Modal.Title>
-                <h5 className="title mb-0 text_p">Download Document Title</h5>
+                <h5 className="title mb-0 text_p">Download {props.title}</h5>
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <form
                 className="downloadModalForm"
-                onSubmit={handleSubmit(onSubmit, onError)}
+                onSubmit={handleSubmit(onSubmit)}
               >
+                {hideForm?
+                <div>
                 <div className="form-group">
                   <label htmlFor="" className="text-muted small">
                     Name
@@ -90,28 +118,47 @@ const DownloadDocument = ({ docs }) => {
                     placeholder="Enter Your Contact Number"
                   />
                 </div>
-                <input
+                {/* <input
                   type="number"
                   className="hidden hide"
                   style={{ display: "none" }}
                   value={doc.id}
                   {...register("file_id")}
-                />
+                /> */}
+                </div>
+                : (
+              <div className="successMessae">
+              {successMessage}
+            </div>
+                )
+                }
                 <div className="buttonwrapper">
                   <Modal.Footer className="d-flex justify-content-between">
-                    <Button variant="custom" onClick={handleClose}>
-                      Cancel
-                    </Button>
-                    <Button type="submit" variant="primary">
+                  <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+
+          
+                    <Button   disabled={btnDisable} type="submit" variant="primary" style={{display: 'flex', alignItems: 'center', 
+                    gap: '10px',}}>
+
+                    {loadingBtn &&
+                   
+                    <Spinner animation="border" role="status">
+                    <span className="visually-hidden"></span>
+                    </Spinner>
+                    }
+
                       Get Document
                     </Button>
                   </Modal.Footer>
                 </div>
               </form>
+             
             </Modal.Body>
           </Modal>
         </div>
-      ))}
+   
     </>
   );
 };

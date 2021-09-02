@@ -3,42 +3,32 @@ import Image from "next/image";
 import DownloadDocument from "../../components/DownloadDocument";
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import axios from "axios";
+import {isEmpty} from 'lodash'
 
 const DocumentCategory = () => {
-  const [documents, setDocument] = useState();
-
-  const documentCategoryFetcher = async () => {
-    const response = await fetch(
-      `https://benchmark.promotingnepal.com/api/document-category`
-    );
-    const data = await response.json();
-    return data;
-  };
-
-  const { data, error } = useSWR("docCategories", documentCategoryFetcher);
-  if (error) return "An error occured";
-  if (!data) return "";
-  const docCategories = data.data;
 
   const router = useRouter();
   const { slug } = router.query;
-  const docCategory = docCategories.find((a) => a.slug === slug);
-  if (!docCategory) {
-    return <div>docCategory Not Found</div>;
-  }
+  const [docCategory, setDocCategory] = useState();
+  const [document, setDocument] = useState();
+  console.log("test", docCategory);
+  console.log(document)
 
-  const documentsFetcher = async () => {
-    const documents = await fetch(
-      `https://benchmark.promotingnepal.com/api/download-document/${slug}`
-    );
-    // const response = await fetch(`${process.env.BASE_URL}setting`)
-    const data = await documents.json();
-    setDocument(data);
+  useEffect(() => {
+    axios.get(`https://benchmark.promotingnepal.com/api/download-document/${slug}`)
+    .then(res => {
+      setDocument(res.data)
+    })
+    }, [slug])
 
-    return data;
-  };
-
-  documentsFetcher();
+  useEffect(() => {
+  axios.get('https://benchmark.promotingnepal.com/api/document-category')
+  .then(res => {
+    const singleItem = res.data.data?.filter((a) => a.slug === slug);
+    setDocCategory(singleItem)
+  })
+  }, [slug])
 
   return (
     <main
@@ -52,18 +42,19 @@ const DocumentCategory = () => {
       }}
       className="py-5"
     >
+       {!isEmpty(docCategory) ? 
       <section className="iconImage py-5">
         <div className="container">
           <div className="row">
             <div className="col-sm-6 d-flex align-items-center">
               <div className="textwrapper">
                 <div className="subtitle f14 text-muted">
-                  Download Free Documents
+                  Download Free Documents, Test
                 </div>
                 <h3 className="title font_p text_big mb-5">
-                  {docCategory.title}
+                  {docCategory?.[0]?.title}
                 </h3>
-                <p className="text f14 my-3">{docCategory.description}</p>
+                <p className="text f14 my-3">{ docCategory?.[0]?.description}</p>
               </div>
             </div>
             <div className="col-sm-6">
@@ -78,11 +69,15 @@ const DocumentCategory = () => {
             </div>
           </div>
           <div className="row py-5">
-            <DownloadDocument docs={documents} />
+          {document?.data?.map((doc) => (
+            <DownloadDocument  slug={slug} id={doc.id} title={doc.title} />
+          ))}
           </div>
         </div>
       </section>
-    </main>
+      : <div>loading</div>
+      } 
+</main>
   );
 };
 
