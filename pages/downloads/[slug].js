@@ -5,16 +5,13 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import axios from "axios";
 import {isEmpty} from 'lodash'
+import Skeleton from 'react-loading-skeleton';
 
 const DocumentCategory = () => {
-
   const router = useRouter();
   const { slug } = router.query;
   const [docCategory, setDocCategory] = useState();
   const [document, setDocument] = useState();
-  console.log("test", docCategory);
-  console.log(document)
-
   useEffect(() => {
     axios.get(`https://benchmark.promotingnepal.com/api/download-document/${slug}`)
     .then(res => {
@@ -75,7 +72,19 @@ const DocumentCategory = () => {
           </div>
         </div>
       </section>
-      : <div>loading</div>
+      : <div className="loader py-5">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-8">
+              <Skeleton count={10}/> 
+            </div>
+            <div className="col-sm-4">
+              <Skeleton circle={true} height={150} width={150} />
+            </div>
+          </div>
+        </div>
+       
+      </div>
       } 
 </main>
   );

@@ -2,51 +2,38 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-const imageFooter = process.env.NEXT_PUBLIC_BASE_URL;
-
-// "https://benchmark.promotingnepal.com/api/setting"
-
+import FooterSocialLink from "./FooterSocialLink";
 const Footer = () => {
-  console.log('ig',imageFooter);
-  
-  const [siteSettings, setSiteSettings]= useState({});
-  console.log("responseSettings", siteSettings.logo)
-  
+  const [siteSettings, setSiteSettings]= useState();
+  console.log('facebook Link', siteSettings?.facebook_url);
+
   useEffect(() => {
-    
     axios.get('https://benchmark.promotingnepal.com/api/setting')
     .then(res=> {
-      console.log('response', res);
       setSiteSettings(res?.data[0]);
-    
     }).catch(error=>{
       console.log(error)
     })
-   
   }, [])
+
   return (
     <footer
       className="py-5 page"
       style={{
-        backgroundImage: `url("/background/bg.svg")`,
+        backgroundImage: "url('/background/bg.png')",
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundAttachment: "fixed",
-        backdropFilter: "20px",
       }}
     >
       <div className="container">
         <div className="row">
           <div className="col-sm-4">
             <div className="leftwrapper">
-              <div className="logowrapper">
-              <img src={siteSettings.logo} className="img-fluid" style={{height: '90px'}}/>
-                <h6 className="title"> 
-                {siteSettings?.site_title}
-                </h6>
-                <h2></h2>
-              </div>
+            <div className="titlewrapper">
+                      <h6 className="title mb-3 font_p fw800"> {siteSettings?.site_title}</h6>
+                    </div>
               <div className="textwrapper">
                 <p className="text-muted small">
                   {siteSettings?.about_text?.slice(0, 250)}...
@@ -65,14 +52,14 @@ const Footer = () => {
                     <div className="menu">
                       <ul>
                         <li className="text-muted f14">
-                          {siteSettings.address}
+                          {siteSettings?.address}
                           </li>
                         <li className="text-muted f14">
-                          {siteSettings.email}
+                          {siteSettings?.email}
                           </li>
                         <li className="text-muted f14">
 
-                          {siteSettings.mobile_no}, {siteSettings.phone_no}
+                          {siteSettings?.mobile_no}, {siteSettings?.phone_no}
                         </li>
                       </ul>
                     </div>
@@ -86,28 +73,11 @@ const Footer = () => {
                       </h6>
                     </div>
                     <div className="menu">
+                     
                       <ul>
-                        <li className="text-muted f14">
-                          <Link href="">
-                            <a target="_blank" className="link text_t">
-                              Facebook
-                            </a>
-                          </Link>
-                        </li>
-                        <li className="text-muted f14">
-                          <Link href="">
-                            <a target="_blank" className="link text_t">
-                              Instagram
-                            </a>
-                          </Link>
-                        </li>
-                        <li className="text-muted f14">
-                          <Link href="">
-                            <a target="_blank" className="link text_t">
-                              Twitter
-                            </a>
-                          </Link>
-                        </li>
+                       {/* <FooterSocialLink link={siteSettingsote.facebook_url} title="Facebook"/>
+                       <FooterSocialLink link={siteSettings.facebook_url} title="Facebook"/>
+                       <FooterSocialLink link={siteSettings.facebook_url} title="Facebook"/> */}
                       </ul>
                     </div>
                   </div>
@@ -139,7 +109,7 @@ const Footer = () => {
             <div className="leftwrapper">
               <div className="textwrapper">
                 <p className="text-muted f12 mb-0">
-                  &copy; Benchmark Adventures Pvt. Ltd. 2021, All Rights
+                 {setSiteSettings?.site_title} &copy;  2021, All Rights
                   Reserved
                 </p>
               </div>

@@ -1,40 +1,35 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useRouter } from "next/router";
 import Meta from "../../components/Meta";
-import Header from "../../components/Header";
-import Layout from "../../components/Layout";
-import Link from "next/link";
-import Image from "next/image";
-import useSWR from "swr";
 import SubServices from "../../components/SubServices";
+import axios from "axios";
+import {isEmpty} from 'lodash'
+
+import Skeleton from 'react-loading-skeleton';
+
 
 export default function SingleService() {
-  const servicesFetcher = async () => {
-    const response = await fetch(
-      `https://benchmark.promotingnepal.com/api/services`
-    );
-    const data = await response.json();
-    return data;
-  };
-
-  const { data, error } = useSWR("services", servicesFetcher);
-  if (error) return null;
-  if (!data) return "";
-  const services = data;
-
   const router = useRouter();
   const { slug } = router.query;
-  const service = services.find((a) => a.slug === slug);
-  if (!service) {
-    return <div>Service Not Found</div>;
-  }
+  const[service, setService] = useState()
+  useEffect(() => {
+  axios.get('https://benchmark.promotingnepal.com/api/services')
+  .then(res=> {
+    const data = res.data;
+  const singleServiceData = data?.filter((a) => a.slug === slug);
+  setService(singleServiceData[0]);
+  })
 
+  .catch(err=> {
+    console.log(err)
+  })
+  }, [slug])
   return (
     <>
-      <Meta
-        title={`${service.title} - Benchmark Advisors`}
-        description={service.description}
-      />
+       <Meta
+        title={`${service?.title} - Benchmark Advisors`}
+        description={service?.description}
+      /> 
       <main
         className="page"
         style={{
@@ -45,16 +40,14 @@ export default function SingleService() {
           backgroundAttachment: "fixed",
         }}
       >
-        <section className="iconImage">
+         {!isEmpty(service) ? 
+        <section className="iconImage singleService">
           <div className="container">
             <div className="row">
               <div className="col-sm-12">
-                <div className="imagewrapper text-center">
-                  <Image
-                    src={service.imagepath}
-                    height={500}
-                    width={600}
-                  ></Image>
+                <div className="imagewrapper heroImage text-center">
+                  <img src={service?.imagepath} className="img-fluid"/>
+                  
                 </div>
               </div>
             </div>
@@ -63,9 +56,11 @@ export default function SingleService() {
                 <div className="textwrapper">
                   <div className="subtitle f14 text-muted">On Boarding</div>
                   <h3 className="title font_p text_big mb-5">
-                    {service.title}
+                    {service?.title}
                   </h3>
-                  <p className="text f14 my-3">{service.description}</p>
+                  <p className="text f14 my-3">
+                    {service?.description}
+                    </p>
                 </div>
               </div>
               <div className="col-sm-4 d-flex align-items-center justify-content-end">
@@ -86,6 +81,24 @@ export default function SingleService() {
             <SubServices slug={slug} />
           </div>
         </section>
+         : <div className="loader py-5">
+         <div className="container">
+           <div className="row py-4">
+             <div className="col-sm-6 offset-sm-3 d-flex justify-content-center">
+               <Skeleton circle={true} height={150} width={150} />
+               
+             </div>
+            
+           </div>
+           <div className="row">
+             <div className="col-sm-12">
+             <Skeleton count={10}/> 
+             </div>
+           </div>
+         </div>
+        
+       </div>
+       } 
       </main>
     </>
   );

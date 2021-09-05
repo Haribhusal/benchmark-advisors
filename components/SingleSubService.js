@@ -5,7 +5,7 @@ const SingleSubService = ({ slug, title }) => {
   return (
     <div className="col-sm-4 mb-3">
       <Link href={`/services/${slug}`} passHref>
-        <a>
+        <a key={slug}>
           <div className="featurewrapper align-items-center px-4 py-3 d-flex gap">
             <div className="icon">
               <img src="/icons/right-arrow.svg" alt="" className="" />

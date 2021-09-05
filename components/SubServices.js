@@ -1,30 +1,41 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
-import Link from "next/link";
 import SingleSubService from "./SingleSubService";
+import {useRouter} from 'next/router'
 
-const SubServices = ({ slug, subServiceSlug }) => {
-  // sub
+const SubServices = ({ slug }) => {
 
-  const subservices = async () => {
-    const response = await fetch(
-      `https://benchmark.promotingnepal.com/api/sub-service/${slug}`
-    );
-    const data = await response.json();
-    return data;
-  };
+  const[subServicesData, setSubServiceData] = useState();
+  
 
-  const { data, error } = useSWR("subServicesData", subservices);
-  if (error) return "An error occured";
-  if (!data) return "";
-  const subServicesData = data.data;
-  console.log(subServicesData);
+
+
+  useEffect(() => {
+    axios.get(`https://benchmark.promotingnepal.com/api/sub-service/${slug}`)
+    .then(res=>{
+      console.log('hey')
+      console.log("sasa",res.data.data);
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+    }, [])
+
+  
+  useEffect(() => {
+    axios.get(`https://benchmark.promotingnepal.com/api/sub-service/${slug}`)
+    .then(response => {
+      const allServices = response.data.data;
+      setSubServiceData(allServices);
+    })  
+  }, [])
 
   return (
     <div className="row py-3">
-      {subServicesData.map((item) => (
-        <SingleSubService slug={item.slug} title={item.title} />
-      ))}
+      {subServicesData?.map((item) => ( 
+        <SingleSubService slug={item.slug} title={item.title}  key={item.id} howWorks={item.how_works} /> 
+       ))}
     </div>
   );
 };

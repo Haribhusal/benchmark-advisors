@@ -1,24 +1,22 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import useSWR from "swr";
+import axios from "axios";
 
-const fetcher = async () => {
-  const response = await fetch(
-    "https://benchmark.promotingnepal.com/api/partner"
-  );
-  // const response = await fetch(`${process.env.BASE_URL}setting`)
-  const data = await response.json();
-  return data;
-};
 
 const KeyPartners = () => {
-  const { data, error } = useSWR("partners", fetcher);
-  if (error) return "An error occured";
-  if (!data) return "";
-  const partners = data;
+  const[partners,setPartners] = useState([])
+  console.log("partners",partners)
+  useEffect(() =>  {
+     axios.get('https://benchmark.promotingnepal.com/api/partner')
+    .then(res=>   {
+      const allPartners = res.data;
+      setPartners(allPartners);
+    })
+  }, [])
 
-  return (
+    return (
     <section className="keypartners py-5">
       <div className="container">
         <div className="row">
@@ -30,7 +28,7 @@ const KeyPartners = () => {
         </div>
         <div className="row">
           {partners.map((partner) => (
-            <div className="col-sm-3" key={partner.id}>
+            <div className="col-sm-3" >
               <Link href={partner.url}>
                 <a className="">
                   <div className="partnerwrapper mb-4  rounded_medium p-3 text-center bg_white">
@@ -41,10 +39,12 @@ const KeyPartners = () => {
                         width={100}
                         objectFit="contain"
                         priority
-                      />
+                      />  
                     </div>
                     <div className="title">
-                      <strong className="f14 text_t">{partner.title}</strong>
+                      <strong className="f14 text_t">
+                         {partner.title} 
+                        </strong>
                     </div>
                   </div>
                 </a>
@@ -52,7 +52,6 @@ const KeyPartners = () => {
             </div>
           ))}
         </div>
-
         <div className="row">
           <div className="col-sm-12">
             <div className="buttonwrapper text-center my-5">
@@ -66,5 +65,4 @@ const KeyPartners = () => {
     </section>
   );
 };
-
 export default KeyPartners;

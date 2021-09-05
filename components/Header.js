@@ -5,14 +5,20 @@ import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import Link from "next/link";
 
 const Header = () => {
+  const[loading, setLoading] = useState();
   const [docCategory, setDocCategory] = useState([]);
   const[showDropdown, setShowDropdown] = useState(false);
   useEffect(() => {
+    setLoading(true)
     axios
       .get("https://benchmark.promotingnepal.com/api/document-category")
       .then((res) => {
         const docs = res.data;
         setDocCategory(docs.data);
+        console.log('res',res)
+        if(res.status==200){
+          setLoading(true)
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -32,7 +38,7 @@ const Header = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Link href="/startups">
+                <Link href="/startup">
                   <Nav className="nav-link">Startups</Nav>
                 </Link>
                 <NavDropdown
@@ -40,7 +46,8 @@ const Header = () => {
                   className="customDropdown"
                   id="doxs"
                 >
-                  <Link href="/downloads">
+                   <NavDropdown.Item>
+                  <Link href="/investors">
                     <a>
                       <div className="dropdown_item_icon d-flex">
                         <div className="image">
@@ -63,7 +70,9 @@ const Header = () => {
                       </div>
                     </a>
                   </Link>
-                  <Link href="/downloads">
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                  <Link href="/venture-capitalist">
                     <a>
                       <div className="dropdown_item_icon d-flex">
                         <div className="image">
@@ -88,7 +97,10 @@ const Header = () => {
                       </div>
                     </a>
                   </Link>
-                  <Link href="/downloads">
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+
+                  <Link href="/investment-banker">
                     <a>
                       <div className="dropdown_item_icon d-flex">
                         <div className="image">
@@ -111,7 +123,8 @@ const Header = () => {
                       </div>
                     </a>
                   </Link>
-
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
                   <Link href="/downloads">
                     <a>
                       <div className="dropdown_item_icon d-flex">
@@ -124,51 +137,22 @@ const Header = () => {
                       </div>
                     </a>
                   </Link>
+                  </NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Link href="#link">Incubators &amp; Accelerators</Nav.Link>
-
-                <NavDropdown title="Pages" id="basic-nav-dropdown">
-                  <Link href="/advisory-consulting">
-                    <a className="dropdown-item">Advisory Consulting</a>
-                  </Link>
-                  <Link href="/investment-banker">
-                    <a className="dropdown-item">Investment Banker</a>
-                  </Link>
-                  <Link href="/investor-profile">
-                    <a className="dropdown-item">Investor Profile</a>
-                  </Link>
-                  <NavDropdown.Divider />
-                  <Link href="/service-detail">
-                    <a className="dropdown-item">Service Detail</a>
-                  </Link>
-                  <Link href="/social-public-sector">
-                    <a className="dropdown-item">Social Public Sector</a>
-                  </Link>
-
-                  <Link href="/startup-info">
-                    <a className="dropdown-item">Startup Information</a>
-                  </Link>
-                  <Link href="/startup">
-                    <a className="dropdown-item">Single Startup</a>
-                  </Link>
-                  <Link href="/tech-startups">
-                    <a className="dropdown-item">Tech Startups</a>
-                  </Link>
-                  <Link href="/venture-capitalist">
-                    <a className="dropdown-item">Venture Capitalist</a>
-                  </Link>
-                </NavDropdown>
-
                 <NavDropdown
                 // collapseOnSelect={false}
                   title="Free Documents"
                   className="customDropdown"
                   id="navbarScrollingDropdown"
                 >
-                  {docCategory.map((item) => (
-                     <NavDropdown.Item>
-                    <Link href={`/downloads/${item.slug}`} key={item.slug}>
-                      <a>
+
+
+                  
+                  {loading ? docCategory.map((item) => (
+                    <NavDropdown.Item key={item.slug}>
+                       <Link href={`/downloads/${item.slug}`} >
+                    
                         <div className="dropdown_item_icon d-flex">
                           <div className="image">
                             <img
@@ -187,10 +171,10 @@ const Header = () => {
                             <img src="/icons/right-arrow.svg" alt="" />
                           </div>
                         </div>
-                      </a>
+                    
                     </Link>
                     </NavDropdown.Item>
-                  ))}
+                  )): (<div>Loading</div>)}
                 </NavDropdown>
               </Nav>
               <Nav className="ml-auto">

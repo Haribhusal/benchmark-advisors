@@ -1,55 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Meta from "../../components/Meta";
-import Header from "../../components/Header";
-import Layout from "../../components/Layout";
-import Link from "next/link";
-import Image from "next/image";
-import useSWR from "swr";
-import SubServices from "../../components/SubServices";
 import axios from "axios";
 
 export default function SingleSubService() {
+  const pageRouter = useRouter();
+  const { slug } = pageRouter.query
+  const [features, setFeatures] = useState()
+  const[team,setTeam] = useState()
 
 
 
   
-  // const subServicesFetcher = async () => {
-  //   const response = await fetch(
-  //     `https://benchmark.promotingnepal.com/api/team/featurelist/${slug}`
-  //   );
-  //   const data = await response.json();
-  //   console.log("daas", data);
-  //   return data;
-  // };
-
-  // const { data, error } = useSWR("subService", subServicesFetcher);
-  // if (error) return null;
-  // if (!data) return "";
-  // console.log("ss", data);
-
-  const router = useRouter();
-  const { slug } = router.query
-  const [subService, setSubService] = useState()
-  const [features, setFeatures] = useState()
-  const[team,setTeam] = useState()
-
+ 
   useEffect(() => {
     axios.get(`https://benchmark.promotingnepal.com/api/team/featurelist/${slug}`)
     .then(response => {
-      console.log("response", response.data)
       const features = response.data.featureList;
       const teams = response.data.teamList;
-      console.log('features', features)
-      console.log('teams', teams)
       setFeatures(features);
       setTeam(teams)
     }).catch(error => {
-      
       console.log(error)
     })
   
   }, [slug])
+
+
 
 
   return (
@@ -142,7 +118,7 @@ export default function SingleSubService() {
               </div>
               <div className="row">
                 {features?.map((feature) => (
-                  <div className="col-sm-4">
+                  <div className="col-sm-4" key={feature.id}>
                     <div className="servicefeatures text-center">
                       <div className="img text-center">
                         <img
@@ -170,7 +146,7 @@ export default function SingleSubService() {
               </div>
               <div className="row">
                 {team?.map((member) => (
-                  <div className="col-sm-6" >
+                  <div className="col-sm-6" key={member.id}>
                     <div className="contactWrapper mb-4 bg_white d-flex">
                       <div className="image">
                         <img src={member.imagepath} alt="" />

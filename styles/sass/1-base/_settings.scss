@@ -452,3 +452,11 @@ header {
     font-size: 14px;
     color: $p;
 }
+
+.singleService{
+    .heroImage{
+        img{
+            min-height: 400px;
+        }
+    }
+}

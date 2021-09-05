@@ -11,7 +11,6 @@ const OnBoarding = () => {
     axios
       .get("https://benchmark.promotingnepal.com/api/services")
       .then((res) => {
-        console.log("res", res);
         setServices(res.data);
         setLoading(true);
 
@@ -35,7 +34,7 @@ const OnBoarding = () => {
         </div>
         <div className="row">
           
-          {services && services.map((service) => (
+          {services && services?.map((service) => (
             <div className="col-sm-4" key={service.id}>
               <Link href={`service/${service.slug}`} passHref>
                 <a>
@@ -50,11 +49,11 @@ const OnBoarding = () => {
                       />
                     </div>
                     <div className="titlewrapper my-3">
-                      <h3 className="title font_p f18">{service.title}</h3>
+                      <h3 className="title font_p f18">{service?.title}</h3>
                     </div>
                     <div className="detailwrapper">
                       <p className="detail text-muted f14">
-                        {service.description.slice(0, 130)}
+                        {service?.description.slice(0, 130)}...
                       </p>
                     </div>
                     <div className="buttonwrapper d-flex justify-content-center">
