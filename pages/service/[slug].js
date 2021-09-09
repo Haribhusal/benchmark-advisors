@@ -18,6 +18,7 @@ export default function SingleService() {
     const data = res.data;
   const singleServiceData = data?.filter((a) => a.slug === slug);
   setService(singleServiceData[0]);
+  console.log('sing', singleServiceData)
   })
 
   .catch(err=> {

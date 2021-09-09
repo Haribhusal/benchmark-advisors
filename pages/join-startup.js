@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import useSWR from "swr";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 
@@ -15,8 +14,8 @@ const JoinStartup = () => {
     const data = await response.json();
     const documentNeeded = data.data;
     console.log("documentsNeeded", documentNeeded);
-    return documentNeeded;
     setDocument(documentNeeded);
+
   }, []);
 
   const {
@@ -308,7 +307,27 @@ const JoinStartup = () => {
                         <hr />
                       </div>
                     </div>
-                    {document.map((doc) => (
+                    <div className='row'>
+                    <div className="col-sm-6">
+                        <div className="form-group">
+                          <label htmlFor="" className="small text-muted">
+                          pan_status
+                          </label>
+                          <input
+                            {...register("pan_status")}
+                            name="personal_email"
+                            type="email"
+                            className="form-control"
+                            placeholder="Your Email Address"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+                    {document?.map((doc) => (
                       <div className="row" key={doc.id}>
                         <div className="col-sm-12">
                           <div className="form-group">

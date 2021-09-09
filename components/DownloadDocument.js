@@ -6,13 +6,14 @@ import { useRouter } from 'next/router'
 
 const DownloadDocument = (props) => {
 
-  const [show, setShow] = useState();
+  const [show, setShow] = useState(false);
   const router = useRouter();
   const [btnDisable, setBtnDisable] = useState(false);
   const [hideForm, setHideForm] = useState(true);
 
   const handleClose = () => {
-    setShow({show: false});
+    setShow();
+    console.warn("nikesh")
     
   }
   const handleShow = () => {
@@ -28,8 +29,7 @@ const DownloadDocument = (props) => {
 
 
   const onSubmit = async (data, e) => {
-    console.log('from data',props.id)
-    
+    console.log('from data',props.id)    
     e.preventDefault();
     setLoadingBtn(true)
     setBtnDisable(true)
@@ -38,7 +38,6 @@ const DownloadDocument = (props) => {
       email: data.email,
       phone: data.phone,
       file_id: props.id
-
     }
 
     axios.post('https://benchmark.promotingnepal.com/api/brochure-download', formData)
@@ -51,12 +50,11 @@ const DownloadDocument = (props) => {
     console.log(err)
     })
   };
-  
   return (
     <>
   
-        <div className="col-sm-4" onClick={handleShow } key={props.id}>
-          <div className="docwrapper">
+        <div className="col-sm-4" key={props.id}>
+          <div className="docwrapper" onClick={handleShow } >
             <div className="icon">
               <i className="las la-file-alt"></i>
             </div>
@@ -67,8 +65,6 @@ const DownloadDocument = (props) => {
               <i className="las la-download"></i>
             </div>
           </div>
-
-
           <Modal
             centered
             show={show}
@@ -135,32 +131,29 @@ const DownloadDocument = (props) => {
                 <div className="buttonwrapper">
                   <Modal.Footer className="d-flex justify-content-between">
                   <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-
-          
+                  Close
+            </Button>
+            
                     <Button   disabled={btnDisable} type="submit" variant="primary" style={{display: 'flex', alignItems: 'center', 
                     gap: '10px',}}>
-
                     {loadingBtn &&
-                   
                     <Spinner animation="border" role="status">
                     <span className="visually-hidden"></span>
                     </Spinner>
                     }
-
                       Get Document
                     </Button>
                   </Modal.Footer>
+                  
                 </div>
               </form>
-             
+              
             </Modal.Body>
+         
           </Modal>
+          
         </div>
-   
     </>
   );
 };
-
 export default DownloadDocument;

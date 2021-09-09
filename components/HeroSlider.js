@@ -95,7 +95,7 @@ const HeroSlider = () => {
                       </div>
                       <div className="title_black">
                         <h2 className="title font_p text_big">
-                          Investing On Great Companies With Deserving Founders
+                          Get Consulted by Experts
                         </h2>
                       </div>
                       <div className="buttonwrapper mt-5">
@@ -119,7 +119,7 @@ const HeroSlider = () => {
                       <Image
                         height={100}
                         width=""
-                        src="/images/Hands.png"
+                        src="/images/cons.png"
                         layout="responsive"
                       />
                     </div>
@@ -142,7 +142,7 @@ const HeroSlider = () => {
                       </div>
                       <div className="title_black">
                         <h2 className="title font_p text_big">
-                          Investing On Great Companies With Deserving Founders
+                        One stop solution for Startup and Investors
                         </h2>
                       </div>
                       <div className="buttonwrapper mt-5">
@@ -166,7 +166,7 @@ const HeroSlider = () => {
                       <Image
                         height={100}
                         width=""
-                        src="/images/Hands.png"
+                        src="/images/startup-single.png"
                         layout="responsive"
                       />
                     </div>
@@ -185,11 +185,11 @@ const HeroSlider = () => {
                         />
                       </div>
                       <div className="subtitle my-3 f12 text-muted text-uppercase">
-                        For Investors and Startups
+                        Government and Public Sectors
                       </div>
                       <div className="title_black">
                         <h2 className="title font_p text_big">
-                          Investing On Great Companies With Deserving Founders
+                         Government and Public Sectors
                         </h2>
                       </div>
                       <div className="buttonwrapper mt-5">
@@ -213,7 +213,7 @@ const HeroSlider = () => {
                       <Image
                         height={100}
                         width=""
-                        src="/images/Hands.png"
+                        src="/images/government.png"
                         layout="responsive"
                       />
                     </div>

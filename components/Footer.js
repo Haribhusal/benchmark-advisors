@@ -5,7 +5,7 @@ import Link from "next/link";
 import FooterSocialLink from "./FooterSocialLink";
 const Footer = () => {
   const [siteSettings, setSiteSettings]= useState();
-  console.log('facebook Link', siteSettings?.facebook_url);
+  console.log(siteSettings)
 
   useEffect(() => {
     axios.get('https://benchmark.promotingnepal.com/api/setting')
@@ -75,9 +75,27 @@ const Footer = () => {
                     <div className="menu">
                      
                       <ul>
-                       {/* <FooterSocialLink link={siteSettingsote.facebook_url} title="Facebook"/>
-                       <FooterSocialLink link={siteSettings.facebook_url} title="Facebook"/>
-                       <FooterSocialLink link={siteSettings.facebook_url} title="Facebook"/> */}
+                        <li>
+                        <a target="_blank" href={siteSettings?.facebook_url}>
+                        <i class="lab la-facebook-f"></i> Facebook 
+                        </a>
+                          </li>
+                          <li>
+                        <a target="_blank" href={siteSettings?.twitter_url}>
+                        <i class="lab la-twitter"></i> Twitter 
+                        </a>
+                          </li>
+                          <li>
+                        <a target="_blank" href={siteSettings?.instagram_url}>
+                        <i class="lab la-instagram"></i> Instagram 
+                        </a>
+                          </li>
+                          
+
+                       
+                       
+                       {/* <FooterSocialLink link={siteSettings?.facebook_url} title="Facebook"/>  */}
+                       
                       </ul>
                     </div>
                   </div>

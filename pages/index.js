@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react'
+
 import Image from "next/image";
 import HeroSlider from "../components/HeroSlider";
 import OnBoarding from "../components/OnBoarding";
@@ -11,29 +13,26 @@ import OurStory from "../components/OurStory";
 import Footer from "../components/Footer";
 import Head from "next/head";
 import Meta from "../components/Meta";
-import useSWR from "swr";
-
-const fetcher = async () => {
-  const response = await fetch(
-    "https://benchmark.promotingnepal.com/api/setting"
-  );
-  const data = await response.json();
-  return data;
-};
+import axios from 'axios';
 
 export default function Home() {
-  const { data, error } = useSWR("settings", fetcher);
-  if (error) return "An error occured";
-  if (!data) return "";
-  const settings = data[0];
+  const[settings, setSettings] = useState();
+  console.log('settings', settings)
+  useEffect(() => {
+   axios.get('https://benchmark.promotingnepal.com/api/setting')
+   .then(res => {
+    //  console.log("res",res.data[0])
+     setSettings(res.data[0])
+   })
+  }, [])
 
   return (
     <>
       <Meta
-        title={settings.site_title}
-        keywords={settings.meta_keywords}
-        description={settings.meta_descriptions}
-        logo={settings.logo}
+        title={settings?.site_title}
+        keywords={settings?.meta_keywords}
+        description={settings?.meta_descriptions}
+        logo={settings?.logo}
       />
       <main
         className="page"
@@ -47,10 +46,10 @@ export default function Home() {
       >
         <HeroSlider />
         <OnBoarding />
-        <HowItWorks />
+        {/* <HowItWorks /> */}
         <KeyPartners />
         <Highlights />
-        <InvestNow />
+        {/* <InvestNow /> */}
         <JoinStartup />
         <UpcomingEvents />
         {/* <OurStory /> */}

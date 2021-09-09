@@ -1,23 +1,18 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import Image from "next/image";
 import Link from "next/link";
-import useSWR from "swr";
-
-const highlightFetcher = async () => {
-  const response = await fetch(
-    "https://benchmark.promotingnepal.com/api/announcements"
-  );
-  // const response = await fetch(`${process.env.BASE_URL}setting`)
-  const data = await response.json();
-  return data;
-};
+import axios from "axios";
+import {isEmpty} from 'lodash'
+import { Spinner } from "react-bootstrap";
 
 const Highlights = () => {
-  const { data, error } = useSWR("highlights", highlightFetcher);
-  if (error) return "An error occured";
-  if (!data) return "";
-  const highlights = data;
-
+  const [highlights, setHighlights] = useState()
+  useEffect(() => {
+    axios.get('https://benchmark.promotingnepal.com/api/announcements')
+    .then(res => {
+      setHighlights(res.data)
+    })
+  }, [])
   return (
     <section className="howitworks py-5">
       <div className="container">
@@ -25,8 +20,8 @@ const Highlights = () => {
           <div className="col-sm-6">
             <div className="titlewrapper">
               <h3 className="title font_p">
-                Highlights &amp; <br />
-                Announcements
+                News &amp; <br />
+                Highlights
               </h3>
             </div>
           </div>
@@ -38,14 +33,15 @@ const Highlights = () => {
             </div>
           </div>
         </div>
+        {!isEmpty(highlights) ?
         <div className="row">
-          {highlights[0] && (
+          {highlights && (
             <div className="col-sm-6">
               <div className="videowrapper bg_white rounded_medium my-3">
                 <div className="thumbnail">
                   <div className="overlay"></div>
                   <Image
-                    src={highlights[0].imagepath}
+                    src={highlights[0]?.imagepath}
                     height={200}
                     width={400}
                     layout={"responsive"}
@@ -58,19 +54,19 @@ const Highlights = () => {
                     <div className="date text-muted bg_p_dim text_p small">
                       Event Date :{" "}
                       <span className="pl-1">
-                        {highlights[0].published_date}
+                        {highlights[0]?.published_date}
                       </span>
                     </div>
                   </div>
                   <Link href={`/highlights/${highlights[0].title}`}>
                     <a>
                       <h3 className="title text_t f20 font_p">
-                        {highlights[0].title}
+                        {highlights[0]?.title}
                       </h3>
                     </a>
                   </Link>
                   <p className="text-muted f14">
-                    {highlights[0].description.slice(0, 200)}...
+                    {highlights[0]?.description.slice(0, 200)}...
                   </p>
                   <div className="buttonwrapper d-flex justify-content-start">
                     <button className="btn_hovered">
@@ -89,16 +85,16 @@ const Highlights = () => {
             <div className="factswrapper pl-3 my-3">
               <div className="row">
                 <div className="col-sm-12 ">
-                  {highlights.slice(1).map((highlight) => (
+                  {highlights?.slice(1).map((highlight) => (
                     <div
                       className="bg_white rounded_medium mb-4"
-                      key={highlight.title}
+                      key={highlight?.title}
                     >
                       <div className="row ">
                         <div
                           className="col-sm-4 rounded_medium object_cover"
                           style={{
-                            backgroundImage: `url(${highlight.imagepath})`,
+                            backgroundImage: `url(${highlight?.imagepath})`,
                           }}
                         ></div>
                         <div className="col-sm-8">
@@ -106,15 +102,15 @@ const Highlights = () => {
                             <div className="subtitle fw300 f14 text_p">
                               HIGHLIGHTS
                             </div>
-                            <Link href={`/highlights/${highlight.title}`}>
+                            <Link href={`/highlights/${highlight?.title}`}>
                               <a>
                                 <h3 className="title text_t f18 font_p">
-                                  {highlight.title}
+                                  {highlight?.title}
                                 </h3>
                               </a>
                             </Link>
                             <p className="text-muted f14">
-                              {highlight.published_date}
+                              {highlight?.published_date}
                             </p>
                           </div>
                         </div>
@@ -126,6 +122,13 @@ const Highlights = () => {
             </div>
           </div>
         </div>
+        : 
+        <div className="loader py-5 d-flex justify-content-center">
+          <Spinner animation="border" role="status">
+          <span className="visually-hidden"></span>
+          </Spinner>
+        </div>
+        }
       </div>
     </section>
   );

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import DownloadDocument from "../../components/DownloadDocument";
-import useSWR from "swr";
 import { useRouter } from "next/router";
 import axios from "axios";
 import {isEmpty} from 'lodash'

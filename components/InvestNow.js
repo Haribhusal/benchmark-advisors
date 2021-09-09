@@ -26,12 +26,7 @@ const InvestNow = () => {
             <div className="startupGrid">
               <Startup />
               <Startup />
-              <Startup />
-              <Startup />
-              <Startup />
-              <Startup />
-              <Startup />
-              <Startup />
+              
             </div>
           </div>
         </div>

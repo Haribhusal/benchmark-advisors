@@ -6,11 +6,12 @@ import PropTypes from 'prop-types'
 const FooterSocialLink = ({link, title}) => {
     return (
         <li className="text-muted f14">
-        <Link href={link}>
+        <div href={link}>
           <a target="_blank" className="link text_t">
-            {title}
+           
+            <i className="lab la-faceboook"></i>
           </a>
-        </Link>
+        </div>
       </li>
     )
 }

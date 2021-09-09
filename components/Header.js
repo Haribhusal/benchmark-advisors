@@ -47,7 +47,7 @@ const Header = () => {
                   id="doxs"
                 >
                    <NavDropdown.Item>
-                  <Link href="/investors">
+                  <Link href="/">
                     <a>
                       <div className="dropdown_item_icon d-flex">
                         <div className="image">
@@ -72,7 +72,7 @@ const Header = () => {
                   </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                  <Link href="/venture-capitalist">
+                  <Link href="/">
                     <a>
                       <div className="dropdown_item_icon d-flex">
                         <div className="image">
@@ -100,7 +100,7 @@ const Header = () => {
                   </NavDropdown.Item>
                   <NavDropdown.Item>
 
-                  <Link href="/investment-banker">
+                  <Link href="/">
                     <a>
                       <div className="dropdown_item_icon d-flex">
                         <div className="image">
@@ -125,7 +125,7 @@ const Header = () => {
                   </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                  <Link href="/downloads">
+                  <Link href="/">
                     <a>
                       <div className="dropdown_item_icon d-flex">
                         <p className="text-muted f16 mb-0">

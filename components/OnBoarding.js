@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
+import {isEmpty} from 'lodash'
+import { Spinner } from "react-bootstrap";
+
 
 const OnBoarding = () => {
   const [services, setServices] = useState();
@@ -32,16 +35,16 @@ const OnBoarding = () => {
             </div>
           </div>
         </div>
+        {!isEmpty(services) ? 
         <div className="row">
-          
-          {services && services?.map((service) => (
-            <div className="col-sm-4" key={service.id}>
-              <Link href={`service/${service.slug}`} passHref>
+          {services?.map((service) => (
+            <div className="col-sm-4" key={service?.id}>
+              <Link href={`service/${service?.slug}`} passHref>
                 <a>
                   <div className="actionwrapper text-center px-3 py-2">
                     <div className="imagewrapper">
                       <Image
-                        src={service.imagepath}
+                        src={service?.imagepath}
                         height={200}
                         width={250}
                         priority
@@ -71,6 +74,14 @@ const OnBoarding = () => {
             </div>
           ))}
         </div>
+
+        :
+        <div className="loader py-5 d-flex align-items-center justify-content-center">
+          <Spinner animation="border" role="status">
+          <span className="visually-hidden"></span>
+        </Spinner>
+        </div>
+}
       </div>
     </section>
   );

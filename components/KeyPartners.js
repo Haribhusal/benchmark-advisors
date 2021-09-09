@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from "react";
 import Image from "next/image";
 import Link from "next/link";
-import useSWR from "swr";
 import axios from "axios";
+import { isEmpty } from "lodash";
+import { Spinner } from "react-bootstrap";
 
 
 const KeyPartners = () => {
+  const[loadMore, setLoadMore] = useState(true)
   const[partners,setPartners] = useState([])
-  console.log("partners",partners)
+
   useEffect(() =>  {
      axios.get('https://benchmark.promotingnepal.com/api/partner')
     .then(res=>   {
@@ -26,8 +28,35 @@ const KeyPartners = () => {
             </div>
           </div>
         </div>
+        {!isEmpty(partners) ? 
         <div className="row">
-          {partners.map((partner) => (
+        {loadMore ? 
+          partners.slice(0,4).map((partner) => (
+            <div className="col-sm-3" >
+              <div href={partner.url}>
+                <a className="">
+                  <div className="partnerwrapper mb-4  rounded_medium p-3 text-center bg_white">
+                    <div className="image">
+                      <Image
+                        src={partner.imagepath}
+                        height={100}
+                        width={100}
+                        objectFit="contain"
+                        priority
+                      />  
+                    </div>
+                    <div className="title">
+                      <strong className="f14 text_t">
+                         {partner.title} 
+                        </strong>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          ))
+        : 
+          partners.map((partner) => (
             <div className="col-sm-3" >
               <Link href={partner.url}>
                 <a className="">
@@ -50,14 +79,28 @@ const KeyPartners = () => {
                 </a>
               </Link>
             </div>
-          ))}
+          ))} 
         </div>
+
+        : <div className='loader py-5 d-flex justify-content-center'>
+          <Spinner animation="border" role="status">
+          <span className="visually-hidden"></span>
+          </Spinner>
+        </div>
+        }
         <div className="row">
           <div className="col-sm-12">
             <div className="buttonwrapper text-center my-5">
-              <button className="btn btn_p_dim rounded_big text_p f14 py-2 px-3">
+            {loadMore ? (
+              <button className="btn btn_p_dim rounded_big text_p f14 py-2 px-3" onClick={() => setLoadMore(false)}>
                 View More
               </button>
+            )
+            : (
+              <button className="btn btn_p_dim rounded_big text_p f14 py-2 px-3" onClick={() => setLoadMore(true)}>
+                View Less
+              </button>
+              ) }
             </div>
           </div>
         </div>

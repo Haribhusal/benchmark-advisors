@@ -1,24 +1,17 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Accordion, Card } from "react-bootstrap";
-import useSWR from "swr";
-
-const fetcher = async () => {
-  const response = await fetch("https://benchmark.promotingnepal.com/api/faq");
-  // const response = await fetch(`${process.env.BASE_URL}setting`)
-  const data = await response.json();
-  return data;
-};
-
 const FaqComponent = () => {
-  const [open, setOpen] = useState(false);
-  const { data, error } = useSWR("faqs", fetcher);
-  if (error) return null;
-  const faqs = data;
-  if (!data) return "";
-
-  console.log(faqs);
-
-  return (
+const [open, setOpen] = useState(false);
+const [faqs, setFaqs] = useState();
+  useEffect(() => {
+   axios.get('https://benchmark.promotingnepal.com/api/faq')
+   .then(res => {
+     console.log(res.data)
+    setFaqs(res.data)
+   })
+  }, [])
+return (
     <main
       className="page"
       style={{
@@ -41,19 +34,19 @@ const FaqComponent = () => {
             <div className="col-sm-12">
               <div className="faqitems">
                 <Accordion defaultActiveKey="0">
-                  {faqs.map((faq) => (
-                    <Card key={faq.id}>
+                  {faqs?.map((faq) => (
+                    <Card key={faq?.id}>
                       <Accordion.Toggle
                         as={Card.Header}
-                        eventKey={faq.id}
+                        eventKey={faq?.id}
                         className="font_p"
                         style={{ cursor: "pointer" }}
                       >
-                        {faq.title}
+                        {faq?.title}
                       </Accordion.Toggle>
                       <Accordion.Collapse eventKey={faq.id}>
                         <Card.Body className="text-muted">
-                          {faq.description}
+                          {faq?.description}
                         </Card.Body>
                       </Accordion.Collapse>
                     </Card>
@@ -63,7 +56,7 @@ const FaqComponent = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> 
     </main>
   );
 };

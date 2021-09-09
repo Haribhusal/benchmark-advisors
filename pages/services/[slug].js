@@ -3,15 +3,11 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 export default function SingleSubService() {
-  const pageRouter = useRouter();
-  const { slug } = pageRouter.query
+  const router = useRouter();
+  const { slug } = router.query
   const [features, setFeatures] = useState()
   const[team,setTeam] = useState()
 
-
-
-  
- 
   useEffect(() => {
     axios.get(`https://benchmark.promotingnepal.com/api/team/featurelist/${slug}`)
     .then(response => {
@@ -22,11 +18,17 @@ export default function SingleSubService() {
     }).catch(error => {
       console.log(error)
     })
+    axios.get(`https://benchmark.promotingnepal.com/api/sub-service/${slug}`)
+ .then(res=>{
+   console.log('responseTwo',res)
+ })
   
   }, [slug])
 
-
-
+const [dataItem, setDataItem] = useState()
+useEffect(() => {
+ 
+}, [])
 
   return (
     <>
@@ -118,19 +120,19 @@ export default function SingleSubService() {
               </div>
               <div className="row">
                 {features?.map((feature) => (
-                  <div className="col-sm-4" key={feature.id}>
+                  <div className="col-sm-4" key={feature?.id}>
                     <div className="servicefeatures text-center">
                       <div className="img text-center">
                         <img
-                          src={feature.imagepath}
+                          src={feature?.imagepath}
                           style={{ height: "150px" }}
                           className="img-fluid"
                           alt=""
                         />
                       </div>
                       <div className="titlewrapper">
-                        <h4 className="title mb-3 font_p">{feature.title}</h4>
-                        <p className="text-muted f14">{feature.description}</p>
+                        <h4 className="title mb-3 font_p">{feature?.title}</h4>
+                        <p className="text-muted f14">{feature?.description}</p>
                       </div>
                     </div>
                   </div>
@@ -146,25 +148,25 @@ export default function SingleSubService() {
               </div>
               <div className="row">
                 {team?.map((member) => (
-                  <div className="col-sm-6" key={member.id}>
+                  <div className="col-sm-6" key={member?.id}>
                     <div className="contactWrapper mb-4 bg_white d-flex">
                       <div className="image">
-                        <img src={member.imagepath} alt="" />
+                        <img src={member?.imagepath} alt="" />
                       </div>
                       <div className="d-flex align-items-center p-4">
                         <div className="">
-                          <h5 className="name title font_p">{member.name}</h5>
+                          <h5 className="name title font_p">{member?.name}</h5>
                           <p className="text-muted mb-3 f14">
-                            {member.designation}
+                            {member?.designation}
                           </p>
                           <div className="contacts">
                             <div className="item text-muted f14">
                               <i className="las la-phone f16 mr-2"></i>
-                              {member.phone}
+                              {member?.phone}
                             </div>
                             <div className="item text-muted f14">
                               <i className="las la-envelope f16 mr-2"></i>
-                              {member.email}
+                              {member?.email}
                             </div>
                           </div>
                         </div>
