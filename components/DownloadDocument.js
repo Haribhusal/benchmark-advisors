@@ -123,9 +123,7 @@ const DownloadDocument = (props) => {
                   </Button>
 
                   <Button
-                    disabled={
-                      
-                    }
+                 
                     type="submit"
                     variant="primary"
                     style={{
