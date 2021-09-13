@@ -7,7 +7,6 @@ import {isEmpty} from 'lodash'
 
 import Skeleton from 'react-loading-skeleton';
 
-
 export default function SingleService() {
   const router = useRouter();
   const { slug } = router.query;
@@ -18,7 +17,6 @@ export default function SingleService() {
     const data = res.data;
   const singleServiceData = data?.filter((a) => a.slug === slug);
   setService(singleServiceData[0]);
-  console.log('sing', singleServiceData)
   })
 
   .catch(err=> {
@@ -53,7 +51,7 @@ export default function SingleService() {
               </div>
             </div>
             <div className="row">
-              <div className="col-sm-8">
+              <div className="col-sm-12">
                 <div className="textwrapper">
                   <div className="subtitle f14 text-muted">On Boarding</div>
                   <h3 className="title font_p text_big mb-5">
@@ -64,20 +62,7 @@ export default function SingleService() {
                     </p>
                 </div>
               </div>
-              <div className="col-sm-4 d-flex align-items-center justify-content-end">
-                <div className="buttonwrapper">
-                  <button className="btn btn_p rounded_big font_p text_w px-5 py-3">
-                    Request for proposal{" "}
-                    <span>
-                      <img
-                        src="/icons/right-arrow.svg"
-                        alt=""
-                        className="ml-2"
-                      />
-                    </span>{" "}
-                  </button>
-                </div>
-              </div>
+             
             </div>
             <SubServices slug={slug} />
           </div>

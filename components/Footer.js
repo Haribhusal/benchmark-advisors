@@ -4,17 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import FooterSocialLink from "./FooterSocialLink";
 const Footer = () => {
-  const [siteSettings, setSiteSettings]= useState();
-  console.log(siteSettings)
+  const [siteSettings, setSiteSettings] = useState();
 
-  useEffect(() => {
-    axios.get('https://benchmark.promotingnepal.com/api/setting')
-    .then(res=> {
-      setSiteSettings(res?.data[0]);
-    }).catch(error=>{
-      console.log(error)
-    })
-  }, [])
+  useEffect(async () => {
+    await axios
+      .get("https://benchmark.promotingnepal.com/api/setting")
+      .then((res) => {
+        setSiteSettings(res?.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <footer
@@ -31,9 +32,12 @@ const Footer = () => {
         <div className="row">
           <div className="col-sm-4">
             <div className="leftwrapper">
-            <div className="titlewrapper">
-                      <h6 className="title mb-3 font_p fw800"> {siteSettings?.site_title}</h6>
-                    </div>
+              <div className="titlewrapper">
+                <h6 className="title mb-3 font_p fw800">
+                  {" "}
+                  {siteSettings?.site_title}
+                </h6>
+              </div>
               <div className="textwrapper">
                 <p className="text-muted small">
                   {siteSettings?.about_text?.slice(0, 250)}...
@@ -53,12 +57,11 @@ const Footer = () => {
                       <ul>
                         <li className="text-muted f14">
                           {siteSettings?.address}
-                          </li>
+                        </li>
                         <li className="text-muted f14">
                           {siteSettings?.email}
-                          </li>
+                        </li>
                         <li className="text-muted f14">
-
                           {siteSettings?.mobile_no}, {siteSettings?.phone_no}
                         </li>
                       </ul>
@@ -73,29 +76,24 @@ const Footer = () => {
                       </h6>
                     </div>
                     <div className="menu">
-                     
                       <ul>
                         <li>
-                        <a target="_blank" href={siteSettings?.facebook_url}>
-                        <i class="lab la-facebook-f"></i> Facebook 
-                        </a>
-                          </li>
-                          <li>
-                        <a target="_blank" href={siteSettings?.twitter_url}>
-                        <i class="lab la-twitter"></i> Twitter 
-                        </a>
-                          </li>
-                          <li>
-                        <a target="_blank" href={siteSettings?.instagram_url}>
-                        <i class="lab la-instagram"></i> Instagram 
-                        </a>
-                          </li>
-                          
+                          <a target="_blank" href={siteSettings?.facebook_url}>
+                            <i className="lab la-facebook-f"></i> Facebook
+                          </a>
+                        </li>
+                        <li>
+                          <a target="_blank" href={siteSettings?.twitter_url}>
+                            <i className="lab la-twitter"></i> Twitter
+                          </a>
+                        </li>
+                        <li>
+                          <a target="_blank" href={siteSettings?.instagram_url}>
+                            <i className="lab la-instagram"></i> Instagram
+                          </a>
+                        </li>
 
-                       
-                       
-                       {/* <FooterSocialLink link={siteSettings?.facebook_url} title="Facebook"/>  */}
-                       
+                        {/* <FooterSocialLink link={siteSettings?.facebook_url} title="Facebook"/>  */}
                       </ul>
                     </div>
                   </div>
@@ -127,8 +125,7 @@ const Footer = () => {
             <div className="leftwrapper">
               <div className="textwrapper">
                 <p className="text-muted f12 mb-0">
-                 {setSiteSettings?.site_title} &copy;  2021, All Rights
-                  Reserved
+                  {setSiteSettings?.site_title} &copy; 2021, All Rights Reserved
                 </p>
               </div>
             </div>

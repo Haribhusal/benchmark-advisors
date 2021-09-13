@@ -37,11 +37,7 @@ export default function AdvisoryAndConsulting() {
                   <button className="btn btn_p rounded_big font_p text_w px-5 py-3">
                     Invest Now{" "}
                     <span>
-                      <img
-                        src="/icons/right-arrow.svg"
-                        alt=""
-                        className="ml-2"
-                      />
+                      <i className="las la-arrow-right"></i>
                     </span>{" "}
                   </button>
                 </div>
@@ -61,11 +57,7 @@ export default function AdvisoryAndConsulting() {
                     />
                   </div>
                   <div className="playIcon">
-                    <Image
-                      src="/icons/right-arrow.svg"
-                      height={30}
-                      width={30}
-                    />
+                    <i className="las la-arrow-right"></i>
                   </div>
                 </div>
               </div>

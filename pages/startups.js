@@ -43,11 +43,7 @@ export default function AdvisoryAndConsulting() {
                   <button className="btn btn_p rounded_big font_p text_w px-5 py-3">
                     Join Now{" "}
                     <span>
-                      <img
-                        src="/icons/right-arrow.svg"
-                        alt=""
-                        className="ml-2"
-                      />
+                      <i className="las la-arrow-right"></i>
                     </span>{" "}
                   </button>
                 </div>
@@ -117,11 +113,7 @@ export default function AdvisoryAndConsulting() {
                       <div className="buttonwrapper mt-3">
                         <button className="btn btn_p_dim text_p btn-block f14 text-uppercase py-2 rounded_big">
                           View Details
-                          <img
-                            src="/icons/right-arrow.svg"
-                            className="icon ml-3"
-                            alt=""
-                          />
+                          <i className="las la-arrow-right"></i>
                         </button>
                       </div>
                     </div>
@@ -190,11 +182,7 @@ export default function AdvisoryAndConsulting() {
                       <div className="buttonwrapper mt-3">
                         <button className="btn btn_p_dim text_p btn-block f14 text-uppercase py-2 rounded_big">
                           View Details
-                          <img
-                            src="/icons/right-arrow.svg"
-                            className="icon ml-3"
-                            alt=""
-                          />
+                          <i className="las la-arrow-right"></i>
                         </button>
                       </div>
                     </div>
@@ -263,11 +251,7 @@ export default function AdvisoryAndConsulting() {
                       <div className="buttonwrapper mt-3">
                         <button className="btn btn_p_dim text_p btn-block f14 text-uppercase py-2 rounded_big">
                           View Details
-                          <img
-                            src="/icons/right-arrow.svg"
-                            className="icon ml-3"
-                            alt=""
-                          />
+                          <i className="las la-arrow-right"></i>
                         </button>
                       </div>
                     </div>
@@ -336,11 +320,7 @@ export default function AdvisoryAndConsulting() {
                       <div className="buttonwrapper mt-3">
                         <button className="btn btn_p_dim text_p btn-block f14 text-uppercase py-2 rounded_big">
                           View Details
-                          <img
-                            src="/icons/right-arrow.svg"
-                            className="icon ml-3"
-                            alt=""
-                          />
+                          <i className="las la-arrow-right"></i>
                         </button>
                       </div>
                     </div>
@@ -409,11 +389,7 @@ export default function AdvisoryAndConsulting() {
                       <div className="buttonwrapper mt-3">
                         <button className="btn btn_p_dim text_p btn-block f14 text-uppercase py-2 rounded_big">
                           View Details
-                          <img
-                            src="/icons/right-arrow.svg"
-                            className="icon ml-3"
-                            alt=""
-                          />
+                          <i className="las la-arrow-right"></i>
                         </button>
                       </div>
                     </div>
@@ -482,11 +458,7 @@ export default function AdvisoryAndConsulting() {
                       <div className="buttonwrapper mt-3">
                         <button className="btn btn_p_dim text_p btn-block f14 text-uppercase py-2 rounded_big">
                           View Details
-                          <img
-                            src="/icons/right-arrow.svg"
-                            className="icon ml-3"
-                            alt=""
-                          />
+                          <i className="las la-arrow-right"></i>
                         </button>
                       </div>
                     </div>
@@ -555,11 +527,7 @@ export default function AdvisoryAndConsulting() {
                       <div className="buttonwrapper mt-3">
                         <button className="btn btn_p_dim text_p btn-block f14 text-uppercase py-2 rounded_big">
                           View Details
-                          <img
-                            src="/icons/right-arrow.svg"
-                            className="icon ml-3"
-                            alt=""
-                          />
+                          <i className="las la-arrow-right"></i>
                         </button>
                       </div>
                     </div>
@@ -628,11 +596,7 @@ export default function AdvisoryAndConsulting() {
                       <div className="buttonwrapper mt-3">
                         <button className="btn btn_p_dim text_p btn-block f14 text-uppercase py-2 rounded_big">
                           View Details
-                          <img
-                            src="/icons/right-arrow.svg"
-                            className="icon ml-3"
-                            alt=""
-                          />
+                          <i className="las la-arrow-right"></i>
                         </button>
                       </div>
                     </div>

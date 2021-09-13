@@ -47,7 +47,7 @@ const Header = () => {
                   id="doxs"
                 >
                    <NavDropdown.Item>
-                  <Link href="/">
+                  <Link href="/investors">
                     <a>
                       <div className="dropdown_item_icon d-flex">
                         <div className="image">
@@ -65,14 +65,14 @@ const Header = () => {
                           </p>
                         </div>
                         <div className="arrow">
-                          <img src="/icons/right-arrow.svg" alt="" />
+                          <i className="las la-arrow-right"></i>
                         </div>
                       </div>
                     </a>
                   </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                  <Link href="/">
+                  <Link href="/venture-capitalist">
                     <a>
                       <div className="dropdown_item_icon d-flex">
                         <div className="image">
@@ -92,7 +92,7 @@ const Header = () => {
                           </p>
                         </div>
                         <div className="arrow">
-                          <img src="/icons/right-arrow.svg" alt="" />
+                          <i className="las la-arrow-right"></i>
                         </div>
                       </div>
                     </a>
@@ -100,7 +100,7 @@ const Header = () => {
                   </NavDropdown.Item>
                   <NavDropdown.Item>
 
-                  <Link href="/">
+                  <Link href="/investment-banker">
                     <a>
                       <div className="dropdown_item_icon d-flex">
                         <div className="image">
@@ -118,7 +118,7 @@ const Header = () => {
                           </p>
                         </div>
                         <div className="arrow">
-                          <img src="/icons/right-arrow.svg" alt="" />
+                        <i className="las la-arrow-right"></i>
                         </div>
                       </div>
                     </a>
@@ -132,7 +132,7 @@ const Header = () => {
                           View all categories
                         </p>
                         <div className="arrow">
-                          <img src="/icons/right-arrow.svg" alt="" />
+                        <i className="las la-arrow-right"></i>
                         </div>
                       </div>
                     </a>
@@ -168,7 +168,7 @@ const Header = () => {
                             </p>
                           </div>
                           <div className="arrow">
-                            <img src="/icons/right-arrow.svg" alt="" />
+                          <i className="las la-arrow-right"></i>
                           </div>
                         </div>
                     

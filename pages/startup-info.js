@@ -48,11 +48,7 @@ export default function AdvisoryAndConsulting() {
                   <button className="btn btn_p rounded_big font_p text_w px-5 py-3">
                     Join Now{" "}
                     <span>
-                      <img
-                        src="/icons/right-arrow.svg"
-                        alt=""
-                        className="ml-2"
-                      />
+                      <i className="las la-arrow-right"></i>
                     </span>{" "}
                   </button>
                 </div>
@@ -62,112 +58,112 @@ export default function AdvisoryAndConsulting() {
               <div className="col-sm-4 mb-3">
                 <div className="featurewrapper align-items-center px-4 py-3 d-flex gap">
                   <div className="icon">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                   <div className="text font_p f15">
                     Financial Reporting and Analysis
                   </div>
                   <div className=" arrow">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                 </div>
               </div>
               <div className="col-sm-4 mb-3">
                 <div className="featurewrapper align-items-center px-4 py-3 d-flex gap">
                   <div className="icon">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                   <div className="text font_p f15">Financial Analysis</div>
                   <div className=" arrow">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                 </div>
               </div>
               <div className="col-sm-4 mb-3">
                 <div className="featurewrapper align-items-center px-4 py-3 d-flex gap">
                   <div className="icon">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                   <div className="text font_p f15">Financial Analysis</div>
                   <div className=" arrow">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                 </div>
               </div>
               <div className="col-sm-4 mb-3">
                 <div className="featurewrapper align-items-center px-4 py-3 d-flex gap">
                   <div className="icon">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                   <div className="text font_p f15">Financial Analysis</div>
                   <div className=" arrow">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                 </div>
               </div>
               <div className="col-sm-4 mb-3">
                 <div className="featurewrapper align-items-center px-4 py-3 d-flex gap">
                   <div className="icon">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                   <div className="text font_p f15">Financial Analysis</div>
                   <div className=" arrow">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                 </div>
               </div>
               <div className="col-sm-4 mb-3">
                 <div className="featurewrapper align-items-center px-4 py-3 d-flex gap">
                   <div className="icon">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                   <div className="text font_p f15">Financial Analysis</div>
                   <div className=" arrow">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                 </div>
               </div>
               <div className="col-sm-4 mb-3">
                 <div className="featurewrapper align-items-center px-4 py-3 d-flex gap">
                   <div className="icon">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                   <div className="text font_p f15">Financial Analysis</div>
                   <div className=" arrow">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                 </div>
               </div>
               <div className="col-sm-4 mb-3">
                 <div className="featurewrapper align-items-center px-4 py-3 d-flex gap">
                   <div className="icon">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                   <div className="text font_p f15">Financial Analysis</div>
                   <div className=" arrow">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                 </div>
               </div>
               <div className="col-sm-4 mb-3">
                 <div className="featurewrapper align-items-center px-4 py-3 d-flex gap">
                   <div className="icon">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                   <div className="text font_p f15">Financial Analysis</div>
                   <div className=" arrow">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                 </div>
               </div>
               <div className="col-sm-4 mb-3">
                 <div className="featurewrapper align-items-center px-4 py-3 d-flex gap">
                   <div className="icon">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                   <div className="text font_p f15">Financial Analysis</div>
                   <div className=" arrow">
-                    <img src="/icons/right-arrow.svg" alt="" className="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                 </div>
               </div>

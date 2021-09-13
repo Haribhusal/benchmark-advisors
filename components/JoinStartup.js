@@ -33,11 +33,7 @@ const JoinStartup = () => {
                     <a>
                       <button className="btn btn_p rounded_big font_p text_w btn_big btn_text_p">
                         Get Started
-                        <Image
-                          src="/icons/right-arrow.svg"
-                          height={15}
-                          width={15}
-                        />
+                        <i className="las la-arrow-right"></i>
                       </button>
                     </a>
                   </Link>

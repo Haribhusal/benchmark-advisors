@@ -41,11 +41,7 @@ export default function ServiceDetails() {
                   <button className="btn btn_p rounded_big font_p text_w px-5 py-3">
                     Request For Proposal{" "}
                     <span>
-                      <img
-                        src="/icons/right-arrow.svg"
-                        alt=""
-                        className="ml-2"
-                      />
+                      <i className="las la-arrow-right"></i>
                     </span>{" "}
                   </button>
                 </div>

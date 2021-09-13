@@ -40,11 +40,7 @@ export default function TechStartups() {
                     <button className="btn btn_p rounded_big font_p text_w px-5 py-3">
                       Join Now{" "}
                       <span>
-                        <img
-                          src="/icons/right-arrow.svg"
-                          alt=""
-                          className="ml-2"
-                        />
+                        <i className="las la-arrow-right"></i>
                       </span>{" "}
                     </button>
                   </div>
@@ -476,7 +472,7 @@ export default function TechStartups() {
               <div className="col-sm-4 offset-sm-4 d-flex align-items-center justify-content-center">
                 <div className="loadingwrapper d-flex gap">
                   <div className="icon">
-                    <img src=" /icons/right-arrow.svg" alt="" />
+                    <i className="las la-arrow-right"></i>
                   </div>
                   <div className="label text_p font_p">Loading...</div>
                 </div>

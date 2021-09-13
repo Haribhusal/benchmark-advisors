@@ -9,23 +9,26 @@ import Skeleton from 'react-loading-skeleton';
 const DocumentCategory = () => {
   const router = useRouter();
   const { slug } = router.query;
+  console.log('ssss',slug)
   const [docCategory, setDocCategory] = useState();
   const [document, setDocument] = useState();
-  useEffect(() => {
-    axios.get(`https://benchmark.promotingnepal.com/api/download-document/${slug}`)
-    .then(res => {
-      setDocument(res.data)
-    })
-    }, [slug])
+  console.log('doc', document)
 
-  useEffect(() => {
-  axios.get('https://benchmark.promotingnepal.com/api/document-category')
+  useEffect(async() => {
+ await axios.get('https://benchmark.promotingnepal.com/api/document-category')
   .then(res => {
     const singleItem = res.data.data?.filter((a) => a.slug === slug);
     setDocCategory(singleItem)
   })
-  }, [slug])
 
+  }, [slug])
+  useEffect( async() => {
+    console.log('myslug', slug)
+    await axios.get(`https://benchmark.promotingnepal.com/api/download-document/${slug}`)
+     .then(res => {
+       setDocument(res.data)
+     })
+     }, [slug])
   return (
     <main
       className="page"
@@ -66,7 +69,7 @@ const DocumentCategory = () => {
           </div>
           <div className="row py-5">
           {document?.data?.map((doc) => (
-            <DownloadDocument  slug={slug} id={doc.id} title={doc.title} />
+            <DownloadDocument  slug={slug} id={doc.id} title={doc.title} key={doc.id} />
           ))}
           </div>
         </div>

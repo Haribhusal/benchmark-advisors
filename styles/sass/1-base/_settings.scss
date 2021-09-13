@@ -460,3 +460,80 @@ header {
         }
     }
 }
+
+.sliderItem{
+    .imagewrapper{
+        img{
+            max-height: 200px;
+        }
+            
+    }
+}
+.rfp {
+    .stepBar{
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        .step{
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            .count{
+                background-color: rgba($p, 0.4);
+                height: 30px;
+                width: 30px;
+                border-radius: 100px;
+                text-align: center;
+                color: #333;
+                line-height: 30px;
+                font-weight: bolder;
+            }
+            .label{
+                color: $p;
+            }
+        }
+        .active{
+            .count{
+                background-color: rgba($p, 1);
+                color: #fff;
+            }
+        }
+    }
+}
+
+.rfpform{
+    .form-control{
+        height: auto !important;
+        padding: 10px 15px !important;
+        border-radius: 100px;
+    }
+    .file_input{
+        min-width: 150px;
+    }
+
+
+}
+.infobar{
+    border-radius: 10px;
+    .imagewrapper{
+        text-align: right;
+        img{
+            max-height: 100px;
+        }
+    }
+} 
+
+.not_rounded_full{
+    border-radius: 10px !important;
+}
+
+
+.confirmData{
+    .data{
+        margin: 7px 0;
+        padding: 7px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+}
