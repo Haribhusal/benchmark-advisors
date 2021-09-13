@@ -42,8 +42,6 @@ export default class Main extends Component {
   };
 
   render() {
-    console.log("sasazxzzx", this.props.slug);
-
     const { step } = this.state;
     const {
       fname,

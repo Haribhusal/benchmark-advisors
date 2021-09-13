@@ -5,7 +5,6 @@ import { Spinner } from "react-bootstrap";
 const Confirmation = ({ prevStep, nextStep, values, slug }) => {
   const[message, setMessage] = useState();
   const[loading, setLoading] = useState(false);
-  const [btnDisable, setBtnDisable] = useState(false);
   const[error, setErrors] = useState();
 
   const {
@@ -41,7 +40,6 @@ const Confirmation = ({ prevStep, nextStep, values, slug }) => {
   const submitForm = async (e) => {
       e.preventDefault();
       setLoading(true)
-      setBtnDisable(true)
       
      await axios({
         method: 'POST',
@@ -50,7 +48,6 @@ const Confirmation = ({ prevStep, nextStep, values, slug }) => {
       }).then(function (response) {
         console.log(response);
         setMessage(response.data.message)
-        setBtnDisable(false)
         setLoading(true)
 
         
@@ -203,25 +200,7 @@ const Confirmation = ({ prevStep, nextStep, values, slug }) => {
       <div className="row my-3">
         <div className="col-sm-12">
           <button className="btn btn-secondary" onClick={Previous}>Back</button>
-          <button className="btn btn_p" disabled={btnDisable} onClick={submitForm}>
-            {loading ? (
-               <div>hey</div>
-             )  
-             
-             : (
-              <div>
-
-<Spinner animation="border" role="status">
-  <span className="visually-hidden"></span>
-</Spinner>
-
-
-Confirm and Submit 
-                </div>
-
-           
-             ) 
-             }
+          <button className="btn btn_p" onClick={submitForm}>Confirm and Submit 
           </button>
         </div>
       </div>
