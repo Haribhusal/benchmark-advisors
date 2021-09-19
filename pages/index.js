@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 
 import Image from "next/image";
 import HeroSlider from "../components/HeroSlider";
@@ -13,18 +13,18 @@ import OurStory from "../components/OurStory";
 import Footer from "../components/Footer";
 import Head from "next/head";
 import Meta from "../components/Meta";
-import axios from 'axios';
+import axios from "axios";
 
 export default function Home() {
-  const[settings, setSettings] = useState();
-  console.log('settings', settings)
+  const [settings, setSettings] = useState();
   useEffect(() => {
-   axios.get('https://benchmark.promotingnepal.com/api/setting')
-   .then(res => {
-    //  console.log("res",res.data[0])
-     setSettings(res.data[0])
-   })
-  }, [])
+    axios
+      .get("https://benchmark.promotingnepal.com/api/setting")
+      .then((res) => {
+        //  console.log("res",res.data[0])
+        setSettings(res.data[0]);
+      });
+  }, []);
 
   return (
     <>

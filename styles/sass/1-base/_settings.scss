@@ -1,286 +1,187 @@
 ::selection {
-    background-color: $p;
-    color: #fff;
+  background-color: $p;
+  color: #fff;
 }
 
 .bg_white_dim {
-    background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.6);
 }
 .btn_white_dim {
-    display: inline-block;
-    padding: 10px 25px;
-    border-radius: 100px;
+  display: inline-block;
+  padding: 10px 25px;
+  border-radius: 100px;
 }
 .slick-prev {
-    transform: scaleX(-1) !important;
-    left: -50px !important;
+  transform: scaleX(-1) !important;
+  left: -50px !important;
 }
 .slick-next {
-    right: -50px !important;
+  right: -50px !important;
 }
 
 @media screen and (max-width: 992px) {
-    .slick-next {
-        right: 0 !important;
-    }
-    .slick-prev {
-        transform: scaleX(-1) !important;
-        left: -0 !important;
-    }
+  .slick-next {
+    right: 0 !important;
+  }
+  .slick-prev {
+    transform: scaleX(-1) !important;
+    left: -0 !important;
+  }
 }
 .slick-arrow {
-    height: 40px !important;
-    width: 40px !important;
-    padding: 15px !important;
-    border-radius: 40px;
-    background-color: rgba($p, 0.1) !important;
-    border: 1px solid transparent;
-    @include tsn();
+  height: 40px !important;
+  width: 40px !important;
+  padding: 15px !important;
+  border-radius: 40px;
+  background-color: rgba($p, 0.1) !important;
+  border: 1px solid transparent;
+  @include tsn();
 
-    &:hover {
-        border: 1px solid $p;
-        padding: 13px !important;
-    }
+  &:hover {
+    border: 1px solid $p;
+    padding: 13px !important;
+  }
 }
 
 ul,
 li,
 ol {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-a{
-    color: #333;
+a {
+  color: #333;
 }
 .header_logo {
-    max-width: 70px !important;
+  max-width: 70px !important;
 }
 
 .btn {
-    font-weight: 700 !important;
-    font-size: 14px !important;
-    text-transform: uppercase;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  text-transform: uppercase;
 
-    &:focus {
-        outline: none !important;
-        box-shadow: none !important;
-    }
-    &:hover {
-        background-color: #fff !important;
-        color: $p !important;
-        box-shadow: 0px 10px 30px rgba(#000, 0.08);
-    }
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  &:hover {
+    background-color: #fff !important;
+    color: $p !important;
+    box-shadow: 0px 10px 30px rgba(#000, 0.08);
+  }
 }
 .btn_p {
+  img {
+    filter: brightness(0) invert(1);
+  }
+  &:hover {
     img {
-        filter: brightness(0) invert(1);
+      filter: brightness(1) invert(0);
     }
-    &:hover {
-        img {
-            filter: brightness(1) invert(0);
-        }
-    }
+  }
 }
 
 .featurewrapper {
+  @include tsn();
+
+  background-color: rgba($p, 0.1);
+  border-radius: 10px;
+  position: relative;
+  .icon {
+    img {
+      height: 20px;
+      @include tsn();
+
+      filter: brightness(1) invert(0);
+    }
+  }
+  .arrow {
+    opacity: 0;
+    background-color: #fff;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    border-radius: 30px;
+    line-height: 30px;
+    position: absolute;
+    right: 30px;
     @include tsn();
-
-    background-color: rgba($p, 0.1);
-    border-radius: 10px;
-    position: relative;
+  }
+  &:hover {
+    background-color: $p;
+    cursor: pointer;
+    color: #fff !important;
     .icon {
-        img {
-            height: 20px;
-            @include tsn();
-
-            filter: brightness(1) invert(0);
-        }
+      img {
+        filter: brightness(0) invert(1);
+      }
     }
     .arrow {
-        opacity: 0;
-        background-color: #fff;
-        height: 30px;
-        width: 30px;
-        text-align: center;
-        border-radius: 30px;
-        line-height: 30px;
-        position: absolute;
-        right: 30px;
-        @include tsn();
+      opacity: 1;
+      background-color: #fff;
+
+      right: 15px;
     }
-    &:hover {
-        background-color: $p;
-        cursor: pointer;
-        color: #fff !important;
-        .icon {
-            img {
-                filter: brightness(0) invert(1);
-            }
-        }
-        .arrow {
-            opacity: 1;
-            background-color: #fff;
-            
-            right: 15px;
-        }
-    }
+  }
 }
 
 .investorwrapper {
-    margin-bottom: 30px;
-    position: relative;
-    overflow: hidden;
-    max-height: 300px;
-    box-shadow: 0px 20px 30px rgba(#000, 0.08);
-    .moredetails {
-        display: none;
-    }
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
+  max-height: 300px;
+  box-shadow: 0px 20px 30px rgba(#000, 0.08);
+  .moredetails {
+    display: none;
+  }
+  .details {
+    @include tsn();
+  }
+  &:hover {
     .details {
-        @include tsn();
+      background-color: #fff;
+      position: relative;
+      z-index: 99;
+      margin-top: -100px;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
     }
-    &:hover {
-        .details {
-            background-color: #fff;
-            position: relative;
-            z-index: 99;
-            margin-top: -100px;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-        }
-        .moredetails {
-            display: block;
-        }
+    .moredetails {
+      display: block;
     }
-    .invested {
-        position: absolute;
-        background-color: green;
-        padding: 2px 13px;
-        border-radius: 100px;
-        color: #fff;
-        top: 15px;
-        right: 15px;
-    }
+  }
+  .invested {
+    position: absolute;
+    background-color: green;
+    padding: 2px 13px;
+    border-radius: 100px;
+    color: #fff;
+    top: 15px;
+    right: 15px;
+  }
 }
 
 .otherInvestors {
-    .investorwrapper {
-        &:hover {
-            .details {
-                margin-top: 0px !important;
-            }
-        }
+  .investorwrapper {
+    &:hover {
+      .details {
+        margin-top: 0px !important;
+      }
     }
+  }
 }
 
 .datawrapper {
-    .item {
-        border-bottom: 1px solid #eee;
-        padding: 10px 0;
-        .data-blurred {
-            position: relative;
-            user-select: none;
-            pointer-events: none;
-            &::after {
-                position: absolute;
-                user-select: none;
-                pointer-events: none;
-                height: 100%;
-                width: 100%;
-                backdrop-filter: blur(6px);
-                top: 0;
-                content: "";
-                z-index: 09;
-                left: 0;
-            }
-        }
-    }
-}
-.datawrapper_single {
-    .item {
-        border: none !important;
-    }
-}
-.tabwrapper {
-    .nav {
-        border: none !important;
-        a {
-            font-family: "ReservationBlack", sans-serif !important;
-            background-color: transparent !important;
-            border-bottom: 2px solid transparent !important;
-            color: #555555;
-            border: none;
-            padding: 10px 0 !important;
-            margin-right: 30px !important;
-        }
-        a.active {
-            color: $p;
-            border-bottom: 2px solid $p !important;
-        }
-    }
-}
-
-.bankerwrapper {
-    position: relative;
-    margin-bottom: 30px;
-    .invested {
-        position: absolute;
-        background-color: green;
-        padding: 2px 13px;
-        border-radius: 100px;
-        color: #fff;
-        top: 15px;
-        right: 15px;
-    }
-}
-
-.investor_profile {
-    .contactdetails {
-        .detail {
-            img {
-                height: 15px;
-                margin-right: 10px;
-            }
-        }
-    }
-}
-.portfoliowrapper {
-    position: relative;
-    .image {
-        img {
-            height: 100px;
-            width: 100%;
-            object-fit: cover;
-        }
-    }
-    .profile {
-        margin-top: -25px;
-        margin-left: 10px;
-        img {
-            border-radius: 10px;
-        }
-    }
-    .invested {
-        position: absolute;
-        color: green;
-        padding: 2px 13px;
-        border-radius: 100px;
-        background-color: #fff;
-        top: 15px;
-        right: 15px;
-    }
-}
-.portfolioData {
-    .dataitem {
-        padding: 10px 0;
-    }
-}
-
-.data-blurred {
-    position: relative;
-    user-select: none;
-    pointer-events: none;
-    &::after {
+  .item {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+    .data-blurred {
+      position: relative;
+      user-select: none;
+      pointer-events: none;
+      &::after {
         position: absolute;
         user-select: none;
         pointer-events: none;
@@ -291,249 +192,339 @@ a{
         content: "";
         z-index: 09;
         left: 0;
+      }
     }
+  }
+}
+.datawrapper_single {
+  .item {
+    border: none !important;
+  }
+}
+.tabwrapper {
+  .nav {
+    border: none !important;
+    a {
+      font-family: "ReservationBlack", sans-serif !important;
+      background-color: transparent !important;
+      border-bottom: 2px solid transparent !important;
+      color: #555555;
+      border: none;
+      padding: 10px 0 !important;
+      margin-right: 30px !important;
+    }
+    a.active {
+      color: $p;
+      border-bottom: 2px solid $p !important;
+    }
+  }
+}
+
+.bankerwrapper {
+  position: relative;
+  margin-bottom: 30px;
+  .invested {
+    position: absolute;
+    background-color: green;
+    padding: 2px 13px;
+    border-radius: 100px;
+    color: #fff;
+    top: 15px;
+    right: 15px;
+  }
+}
+
+.investor_profile {
+  .contactdetails {
+    .detail {
+      img {
+        height: 15px;
+        margin-right: 10px;
+      }
+    }
+  }
+}
+.portfoliowrapper {
+  position: relative;
+  .image {
+    img {
+      height: 100px;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  .profile {
+    margin-top: -25px;
+    margin-left: 10px;
+    img {
+      border-radius: 10px;
+    }
+  }
+  .invested {
+    position: absolute;
+    color: green;
+    padding: 2px 13px;
+    border-radius: 100px;
+    background-color: #fff;
+    top: 15px;
+    right: 15px;
+  }
+}
+.portfolioData {
+  .dataitem {
+    padding: 10px 0;
+  }
+}
+
+.data-blurred {
+  position: relative;
+  user-select: none;
+  pointer-events: none;
+  &::after {
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(6px);
+    top: 0;
+    content: "";
+    z-index: 09;
+    left: 0;
+  }
 }
 
 .servicewrapper {
-    .infoicon {
-        position: relative;
-        cursor: pointer;
-        .infodata {
-            position: absolute;
-            width: 200px;
-            padding: 10px;
-            font-size: 12px;
-            background-color: #fff;
-            left: 50%;
-            top: 100%;
-            transform: translateX(-50%);
-            box-shadow: 0px 10px 30px rgba(#000, 0.2);
-            border-radius: 10px;
-            &::before {
-                border-bottom: 10px solid #fff;
-                position: absolute;
-                top: -15px;
-                left: 50%;
-                transform: translateX(-50%);
-                content: "";
-                border-top: 10px solid transparent;
-                border-left: 10px solid transparent;
-                border-right: 10px solid transparent;
-            }
-        }
-        .icon {
-            height: 30px;
-            width: 30px;
-            border-radius: 30px;
-            line-height: 30px;
-            background-color: rgba($p, 0.2);
-            text-align: center;
-            color: #777;
-            cursor: pointer;
-        }
+  .infoicon {
+    position: relative;
+    cursor: pointer;
+    .infodata {
+      position: absolute;
+      width: 200px;
+      padding: 10px;
+      font-size: 12px;
+      background-color: #fff;
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%);
+      box-shadow: 0px 10px 30px rgba(#000, 0.2);
+      border-radius: 10px;
+      &::before {
+        border-bottom: 10px solid #fff;
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        content: "";
+        border-top: 10px solid transparent;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+      }
     }
+    .icon {
+      height: 30px;
+      width: 30px;
+      border-radius: 30px;
+      line-height: 30px;
+      background-color: rgba($p, 0.2);
+      text-align: center;
+      color: #777;
+      cursor: pointer;
+    }
+  }
 }
 
 .keycontacts {
-    .contactWrapper {
-        border-radius: 10px;
-        .image {
-            img {
-                max-height: 170px;
-                border-top-left-radius: 10px;
-                border-bottom-left-radius: 10px;
-            }
-        }
-        .details {
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-        }
+  .contactWrapper {
+    border-radius: 10px;
+    .image {
+      img {
+        max-height: 170px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+      }
     }
-    .contacts {
-        .item {
-            img {
-                height: 15px;
-            }
-        }
+    .details {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
     }
+  }
+  .contacts {
+    .item {
+      img {
+        height: 15px;
+      }
+    }
+  }
 }
 
 .tags {
-    list-style: none;
-    margin: 10px 0;
-    padding: 0;
-    li {
-        display: inline-block;
-        border-radius: 100px;
-        background-color: rgba(#000, 0.08);
-        font-size: 12px;
-        padding: 5px 13px;
-        color: #777;
-    }
+  list-style: none;
+  margin: 10px 0;
+  padding: 0;
+  li {
+    display: inline-block;
+    border-radius: 100px;
+    background-color: rgba(#000, 0.08);
+    font-size: 12px;
+    padding: 5px 13px;
+    color: #777;
+  }
 }
 
 .btn_get_investment {
-    background-color: rgba($p, 0.1);
-    border-radius: 100px;
-    color: $p !important;
+  background-color: rgba($p, 0.1);
+  border-radius: 100px;
+  color: $p !important;
 }
 
 header {
-    .navbar {
-        .dropdown-menu {
-            border: none !important;
-            z-index: 99999 !important;
-            box-shadow: 0px 10px 30px rgba($p, 0.1);
-        }
-        .dropdown-item {
-            &:focus {
-                background-color: rgba($p, 0.1) !important;
-                color: $p !important;
-            }
-        }
+  .navbar {
+    .dropdown-menu {
+      border: none !important;
+      z-index: 99999 !important;
+      box-shadow: 0px 10px 30px rgba($p, 0.1);
     }
+    .dropdown-item {
+      &:focus {
+        background-color: rgba($p, 0.1) !important;
+        color: $p !important;
+      }
+    }
+  }
 }
 
 .title_bold {
-    font-weight: bolder;
+  font-weight: bolder;
 }
 
-.metas{
-    display: flex;
-    .bg_p_dim{
-        background-color: rgba($p, 0.1);
-        color: $p;
-        font-weight: bolder;
-    }
-    .meta{
-        padding: 8px 20px;
-        border-radius: 100px;
-    }
-}
-.font_bold{
-    font-weight: bolder;
-}
-.bg_p{
-    background-color: $p;
-}
-.f14{
-    line-height: 26px;
-}
-
-.form-control{
-    border: 1px solid #eee;
-    background-color:rgba($p, 0.08);
-    &:hover{
-        border: 1px solid $p;
-
-    }
-    &:focus{
-        border: 1px solid $p;
-        box-shadow: none;
-        outline: none;
-
-    }
-}
-.downloadModalForm{
-    padding: 15px;
-   
-}
-
-.modal{
-
-    .title{
-        font-size: 18px !important;
-    }
-}
-.successMessae{
-    background-color: rgba($p,0.1);
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 14px;
+.metas {
+  display: flex;
+  .bg_p_dim {
+    background-color: rgba($p, 0.1);
     color: $p;
+    font-weight: bolder;
+  }
+  .meta {
+    padding: 8px 20px;
+    border-radius: 100px;
+  }
+}
+.font_bold {
+  font-weight: bolder;
+}
+.bg_p {
+  background-color: $p;
+}
+.f14 {
+  line-height: 26px;
 }
 
-.singleService{
-    .heroImage{
-        img{
-            min-height: 400px;
-        }
-    }
+.form-control {
+  border: 1px solid #eee;
+  background-color: rgba($p, 0.08);
+  &:hover {
+    border: 1px solid $p;
+  }
+  &:focus {
+    border: 1px solid $p;
+    box-shadow: none;
+    outline: none;
+  }
+}
+.downloadModalForm {
+  padding: 15px;
 }
 
-.sliderItem{
-    .imagewrapper{
-        img{
-            max-height: 200px;
-        }
-            
+.modal {
+  .title {
+    font-size: 18px !important;
+  }
+}
+.successMessae {
+  background-color: rgba($p, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: $p;
+}
+
+.singleService {
+  .heroImage {
+    img {
+      min-height: 400px;
     }
+  }
+}
+
+.sliderItem {
+  .imagewrapper {
+    img {
+      max-height: 200px;
+    }
+  }
 }
 .rfp {
-    .stepBar{
-        border-radius: 15px;
-        display: flex;
-        align-items: center;
-        gap: 30px;
-        .step{
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            .count{
-                background-color: rgba($p, 0.4);
-                height: 30px;
-                width: 30px;
-                border-radius: 100px;
-                text-align: center;
-                color: #333;
-                line-height: 30px;
-                font-weight: bolder;
-            }
-            .label{
-                color: $p;
-            }
-        }
-        .active{
-            .count{
-                background-color: rgba($p, 1);
-                color: #fff;
-            }
-        }
-    }
-}
-
-.rfpform{
-    .form-control{
-        height: auto !important;
-        padding: 10px 15px !important;
+  .stepBar {
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    .step {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      .count {
+        background-color: rgba($p, 0.4);
+        height: 30px;
+        width: 30px;
         border-radius: 100px;
+        text-align: center;
+        color: #333;
+        line-height: 30px;
+        font-weight: bolder;
+      }
+      .label {
+        color: $p;
+      }
     }
-    .file_input{
-        min-width: 150px;
+    .active {
+      .count {
+        background-color: rgba($p, 1);
+        color: #fff;
+      }
     }
-
-
-}
-.infobar{
-    border-radius: 10px;
-    .imagewrapper{
-        text-align: right;
-        img{
-            max-height: 100px;
-        }
-    }
-} 
-
-.not_rounded_full{
-    border-radius: 10px !important;
+  }
 }
 
-
-.confirmData{
-    .data{
-        margin: 7px 0;
-        padding: 7px 0;
-        border-bottom: 1px solid #eee;
+.rfpform {
+  .form-control {
+    height: auto !important;
+    padding: 10px 15px !important;
+    border-radius: 100px;
+  }
+  .file_input {
+    min-width: 150px;
+  }
+}
+.infobar {
+  border-radius: 10px;
+  .imagewrapper {
+    text-align: right;
+    img {
+      max-height: 100px;
     }
+  }
+}
 
+.not_rounded_full {
+  border-radius: 10px !important;
+}
+
+.confirmData {
+  .data {
+    margin: 7px 0;
+    padding: 7px 0;
+    border-bottom: 1px solid #eee;
+  }
 }

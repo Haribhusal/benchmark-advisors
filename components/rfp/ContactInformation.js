@@ -1,16 +1,75 @@
-import React from "react";
-// import { makeStyles } from '@material-ui/core/styles';
-import {
-  Container,
-  Typography,
-  Grid,
-  TextField,
-  Button,
-} from "@material-ui/core";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
+import axios from "axios";
+import { isEmpty } from "lodash";
+import { Spinner } from "react-bootstrap";
+
 const ContactInformation = ({ nextStep, handleChange, values }) => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const [companyCategory, setCompanyCategory] = useState();
+  const [state, setState] = useState();
+  const [district, setDistrict] = useState();
+  const [mun, setMun] = useState();
+  const [updateDistricts, setUpdateDistricts] = useState();
   // for continue event listener
+
+  // const filterdDistrict = () => {
+  //   const fd = district.filter((item) => {
+  //     item.state_id;
+  //   });
+  //   console.log("selectedDis", fd);
+  // };
+
+  // useEffect(() => {
+  //   const updateDistricts = (state_id) => {
+  //     const fdistrict = district?.filter(
+  //       (districtItem) => districtItem.state_id == state_id
+  //     );
+  //     updateDistricts(state_id);
+
+  //     // setFilteredDistrict(fdistrict);
+  //   };
+  // }, []);
+
+  useEffect(async () => {
+    await axios
+      .get("https://benchmark.promotingnepal.com/api/company-category/list")
+      .then((res) => {
+        setCompanyCategory(res.data.data);
+        console.log("categories", res.data.data);
+      });
+  }, []);
+  useEffect(async () => {
+    await axios
+      .get("https://benchmark.promotingnepal.com/api/state/list")
+      .then((res) => {
+        setState(res.data.data);
+        console.log("state", res.data.data);
+      });
+  }, []);
+  useEffect(async () => {
+    await axios
+      .get("https://benchmark.promotingnepal.com/api/district/list")
+      .then((res) => {
+        setDistrict(res.data.data);
+        console.log("dis", res.data.data);
+      });
+  }, []);
+  useEffect(async () => {
+    await axios
+      .get("https://benchmark.promotingnepal.com/api/municipality/list")
+      .then((res) => {
+        setMun(res.data.data);
+        console.log("min", res.data.data);
+      });
+  }, []);
+
   const Continue = (e) => {
     e.preventDefault();
     nextStep();
@@ -42,6 +101,7 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
                 placeholder="Enter your First Name"
                 onChange={handleChange("fname")}
                 defaultValue={values.fname}
+                {...register("fname", { required: true })}
               />
             </div>
           </div>
@@ -127,82 +187,91 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
               <select
                 className="form-control"
                 onChange={handleChange("company_category_id")}
-                defaultValue={values.company_category_id}
+                defaultValue={values?.company_category_id}
               >
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
+                {companyCategory?.map((item) => (
+                  <option value={item?.title} key={item?.id}>
+                    {item?.title}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
+
           <div className="col-sm-4">
-            <div className="form-group mb-3">
-              <label htmlFor="isector">Select Country</label>
-              <select
-                className="form-control"
-                onChange={handleChange("country")}
-                defaultValue={values.country}
-              >
-                <option value="1">Nepal</option>
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-              </select>
-            </div>
-          </div>
-          <div className="col-sm-4">
-            <div className="form-group mb-3">
-              <label htmlFor="isector">State</label>
-              <select
-                className="form-control"
-                onChange={handleChange("state_id")}
-                defaultValue={values.state_id}
-              >
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-              </select>
-            </div>
+            {!isEmpty(state) ? (
+              <div className="form-group mb-3">
+                <label htmlFor="isector">State</label>
+                <select
+                  className="form-control"
+                  onChange={handleChange("state_id")}
+                  defaultValue={values.state_id}
+                >
+                  {state?.map((item) => (
+                    <option value={item?.province_name} key={item?.id}>
+                      {item?.province_name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <div className="d-flex justify-content-center py-5 ">
+                <Spinner animation="border" role="status">
+                  <span className="visually-hidden"></span>
+                </Spinner>
+              </div>
+            )}
           </div>
         </div>
 
         <div className="row">
-          <div className="col-sm-4">
-            <div className="form-group mb-3">
-              <label htmlFor="isector">District</label>
-              <select
-                className="form-control"
-                onChange={handleChange("district_id")}
-                defaultValue={values.district_id}
-              >
-                <option value="1">Nepal</option>
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-              </select>
+          {!isEmpty(district) ? (
+            <div className="col-sm-4">
+              <div className="form-group mb-3">
+                <label htmlFor="isector">District</label>
+                <select
+                  className="form-control"
+                  onChange={handleChange("district_id")}
+                  defaultValue={values.district_id}
+                >
+                  {district?.map((item) => (
+                    <option value={item?.district_name} key={item?.id}>
+                      {item?.district_name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-          </div>
-          <div className="col-sm-4">
-            <div className="form-group mb-3">
-              <label htmlFor="isector">Municipality</label>
-              <select
-                className="form-control"
-                onChange={handleChange("municipality_id")}
-                defaultValue={values.municipality_id}
-              >
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-                <option value="1">Value 1</option>
-              </select>
+          ) : (
+            <div className="d-flex justify-content-center py-5 ">
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden"></span>
+              </Spinner>
             </div>
+          )}
+          <div className="col-sm-4">
+            {!isEmpty(mun) ? (
+              <div className="form-group mb-3">
+                <label htmlFor="isector">Municipality</label>
+                <select
+                  className="form-control"
+                  onChange={handleChange("municipality_id")}
+                  defaultValue={values.municipality_id}
+                >
+                  {mun?.map((item) => (
+                    <option value={item?.municipality_name} key={item?.id}>
+                      {item?.municipality_name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <div className="d-flex justify-content-center py-5 ">
+                <Spinner animation="border" role="status">
+                  <span className="visually-hidden"></span>
+                </Spinner>
+              </div>
+            )}
           </div>
         </div>
         <div className="row">

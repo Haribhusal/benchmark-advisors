@@ -35,9 +35,9 @@ const RequestDetails = ({ prevStep, handleChange, nextStep, values }) => {
       </div>
       <div className="row">
         <div className="col-sm-12">
-          <div className="buttonwrapper">
-            <button className="btn btn-secondary" onClick={Previous}>
-              Previous
+          <div className="buttonwrapper gap d-flex">
+            <button className="btn btn_p btn_p_dim" onClick={Previous}>
+              <i className="las la-arrow-left ml-2"></i> Previous
             </button>
             <button className="btn btn_p" onClick={Continue}>
               Next Step <i className="las la-arrow-right ml-2"></i>

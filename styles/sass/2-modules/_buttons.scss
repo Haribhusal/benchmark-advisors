@@ -1,12 +1,17 @@
 .btn_p {
-    color: #fff !important;
-    padding: 10px 30px;
-    border-radius: 100px;
-    &:hover {
-        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
-        border: 1px solid $p;
-    }
-    &:focus {
-        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
-    }
+  color: #fff !important;
+  padding: 10px 30px;
+  border-radius: 100px;
+  &:hover {
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid $p;
+  }
+  &:focus {
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.btn_p_dim {
+  background-color: rgba($p, 0.08) !important;
+  color: $p !important;
 }
