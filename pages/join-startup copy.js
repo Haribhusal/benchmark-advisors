@@ -2,24 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { Signup } from "../components/api/Api";
 
 const JoinStartup = () => {
-  const [fileitems, setFileItems] = useState([]);
   const [document, setDocument] = useState();
-
-  const [docCatId, setDocCatId] = useState([]);
-  console.log("filesss", fileitems);
-
-  const handelClickfile = (e, id) => {
-    const filesWithId = {
-      files: e,
-      document_category_id: id,
-    };
-    console.log("event", e, id);
-    console.log("filesWithId", filesWithId);
-    setFileItems([...fileitems, filesWithId]);
-  };
 
   useEffect(async () => {
     const response = await fetch(
@@ -30,6 +15,7 @@ const JoinStartup = () => {
     const documentNeeded = data.data;
     console.log("documentsNeeded", documentNeeded);
     setDocument(documentNeeded);
+
   }, []);
 
   const {
@@ -37,19 +23,7 @@ const JoinStartup = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    let formData = new FormData();
-
-    fileitems.forEach((item) => {
-      formData.append("file", item);
-    });
-    const FinalData = {
-      ...data,
-      documents: formData,
-    };
-    Signup(FinalData);
-    console.log("frontend form data", FinalData);
-  };
+  const onSubmit = (data) => console.log(data);
 
   const [activeForm, setActiveForm] = useState(1);
   return (
@@ -333,99 +307,25 @@ const JoinStartup = () => {
                         <hr />
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-sm-6">
+                    <div className='row'>
+                    <div className="col-sm-6">
                         <div className="form-group">
                           <label htmlFor="" className="small text-muted">
-                            pan_status
+                          pan_status
                           </label>
-                          <select
-                            id=""
-                            className="form-control"
-                            name="pan_status"
+                          <input
                             {...register("pan_status")}
-                          >
-                            <option value="1">yes</option>
-                            <option value="0">no</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div className="col-sm-6">
-                        <div className="form-group">
-                          <label htmlFor="" className="small text-muted">
-                            pan_number
-                          </label>
-
-                          <input
-                            {...register("pan_number")}
-                            name="pan_number"
-                            type="number"
+                            name="personal_email"
+                            type="email"
                             className="form-control"
-                            placeholder="Enter Pan Number"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-sm-6">
-                        <div className="form-group">
-                          <label htmlFor="" className="small text-muted">
-                            company_since
-                          </label>
-
-                          <input
-                            {...register("company_since")}
-                            name="company_since"
-                            type="date"
-                            className="form-control"
-                            placeholder="Company Since"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-sm-6">
-                        <div className="form-group">
-                          <label htmlFor="" className="small text-muted">
-                            number_of_emplyee
-                          </label>
-
-                          <input
-                            {...register("number_of_emplyee")}
-                            name="number_of_emplyee"
-                            type="number"
-                            className="form-control"
-                            placeholder="Number of Employees"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-sm-6">
-                        <div className="form-group">
-                          <label htmlFor="" className="small text-muted">
-                            password
-                          </label>
-
-                          <input
-                            {...register("password")}
-                            name="password"
-                            type="password"
-                            className="form-control"
-                            placeholder="Password"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-sm-6">
-                        <div className="form-group">
-                          <label htmlFor="" className="small text-muted">
-                            password
-                          </label>
-
-                          <input
-                            {...register("password_confirmation")}
-                            name="password_confirmation"
-                            type="password"
-                            className="form-control"
-                            placeholder="Password"
+                            placeholder="Your Email Address"
                           />
                         </div>
                       </div>
                     </div>
+
+
+
 
                     {document?.map((doc) => (
                       <div className="row" key={doc.id}>
@@ -435,11 +335,11 @@ const JoinStartup = () => {
                               Choose Document for {doc.title}
                             </label>
                             <input
-                              onChange={(e) =>
-                                handelClickfile(e.target.files[0], doc.id)
-                              }
+                              {...register("files[]")}
+                              name="files[]"
                               type="file"
                               className="form-control"
+                              placeholder="Document 1"
                             />
                           </div>
                         </div>

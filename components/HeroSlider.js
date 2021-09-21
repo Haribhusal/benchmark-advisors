@@ -32,7 +32,7 @@ const HeroSlider = () => {
         <div className="row">
           <div className="col-sm-12">
             <Slider {...settings}>
-            <div className="sliderItem">
+              <div className="sliderItem">
                 <div className="row slider_mobile">
                   <div className="col-sm-7 d-flex align-items-center">
                     <div className="slider-left w-100">
@@ -48,14 +48,14 @@ const HeroSlider = () => {
                       </div>
                       <div className="title_black">
                         <h2 className="title font_p text_big">
-                         Advisors and Consultings
+                          Business Advisory and Consulting
                         </h2>
                       </div>
                       <div className="buttonwrapper mt-5">
                         <Link href="#">
                           <a>
                             <button className="btn btn_p rounded_big font_p text_w btn_big btn_text_p">
-                              Get Started
+                              Request for Proposal
                               <Image
                                 src="/icons/right-arow.svg"
                                 height={15}
@@ -79,7 +79,7 @@ const HeroSlider = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="sliderItem">
                 <div className="row slider_mobile">
                   <div className="col-sm-7 d-flex align-items-center">
@@ -92,15 +92,16 @@ const HeroSlider = () => {
                         />
                       </div>
                       <div className="subtitle my-3 f12 text-muted text-uppercase">
-                        Startup
+                        Startups
                       </div>
                       <div className="title_black">
                         <h2 className="title font_p text_big">
-                        Startup
+                          {" "}
+                          Getting you Market Ready for Investment
                         </h2>
                       </div>
                       <div className="buttonwrapper mt-5">
-                        <Link href="#">
+                        <Link href="startup/signup">
                           <a>
                             <button className="btn btn_p rounded_big font_p text_w btn_big btn_text_p">
                               Get Started
@@ -126,8 +127,8 @@ const HeroSlider = () => {
                     </div>
                   </div>
                 </div>
-              </div>      
-              
+              </div>
+
               <div className="sliderItem">
                 <div className="row slider_mobile">
                   <div className="col-sm-7 d-flex align-items-center">
@@ -144,14 +145,14 @@ const HeroSlider = () => {
                       </div>
                       <div className="title_black">
                         <h2 className="title font_p text_big">
-                         Government and Public Sectors
+                          Government and Public Sector Consulting
                         </h2>
                       </div>
                       <div className="buttonwrapper mt-5">
                         <Link href="#">
                           <a>
                             <button className="btn btn_p rounded_big font_p text_w btn_big btn_text_p">
-                              Get Started
+                              Request for Proposal
                               <Image
                                 src="/icons/right-arow.svg"
                                 height={15}
@@ -175,7 +176,7 @@ const HeroSlider = () => {
                   </div>
                 </div>
               </div>
-            
+
               <div className="sliderItem">
                 <div className="row slider_mobile">
                   <div className="col-sm-7 d-flex align-items-center">
@@ -192,11 +193,11 @@ const HeroSlider = () => {
                       </div>
                       <div className="title_black">
                         <h2 className="title font_p text_big">
-                        One stop solution for Startup and Investors
+                          Make Diligent Investment Decisions
                         </h2>
                       </div>
                       <div className="buttonwrapper mt-5">
-                        <Link href="#">
+                        <Link href="investor/signup">
                           <a>
                             <button className="btn btn_p rounded_big font_p text_w btn_big btn_text_p">
                               Get Started
@@ -224,9 +225,6 @@ const HeroSlider = () => {
                   </div>
                 </div>
               </div>
-              
-              
-        
             </Slider>
           </div>
         </div>

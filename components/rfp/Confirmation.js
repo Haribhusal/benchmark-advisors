@@ -14,8 +14,6 @@ const Confirmation = ({ prevStep, nextStep, values, slug }) => {
     phone,
     company_name,
     role,
-    sub_service_id,
-    company_category_id,
     state_id,
     district_id,
     municipality_id,
@@ -25,7 +23,7 @@ const Confirmation = ({ prevStep, nextStep, values, slug }) => {
   } = values;
 
   values.name = fname + lname;
-  values.sub_service_id = 1;
+  values.sub_service_id = slug;
 
   const Continue = (e) => {
     e.preventDefault();
@@ -72,100 +70,72 @@ const Confirmation = ({ prevStep, nextStep, values, slug }) => {
         <div className="col-sm-12">
           <div className="bg_white p-3">
             <div className="row">
-              <div className="col-sm-6">
-                <div className="datawrapper">
-                  <div className="data d-flex gap">
-                    <div className="title">Name</div>
-                    <div className="value text-muted mb-0">
-                      {fname} {lname}
-                      <span className="text-danger f12">{error?.name[0]}</span>
-                    </div>
-                  </div>
-                  <div className="data d-flex gap">
-                    <div className="title">Email</div>
-                    <div className="value text-muted mb-0">
-                      {email}
-
-                      <span className="text-danger f12">{error?.email[0]}</span>
-                    </div>
-                  </div>
-                  <div className="data d-flex gap">
-                    <div className="title">Phone</div>
-                    <div className="value text-muted mb-0">
-                      {phone}
-
-                      <span className="text-danger f12">{error?.phone[0]}</span>
-                    </div>
-                  </div>
-
-                  <div className="data d-flex gap">
-                    <div className="title">company_name</div>
-                    <div className="value text-muted mb-0">
-                      {company_name}
-
-                      <span className="text-danger f12">
-                        {error?.company_name[0]}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="data d-flex gap">
-                    <div className="title">role</div>
-                    <div className="value text-muted mb-0">
-                      {role}
-                      <span className="text-danger f12">{error?.role[0]}</span>
-                    </div>
-                  </div>
-
-                  <div className="data d-flex gap">
-                    <div className="title">state_id</div>
-                    <div className="value text-muted mb-0">
-                      {state_id}
-
-                      <span className="text-danger f12">
-                        {error?.state_id[0]}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="data d-flex gap">
-                    <div className="title">district_id</div>
-                    <div className="value text-muted mb-0">
-                      {district_id}
-
-                      <span className="text-danger f12">
-                        {error?.district_id[0]}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="data d-flex gap">
-                    <div className="title">municipality_id</div>
-                    <div className="value text-muted mb-0">
-                      {municipality_id}
-
-                      <span className="text-danger f12">
-                        {error?.municipality_id[0]}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="data d-flex gap">
-                    <div className="title">description</div>
-                    <div className="value text-muted mb-0">
-                      {description}
-
-                      <span className="text-danger f12">
-                        {error?.description[0]}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="data d-flex gap">
-                    <div className="title">is_client</div>
-                    <div className="value text-muted mb-0">{is_client}</div>
+              <div className="col-sm-4">
+                <div className="data d-flex gap">
+                  <div className="title labeltitle">Name</div>
+                  <div className="value text-muted mb-0">
+                    {fname} {lname}
                   </div>
                 </div>
               </div>
-              <div className="col-sm-6">
+              <div className="col-sm-4">
+                <div className="data d-flex gap">
+                  <div className="title labeltitle">Email</div>
+                  <div className="value text-muted mb-0">{email}</div>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="data d-flex gap">
+                  <div className="title labeltitle">Phone</div>
+                  <div className="value text-muted mb-0">{phone}</div>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="data d-flex gap">
+                  <div className="title labeltitle">Company Name</div>
+                  <div className="value text-muted mb-0">{company_name}</div>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="data d-flex gap">
+                  <div className="title labeltitle">Your Role</div>
+                  <div className="value text-muted mb-0">{role}</div>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="data d-flex gap">
+                  <div className="title labeltitle">State</div>
+                  <div className="value text-muted mb-0">{state_id}</div>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="data d-flex gap">
+                  <div className="title labeltitle">District</div>
+                  <div className="value text-muted mb-0">{district_id}</div>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="data d-flex gap">
+                  <div className="title labeltitle">Muncipality</div>
+                  <div className="value text-muted mb-0">{municipality_id}</div>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="data d-flex gap">
+                  <div className="title labeltitle">Description</div>
+                  <div className="value text-muted mb-0">{description}</div>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="data d-flex gap">
+                  <div className="title labeltitle">is_client</div>
+                  <div className="value text-muted mb-0">{is_client}</div>
+                </div>
+              </div>
+              <div className="col-sm-4">
                 <div className="datawrapper">
                   <div className="data d-flex gap">
-                    <div className="title">files</div>
+                    <div className="title labeltitle">files</div>
                     <div className="value text-muted mb-0">{files}</div>
                   </div>
                 </div>
@@ -174,14 +144,17 @@ const Confirmation = ({ prevStep, nextStep, values, slug }) => {
           </div>
         </div>
       </div>
+
       <div className="row my-3">
         <div className="col-sm-12">
-          <button className="btn btn-secondary" onClick={Previous}>
-            Back
-          </button>
-          <button className="btn btn_p" onClick={submitForm}>
-            Confirm and Submit
-          </button>
+          <div className="buttonwrapper d-flex gap">
+            <button className="btn btn_p btn_p_dim" onClick={Previous}>
+              <i className="las la-arrow-left ml-2"></i> Back
+            </button>
+            <button className="btn btn_p" onClick={submitForm}>
+              Confirm and Submit <i className="las la-arrow-right"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -37,9 +37,104 @@ const Header = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Link href="/startup">
-                  <Nav className="nav-link">Startups</Nav>
-                </Link>
+                <NavDropdown
+                  title="Startups"
+                  className="customDropdown"
+                  id="doxs"
+                >
+                  <NavDropdown.Item>
+                    <Link href="">
+                      <a>
+                        <div className="dropdown_item_icon d-flex">
+                          <div className="image">
+                            <img
+                              src="/images/angel-investors.png"
+                              className="img-fluid"
+                              alt=""
+                            />
+                          </div>
+                          <div className="info">
+                            <h6 className="title font_p">Tech Startups</h6>
+                            <p className="text-muted small">
+                              Lorem ipsum dolor sit amet, consectetur
+                              adipisicing elit. Alias, adipisci.
+                            </p>
+                          </div>
+                          <div className="arrow">
+                            <i className="las la-arrow-right"></i>
+                          </div>
+                        </div>
+                      </a>
+                    </Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link href="">
+                      <a>
+                        <div className="dropdown_item_icon d-flex">
+                          <div className="image">
+                            <img
+                              src="/images/consulting.png"
+                              className="img-fluid"
+                              alt=""
+                            />
+                          </div>
+                          <div className="info">
+                            <h6 className="title font_p">Design Startup</h6>
+                            <p className="text-muted small">
+                              Lorem ipsum dolor sit amet, consectetur
+                              adipisicing elit. Alias, adipisci.
+                            </p>
+                          </div>
+                          <div className="arrow">
+                            <i className="las la-arrow-right"></i>
+                          </div>
+                        </div>
+                      </a>
+                    </Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link href="">
+                      <a>
+                        <div className="dropdown_item_icon d-flex">
+                          <div className="image">
+                            <img
+                              src="/images/investment-banker.png"
+                              className="img-fluid"
+                              alt=""
+                            />
+                          </div>
+                          <div className="info">
+                            <h6 className="title font_p">
+                              Industrial Startups
+                            </h6>
+                            <p className="text-muted small">
+                              Lorem ipsum dolor sit amet, consectetur
+                              adipisicing elit. Alias, adipisci.
+                            </p>
+                          </div>
+                          <div className="arrow">
+                            <i className="las la-arrow-right"></i>
+                          </div>
+                        </div>
+                      </a>
+                    </Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link href="/">
+                      <a>
+                        <div className="dropdown_item_icon d-flex">
+                          <p className="text-muted f16 mb-0">
+                            View all categories
+                          </p>
+                          <div className="arrow">
+                            <i className="las la-arrow-right"></i>
+                          </div>
+                        </div>
+                      </a>
+                    </Link>
+                  </NavDropdown.Item>
+                </NavDropdown>
+
                 <NavDropdown
                   title="Investors"
                   className="customDropdown"
@@ -139,7 +234,6 @@ const Header = () => {
                 </NavDropdown>
                 <Nav.Link href="#link">Incubators &amp; Accelerators</Nav.Link>
                 <NavDropdown
-                  // collapseOnSelect={false}
                   title="Free Documents"
                   className="customDropdown"
                   id="navbarScrollingDropdown"
