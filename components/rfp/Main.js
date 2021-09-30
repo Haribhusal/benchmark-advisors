@@ -20,8 +20,7 @@ export default class Main extends Component {
     district_id: "",
     municipality_id: "",
     description: "",
-    is_client: "1",
-    files: [],
+    is_client: "",
   };
 
   // go back to previous step

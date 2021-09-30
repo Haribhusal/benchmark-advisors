@@ -43,7 +43,7 @@ const Header = () => {
                   id="doxs"
                 >
                   <NavDropdown.Item>
-                    <Link href="">
+                    <Link href="startups">
                       <a>
                         <div className="dropdown_item_icon d-flex">
                           <div className="image">
@@ -68,7 +68,7 @@ const Header = () => {
                     </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                    <Link href="">
+                    <Link href="startups">
                       <a>
                         <div className="dropdown_item_icon d-flex">
                           <div className="image">
@@ -93,7 +93,7 @@ const Header = () => {
                     </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                    <Link href="">
+                    <Link href="startups">
                       <a>
                         <div className="dropdown_item_icon d-flex">
                           <div className="image">
@@ -120,7 +120,7 @@ const Header = () => {
                     </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                    <Link href="/">
+                    <Link href="startups">
                       <a>
                         <div className="dropdown_item_icon d-flex">
                           <p className="text-muted f16 mb-0">
@@ -136,7 +136,7 @@ const Header = () => {
                 </NavDropdown>
 
                 <NavDropdown
-                  title="Investors"
+                  title="startups"
                   className="customDropdown"
                   id="doxs"
                 >
@@ -232,7 +232,11 @@ const Header = () => {
                     </Link>
                   </NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link href="#link">Incubators &amp; Accelerators</Nav.Link>
+
+                <Nav.Link href="incubators">
+                  Incubators &amp; Accelerators
+                </Nav.Link>
+
                 <NavDropdown
                   title="Free Documents"
                   className="customDropdown"

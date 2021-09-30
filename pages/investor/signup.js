@@ -21,7 +21,7 @@ function Signup() {
           <div className="container">
             <div className="row">
               <div className="col-sm-12">
-                <h3 className="title">Registering Startups Coming Soon...</h3>
+                <h3 className="title">Registering Investors Coming Soon...</h3>
               </div>
             </div>
           </div>

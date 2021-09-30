@@ -23,9 +23,7 @@ export default function AdvisoryAndConsulting() {
               <div className="col-sm-6 d-flex align-items-center">
                 <div className="textwrapper">
                   <div className="subtitle f14 text-muted">INVESTORS</div>
-                  <h3 className="title font_p text_big mb-5">
-                    Angel Investors
-                  </h3>
+                  <h3 className="title font_p text_big mb-5">Investors</h3>
                   <p className="text f14 my-3">
                     Lorem ipsum dolor sit amet, ipsum dolo dipiscing elit, sed
                     do eiusmod tempor incididunt consectetur adipiscing elit
@@ -50,6 +48,12 @@ export default function AdvisoryAndConsulting() {
                     priority
                   ></Image>
                 </div>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-sm-12">
+                <h3 className="title">Investors Revealing soon...</h3>
               </div>
             </div>
 

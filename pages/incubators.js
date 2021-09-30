@@ -19,59 +19,52 @@ export default function AdvisoryAndConsulting() {
       >
         <section className="iconImage py-5">
           <div className="container">
-            <div className="row mb-5">
+            <div className="row">
               <div className="col-sm-6 d-flex align-items-center">
                 <div className="textwrapper">
-                  <div className="subtitle f14 text-muted">INVESTORS</div>
+                  <div className="subtitle f14 text-muted">Incubators</div>
                   <h3 className="title font_p text_big mb-5">
-                    Venture <br />
-                    Capitalists (VC)
+                    Incubators and Accelerators
                   </h3>
                   <p className="text f14 my-3">
                     Lorem ipsum dolor sit amet, ipsum dolo dipiscing elit, sed
-                    do eiusmod tempor incididunt consectetur adipiscing elit
+                    do eiusmod tempor incididunt consectetur adipiscing elit.
                   </p>
-                  {/* <div className="buttonwrapper">
-                    <button className="btn btn_p rounded_big font_p text_w px-5 py-3">
-                      Become One{" "}
-                      <span>
-                                                 <i className="las la-arrow-right"></i>
-
-                      </span>{" "}
-                    </button>
-                  </div> */}
                 </div>
               </div>
               <div className="col-sm-6">
                 <div className="imagewrapper text-center">
-                  <img
-                    src="/images/consulting.png"
-                    className="img-fluid"
-                    alt=""
-                  />
+                  <Image
+                    src="/images/investment-banker.png"
+                    height={400}
+                    width={350}
+                    priority
+                  ></Image>
                 </div>
               </div>
             </div>
 
             <div className="row">
               <div className="col-sm-12">
-                <h3 className="title">Venture Capitalists Revealing soon...</h3>
+                <h3 className="title">
+                  Incubators and Accelerators Revealing soon...
+                </h3>
               </div>
             </div>
 
             {/* <div className="row">
               <div className="col-sm-12">
                 <div className="textwrapper">
-                  <div className="font_p f19 ">51 Total Investors</div>
+                  <div className="font_p f19 ">115 Total Investors</div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
-            <div className="row">
+            {/* <div className="row">
               <div className="col-sm-12">
                 <div className="textwrapper my-3">
                   <div className="subtitle f14 fw100 text-muted">
-                    Top 3 Investors
+                    Top Investors
                   </div>
                 </div>
               </div>
@@ -91,13 +84,9 @@ export default function AdvisoryAndConsulting() {
                   <div className="details p-4">
                     <div className="shortdetail">
                       <div className="name">
-                        <Link href="#">
-                          <a className="link text_t">
-                            <h3 className="title font_p f18 mb-2">
-                              Hritesh Kishor
-                            </h3>
-                          </a>
-                        </Link>
+                        <h3 className="title font_p f18 mb-2">
+                          Hritesh Kishor
+                        </h3>
                       </div>
                       <div className="designation">
                         <p className="text-muted mb-0 f14">
@@ -108,7 +97,7 @@ export default function AdvisoryAndConsulting() {
                   </div>
                 </div>
               </div>
-</div> */}
+            </div> */}
 
             {/* <div className="row">
               <div className="col-sm-12">
@@ -122,7 +111,7 @@ export default function AdvisoryAndConsulting() {
             {/* <div className="otherInvestors">
               <div className="row ">
                 <div className="col-sm-3">
-                  <div className="bankerwrapper bg_white rounded_medium">
+                  <div className="investorwrapper bg_white rounded_medium">
                     <div className="invested">Rs. 20,00,000</div>
                     <div className="image">
                       <img
@@ -151,13 +140,12 @@ export default function AdvisoryAndConsulting() {
                     </div>
                   </div>
                 </div>
-
-                </div>
+              </div>
               <div className="row my-5">
                 <div className="col-sm-4 offset-sm-4 d-flex align-items-center justify-content-center">
                   <div className="loadingwrapper d-flex gap">
                     <div className="icon">
-                                             <i className="las la-arrow-right"></i>
+                                                <i className="las la-arrow-right"></i>
 
                     </div>
                     <div className="label text_p font_p">Loading...</div>

@@ -28,7 +28,7 @@ export default function AdvisoryAndConsulting() {
                     STARTUPS
                   </div>
 
-                  <h3 className="title font_p mb-0">Fintech Startups</h3>
+                  <h3 className="title font_p mb-0"> Startups</h3>
                   <p className="text f14 text-muted my-3">
                     lorem ipsum dolor sit amet, ipsum dolo dipiscing elit, sed
                     do eiusmod tempor incididunt consectetur adipiscing
@@ -40,16 +40,20 @@ export default function AdvisoryAndConsulting() {
               </div>
               <div className="col-sm-5 d-flex align-items-center justify-content-end">
                 <div className="buttonwrapper">
-                  <button className="btn btn_p rounded_big font_p text_w px-5 py-3">
-                    Join Now{" "}
-                    <span>
-                      <i className="las la-arrow-right"></i>
-                    </span>{" "}
-                  </button>
+                  <Link href="join-startup">
+                    <a>
+                      <button className="btn btn_p rounded_big font_p text_w px-5 py-3">
+                        Join Now
+                        <span>
+                          <i className="las la-arrow-right"></i>
+                        </span>
+                      </button>
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>
-
+            {/* 
             <div className="row">
               <div className="col-sm-4">
                 <div className="portfoliowrapper mb-4 bg_white rounded_medium">
@@ -604,6 +608,8 @@ export default function AdvisoryAndConsulting() {
                 </div>
               </div>
             </div>
+          
+           */}
           </div>
         </section>
       </main>
