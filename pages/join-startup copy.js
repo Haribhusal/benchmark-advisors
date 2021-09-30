@@ -13,9 +13,7 @@ const JoinStartup = () => {
 
     const data = await response.json();
     const documentNeeded = data.data;
-    console.log("documentsNeeded", documentNeeded);
     setDocument(documentNeeded);
-
   }, []);
 
   const {
@@ -307,11 +305,11 @@ const JoinStartup = () => {
                         <hr />
                       </div>
                     </div>
-                    <div className='row'>
-                    <div className="col-sm-6">
+                    <div className="row">
+                      <div className="col-sm-6">
                         <div className="form-group">
                           <label htmlFor="" className="small text-muted">
-                          pan_status
+                            pan_status
                           </label>
                           <input
                             {...register("pan_status")}
@@ -323,9 +321,6 @@ const JoinStartup = () => {
                         </div>
                       </div>
                     </div>
-
-
-
 
                     {document?.map((doc) => (
                       <div className="row" key={doc.id}>

@@ -19,7 +19,6 @@ const JoinStartup = () => {
   const [district, setDistrict] = useState();
   const [mun, setMun] = useState();
   const [fiterState, setFilterState] = useState();
-  console.log("filterSrare", fiterState);
   const [updateMun, setUpdateMun] = useState();
 
   const [setisCalled] = useState(true);
@@ -27,12 +26,8 @@ const JoinStartup = () => {
   const onSubmit = async (data) => {
     await axios
       .post(`https://benchmark.promotingnepal.com/api/startup/signup`, data)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log("error form ", err);
-      });
+      .then((res) => {})
+      .catch((err) => {});
 
     // Signup(data);
   };
@@ -42,7 +37,6 @@ const JoinStartup = () => {
     ?.filter((item) => item.state_id === Number(fiterState))
     .map((item) => {
       return item;
-      console.log("df", item);
     });
   //mun
   const munfilter = mun
@@ -63,7 +57,6 @@ const JoinStartup = () => {
       .get("https://benchmark.promotingnepal.com/api/state/list")
       .then((res) => {
         setState(res.data.data);
-        console.log("state", res.data.data);
       });
   }, []);
 
@@ -72,7 +65,6 @@ const JoinStartup = () => {
       .get("https://benchmark.promotingnepal.com/api/district/list")
       .then((res) => {
         setDistrict(res.data.data);
-        console.log("dist", res.data.data);
       });
   }, []);
 
@@ -81,7 +73,6 @@ const JoinStartup = () => {
       .get("https://benchmark.promotingnepal.com/api/municipality/list")
       .then((res) => {
         setMun(res.data.data);
-        console.log("mun", res.data.data);
       });
   }, []);
 

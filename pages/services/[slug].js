@@ -16,7 +16,6 @@ export default function SingleSubService() {
 
   const router = useRouter();
   const { slug } = router.query;
-  console.log("sss", slug);
   const [features, setFeatures] = useState();
   const [team, setTeam] = useState();
   const [description, setDescription] = useState();
@@ -28,7 +27,6 @@ export default function SingleSubService() {
     axios
       .get(`https://benchmark.promotingnepal.com/api/team/featurelist/${slug}`)
       .then((response) => {
-        console.log("allresponse", response);
         const features = response.data.featureList;
         const teams = response.data.teamList;
         setFeatures(features);

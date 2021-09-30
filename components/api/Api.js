@@ -13,12 +13,9 @@ const Login = (data) => {
 };
 
 const Signup = (data) => {
-  console.log("signupdata", data);
   return axios
     .post(`startup/signup`, data)
-    .then((res) => {
-      console.log(res);
-    })
+    .then((res) => {})
     .catch((err) => {
       console.log("error form ", err);
     });

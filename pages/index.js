@@ -21,7 +21,6 @@ export default function Home() {
     axios
       .get("https://benchmark.promotingnepal.com/api/setting")
       .then((res) => {
-        //  console.log("res",res.data[0])
         setSettings(res.data[0]);
       });
   }, []);

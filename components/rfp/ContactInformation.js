@@ -16,7 +16,6 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
   const [mun, setMun] = useState();
   const [fiterState, setFilterState] = useState();
   const [updateMun, setUpdateMun] = useState();
-  console.log("mun", mun);
   // district
   const districtfilter = district
     ?.filter((item) => item.state_id === Number(fiterState))
@@ -29,7 +28,6 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
     .map((item) => {
       return item;
     });
-  console.log("munifilter", munfilter);
   useEffect(async () => {
     await axios
       .get("https://benchmark.promotingnepal.com/api/company-category/list")
@@ -43,7 +41,6 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
       .get("https://benchmark.promotingnepal.com/api/state/list")
       .then((res) => {
         setState(res.data.data);
-        console.log("state", res.data.data);
       });
   }, []);
 
@@ -52,7 +49,6 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
       .get("https://benchmark.promotingnepal.com/api/district/list")
       .then((res) => {
         setDistrict(res.data.data);
-        console.log("dist", res.data.data);
       });
   }, []);
 
@@ -61,7 +57,6 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
       .get("https://benchmark.promotingnepal.com/api/municipality/list")
       .then((res) => {
         setMun(res.data.data);
-        console.log("mun", res.data.data);
       });
   }, []);
 

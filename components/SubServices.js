@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 
 const SubServices = ({ slug }) => {
   const [subServicesData, setSubServiceData] = useState();
-  console.log(subServicesData);
 
   useEffect(() => {
     axios
@@ -13,7 +12,6 @@ const SubServices = ({ slug }) => {
       .then((response) => {
         const allServices = response.data.data;
         setSubServiceData(allServices);
-        console.log("heysingle", response);
       });
   }, []);
 

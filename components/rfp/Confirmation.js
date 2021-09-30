@@ -45,7 +45,6 @@ const Confirmation = ({ prevStep, nextStep, values, slug }) => {
       data: values,
     })
       .then(function (response) {
-        console.log(response);
         setMessage(response.data.message);
         setLoading(true);
       })

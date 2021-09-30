@@ -8,7 +8,6 @@ import { Spinner } from "react-bootstrap";
 const KeyPartners = () => {
   const [loadMore, setLoadMore] = useState(true);
   const [partners, setPartners] = useState([]);
-  console.log("partnersss", partners);
 
   useEffect(() => {
     axios

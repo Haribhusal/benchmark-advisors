@@ -21,7 +21,6 @@ const DocumentCategory = () => {
       });
   }, [slug]);
   useEffect(async () => {
-    console.log("myslug", slug);
     await axios
       .get(`https://benchmark.promotingnepal.com/api/download-document/${slug}`)
       .then((res) => {

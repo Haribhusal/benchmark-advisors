@@ -94,7 +94,6 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
       .get("https://benchmark.promotingnepal.com/api/state/list")
       .then((res) => {
         setState(res.data.data);
-        console.log("state", res.data.data);
       });
   }, []);
 
@@ -103,7 +102,6 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
       .get("https://benchmark.promotingnepal.com/api/district/list")
       .then((res) => {
         setDistrict(res.data.data);
-        console.log("dist", res.data.data);
       });
   }, []);
 
@@ -112,7 +110,6 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
       .get("https://benchmark.promotingnepal.com/api/municipality/list")
       .then((res) => {
         setMun(res.data.data);
-        console.log("mun", res.data.data);
       });
   }, []);
 

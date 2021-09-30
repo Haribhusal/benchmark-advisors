@@ -2,16 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Accordion, Card } from "react-bootstrap";
 const FaqComponent = () => {
-const [open, setOpen] = useState(false);
-const [faqs, setFaqs] = useState();
+  const [open, setOpen] = useState(false);
+  const [faqs, setFaqs] = useState();
   useEffect(() => {
-   axios.get('https://benchmark.promotingnepal.com/api/faq')
-   .then(res => {
-     console.log(res.data)
-    setFaqs(res.data)
-   })
-  }, [])
-return (
+    axios.get("https://benchmark.promotingnepal.com/api/faq").then((res) => {
+      setFaqs(res.data);
+    });
+  }, []);
+  return (
     <main
       className="page"
       style={{
@@ -56,7 +54,7 @@ return (
             </div>
           </div>
         </div>
-      </section> 
+      </section>
     </main>
   );
 };

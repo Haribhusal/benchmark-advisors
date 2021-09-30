@@ -9,11 +9,7 @@ function Form() {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-  }; // your form submit function which will invoke after successful validation
-
-  console.log(watch("example")); // you can watch individual input by pass the name of the input
+  const onSubmit = (data) => {}; // your form submit function which will invoke after successful validation
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="py-5">
