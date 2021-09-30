@@ -14,20 +14,73 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
   const [state, setState] = useState();
   const [district, setDistrict] = useState();
   const [mun, setMun] = useState();
-  const [fiterState, setFilterState] = useState();
+  const [fiterState, setFilterState] = useState([]);
+  const [updateDistricts, setUpdateDistricts] = useState([]);
   const [updateMun, setUpdateMun] = useState();
-  // district
-  const districtfilter = district
-    ?.filter((item) => item.state_id === Number(fiterState))
-    .map((item) => {
-      return item;
-    });
-  //mun
-  const munfilter = mun
-    ?.filter((item) => item.id === Number(updateMun))
-    .map((item) => {
-      return item;
-    });
+  const [isCalled, setisCalled] = useState(true);
+
+  useEffect(() => {
+    if (!isEmpty(district) && isCalled) {
+      setUpdateDistricts(
+        district
+          ?.filter((item) => {
+            if (item.state_id === 1) {
+              return item;
+            }
+          })
+          .map((item) => item.district_name)
+      );
+      setisCalled(true);
+    } else {
+      setUpdateDistricts([]);
+    }
+  }, [district]);
+
+  const handleChangeState = (e) => {
+    const numbervalue = Number(e.target.value);
+    setUpdateDistricts(
+      district
+        .filter((item) => {
+          if (item.state_id === numbervalue) {
+            return item;
+          }
+        })
+        .map((item) => item.district_name)
+    );
+  };
+
+  // mun
+  useEffect(() => {
+    if (!isEmpty(mun) && isCalled) {
+      setUpdateMun(
+        mun
+          ?.filter((item) => {
+            if (item.district_id === 101) {
+              return item;
+            }
+          })
+          .map((item) => item.municipality_name)
+      );
+      setisCalled(true);
+    } else {
+      setUpdateMun([]);
+    }
+  }, [mun]);
+
+  const handleChangeDistrict = (e) => {
+    const numbervalue2 = Number(e.target.value);
+
+    setUpdateMun(
+      mun
+        .filter((item) => {
+          if (item.district_id === numbervalue2) {
+            return item;
+          }
+        })
+        .map((item) => item.municipality_name)
+    );
+  };
+
   useEffect(async () => {
     await axios
       .get("https://benchmark.promotingnepal.com/api/company-category/list")
@@ -183,6 +236,7 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
                       <select
                         className="form-control"
                         onChange={handleChange("company_category_id")}
+                        defaultValue={values?.company_category_id}
                       >
                         {companyCategory?.map((item) => (
                           <option value={item?.title} key={item?.id}>
@@ -198,7 +252,7 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
                       <label htmlFor="isector">State</label>
                       <select
                         className="form-control"
-                        onChange={(e) => setFilterState(e.target.value)}
+                        onChange={(e) => handleChangeState(e)}
                         defaultValue="hey"
                       >
                         {state?.map((item) => (
@@ -217,10 +271,10 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
                       <label htmlFor="isector">District</label>
                       <select
                         className="form-control"
-                        onChange={(e) => setUpdateMun(e.target.value)}
+                        onChange={(e) => handleChangeDistrict(e)}
                       >
-                        {districtfilter?.map((item) => (
-                          <option value={item.id}>{item.district_name}</option>
+                        {updateDistricts?.map((item) => (
+                          <option value={item.district_id}>{item}</option>
                         ))}
                       </select>
                     </div>
@@ -233,7 +287,7 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
                         className="form-control"
                         onChange={handleChange("municipality_id")}
                       >
-                        {munfilter?.map((item) => (
+                        {updateMun?.map((item) => (
                           <option value={item.municipality_name}>
                             {item.municipality_name}
                           </option>

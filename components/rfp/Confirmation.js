@@ -151,7 +151,7 @@ const Confirmation = ({ prevStep, nextStep, values, slug }) => {
             <button className="btn btn_p btn_p_dim" onClick={Previous}>
               <i className="las la-arrow-left ml-2"></i> Back
             </button>
-            <button className="btn btn_p" onClick={submitForm}>
+            <button className="btn btn_p" type="submit">
               Confirm and Submit <i className="las la-arrow-right"></i>
             </button>
           </div>

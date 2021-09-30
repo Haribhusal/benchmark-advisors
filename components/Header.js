@@ -269,10 +269,12 @@ const Header = () => {
                 </NavDropdown>
               </Nav>
               <Nav className="ml-auto">
-                <Nav.Link href="#link">Login</Nav.Link>
-                <Nav.Link href="#link">Sign up</Nav.Link>
+                {/* <Nav.Link href="#link">Login</Nav.Link>
+                <Nav.Link href="#link">Sign up</Nav.Link> */}
                 <Link href="/join-startup">
-                  <a className="nav-link btn_get_investment">Get Investment</a>
+                  <a className="nav-link btn_get_investment">
+                    Get Investment <i className="las la-arrow-right"></i>
+                  </a>
                 </Link>
               </Nav>
             </Navbar.Collapse>
