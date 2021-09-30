@@ -1,12 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import { signup } from "../actions/auth";
 
 const JoinStartup = () => {
   const [document, setDocument] = useState();
+  const dispatch = useDispatch();
+
+  const data = useSelector((state) => state.auth?.data);
+  console.log(data);
 
   useEffect(async () => {
+    dispatch(signup("user"));
     const response = await fetch(
       "https://benchmark.promotingnepal.com/api/document/list"
     );

@@ -2,11 +2,16 @@ import Head from "next/head";
 import NextNprogress from "nextjs-progressbar";
 import Layout from "../components/Layout";
 import parse from "postcss/lib/parse";
+import axios from "axios";
+import { Provider } from "react-redux";
+import store from "../store";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -26,9 +31,11 @@ function MyApp({ Component, pageProps }) {
           rel="stylesheet"
         />
       </Head>
+      <Provider store={store}>
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      </Provider>
     </>
   );
 }

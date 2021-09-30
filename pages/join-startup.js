@@ -1,80 +1,31 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { useForm, Controller } from "react-hook-form";
+import Select from "react-select";
 import Link from "next/link";
-import { getCompanyCategory } from "../components/api/Api";
+import { getCompanyCategory, getStates, getDistricts, getMunicipalities } from "../actions/common";
 
 const JoinStartup = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
+  const { register, control, handleSubmit, formState: { errors } } = useForm();
   const [activeForm, setActiveForm] = useState(1);
+  const [mystate, setMystate] = useState("");
+  const [mydistrict, setMydistrict] = useState("");
+  const dispatch = useDispatch();
 
-  const [companyCategory, setCompanyCategory] = useState();
-  const [state, setState] = useState();
-  const [district, setDistrict] = useState();
-  const [mun, setMun] = useState();
-  const [fiterState, setFilterState] = useState();
-  const [updateMun, setUpdateMun] = useState();
+  const { companyCategory, states, districts, municipalities } = useSelector(state => state.common);
 
-  const [setisCalled] = useState(true);
+  const stateOptions = states?.map(d => ({ value: d.id, label: d.province_name }))
+  const districtOptions = districts?.filter(f => f.state_id === mystate)?.map(d => ({ value: d.id, label: d.district_name }))
+  const municipalityOptions = municipalities?.filter(f => f.district_id === mydistrict)?.map(d => ({ value: d.id, label: d.municipality_name }))
 
-  const onSubmit = async (data) => {
-    await axios
-      .post(`https://benchmark.promotingnepal.com/api/startup/signup`, data)
-      .then((res) => {})
-      .catch((err) => {});
+  const onSubmit = e => console.log(e);
 
-    // Signup(data);
-  };
-
-  // district
-  const districtfilter = district
-    ?.filter((item) => item.state_id === Number(fiterState))
-    .map((item) => {
-      return item;
-    });
-  //mun
-  const munfilter = mun
-    ?.filter((item) => item.id === Number(updateMun))
-    .map((item) => {
-      return item;
-    });
-  useEffect(async () => {
-    await axios
-      .get("https://benchmark.promotingnepal.com/api/company-category/list")
-      .then((res) => {
-        setCompanyCategory(res.data.data);
-      });
-  }, []);
-
-  useEffect(async () => {
-    await axios
-      .get("https://benchmark.promotingnepal.com/api/state/list")
-      .then((res) => {
-        setState(res.data.data);
-      });
-  }, []);
-
-  useEffect(async () => {
-    await axios
-      .get("https://benchmark.promotingnepal.com/api/district/list")
-      .then((res) => {
-        setDistrict(res.data.data);
-      });
-  }, []);
-
-  useEffect(async () => {
-    await axios
-      .get("https://benchmark.promotingnepal.com/api/municipality/list")
-      .then((res) => {
-        setMun(res.data.data);
-      });
-  }, []);
+  useEffect(() => {
+    dispatch(getCompanyCategory());
+    dispatch(getStates());
+    dispatch(getDistricts());
+    dispatch(getMunicipalities());
+  }, [dispatch]);
 
   return (
     <main
@@ -151,44 +102,49 @@ const JoinStartup = () => {
                         <div className="col-sm-4">
                           <div className="form-group mb-3">
                             <label htmlFor="isector">State</label>
-                            <select
-                              className="form-control"
-                              onChange={(e) => setFilterState(e.target.value)}
-                              defaultValue="hey"
-                            >
-                              {state?.map((item) => (
-                                <option value={item?.id} key={item?.id}>
-                                  {item?.province_name}
-                                </option>
-                              ))}
-                            </select>
+                            <Controller
+                              name="state"
+                              control={control}
+                              render={({ field: { onChange, value } }) => (
+                                <Select
+                                  options={stateOptions}
+                                  value={stateOptions?.find(c => c.value === value)}
+                                  onChange={v => { onChange(v.value); setMystate(v.value) }}
+                                />
+                              )}
+                            />
                           </div>
                         </div>
                         <div className="col-sm-6">
                           <div className="form-group mb-3">
                             <label htmlFor="isector">District</label>
-                            <select
-                              className="form-control"
-                              onChange={(e) => setUpdateMun(e.target.value)}
-                            >
-                              {districtfilter?.map((item) => (
-                                <option value={item.id}>
-                                  {item.district_name}
-                                </option>
-                              ))}
-                            </select>
+                            <Controller
+                              name="district"
+                              control={control}
+                              render={({ field: { onChange, value } }) => (
+                                <Select
+                                  options={districtOptions}
+                                  value={districtOptions?.find(v => v.value === value)}
+                                  onChange={c => { onChange(c.value); setMydistrict(c.value) }}
+                                />
+                              )}
+                            />
                           </div>
                         </div>
                         <div className="col-sm-4">
                           <div className="form-group mb-3">
                             <label htmlFor="isector">Municipality</label>
-                            <select className="form-control">
-                              {munfilter?.map((item) => (
-                                <option value={item.municipality_name}>
-                                  {item.municipality_name}
-                                </option>
-                              ))}
-                            </select>
+                            <Controller
+                              name="municipality"
+                              control={control}
+                              render={({ field: { onChange, value } }) => (
+                                <Select
+                                  options={municipalityOptions}
+                                  value={municipalityOptions?.find(v => v.value === value)}
+                                  onChange={c => { onChange(c.value)}}
+                                />
+                              )}
+                            />
                           </div>
                         </div>
                       </div>
