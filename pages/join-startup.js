@@ -3,25 +3,54 @@ import { useSelector, useDispatch } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import Link from "next/link";
-import { getCompanyCategory, getStates, getDistricts, getMunicipalities } from "../actions/common";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+import { getCompanyCategory, getDocumentCategory, getStates, getDistricts, getMunicipalities } from "../actions/common";
+
+const schema = yup.object().shape({
+  startup_name: yup.string().required(),
+  contact_number: yup.number().positive().integer().required().max(9999999999, 'Mobile number must be 10 or less than 10 digits'),
+  email: yup.string().email().required(),
+  pan_number: yup.number().positive().integer().required(),
+  personal_name: yup.string().required(),
+  personal_contact_number: yup.number().positive().integer().required().max(9999999999, 'Mobile number must be 10 or less than 10 digits'),
+  personal_email: yup.string().email().required(),
+  personal_address: yup.string().required(),
+  pan_status: yup.string().required(),
+  company_since: yup.date().required(),
+  number_of_emplyees: yup.number().positive().integer().required(),
+  password: yup.string().required().min(8).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, "Must contain at least one uppercase letter, number and special character"),
+  password_confirmation: yup.string().required().oneOf([yup.ref('password1')], 'Passwords must match'),
+});
 
 const JoinStartup = () => {
-  const { register, control, handleSubmit, formState: { errors } } = useForm();
+  const { register, setValue, getValues, control, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
   const [activeForm, setActiveForm] = useState(1);
   const [mystate, setMystate] = useState("");
   const [mydistrict, setMydistrict] = useState("");
   const dispatch = useDispatch();
 
-  const { companyCategory, states, districts, municipalities } = useSelector(state => state.common);
+  const { companyCategory, documentCategory, states, districts, municipalities } = useSelector(state => state.common);
 
+  const categoryOptions = companyCategory?.map(d => ({ value: d.id, label: d.title }));
+  const documentOptions = documentCategory?.map(d => ({ value: d.id, label: d.title }));
   const stateOptions = states?.map(d => ({ value: d.id, label: d.province_name }))
   const districtOptions = districts?.filter(f => f.state_id === mystate)?.map(d => ({ value: d.id, label: d.district_name }))
   const municipalityOptions = municipalities?.filter(f => f.district_id === mydistrict)?.map(d => ({ value: d.id, label: d.municipality_name }))
+
+  const handleOptionChange = selectedOption => {
+    let array = [];
+    selectedOption.map(item => {
+        array.push(item.value)
+    })
+    setValue("document_category_id", array);
+  };
 
   const onSubmit = e => console.log(e);
 
   useEffect(() => {
     dispatch(getCompanyCategory());
+    dispatch(getDocumentCategory());
     dispatch(getStates());
     dispatch(getDistricts());
     dispatch(getMunicipalities());
@@ -73,6 +102,7 @@ const JoinStartup = () => {
                               className="form-control"
                               placeholder="Startup Name"
                             />
+                            {<span className="text-danger">{errors.startup_name?.message}</span>}
                           </div>
                         </div>
                       </div>
@@ -82,28 +112,27 @@ const JoinStartup = () => {
                             <label htmlFor="isector">
                               Select Industry Sector
                             </label>
-
-                            {/*  */}
-                            <select
-                              className="form-control"
-                              {...register("company_category_id")}
-                            >
-                              {companyCategory?.map((item) => (
-                                <option value={item?.title} key={item?.id}>
-                                  {item?.title}
-                                </option>
-                              ))}
-                            </select>
+                            <Controller
+                              name="company_category_id"
+                              control={control}
+                              render={({ field: { onChange, value } }) => (
+                                <Select
+                                  options={categoryOptions}
+                                  value={categoryOptions?.find(c => c.value === value)}
+                                  onChange={v => { onChange(v.value) }}
+                                />
+                              )}
+                            />
                           </div>
                         </div>
                       </div>
 
                       <div className="row">
-                        <div className="col-sm-4">
+                        <div className="col-sm-6">
                           <div className="form-group mb-3">
                             <label htmlFor="isector">State</label>
                             <Controller
-                              name="state"
+                              name="province_id"
                               control={control}
                               render={({ field: { onChange, value } }) => (
                                 <Select
@@ -119,7 +148,7 @@ const JoinStartup = () => {
                           <div className="form-group mb-3">
                             <label htmlFor="isector">District</label>
                             <Controller
-                              name="district"
+                              name="district_id"
                               control={control}
                               render={({ field: { onChange, value } }) => (
                                 <Select
@@ -131,11 +160,11 @@ const JoinStartup = () => {
                             />
                           </div>
                         </div>
-                        <div className="col-sm-4">
+                        <div className="col-sm-6">
                           <div className="form-group mb-3">
                             <label htmlFor="isector">Municipality</label>
                             <Controller
-                              name="municipality"
+                              name="municipality_id"
                               control={control}
                               render={({ field: { onChange, value } }) => (
                                 <Select
@@ -177,6 +206,7 @@ const JoinStartup = () => {
                               className="form-control"
                               placeholder="Startup Contact Number"
                             />
+                            {<span className="text-danger">{errors.contact_number?.message}</span>}
                           </div>
                         </div>
                         <div className="col-sm-6">
@@ -191,6 +221,7 @@ const JoinStartup = () => {
                               className="form-control"
                               placeholder="Startup Email"
                             />
+                            {<span className="text-danger">{errors.email?.message}</span>}
                           </div>
                         </div>
                       </div>
@@ -210,6 +241,7 @@ const JoinStartup = () => {
                               <option value="1">yes</option>
                               <option value="0">no</option>
                             </select>
+                            {<span className="text-danger">{errors.pan_status?.message}</span>}
                           </div>
                         </div>
                         <div className="col-sm-6">
@@ -225,6 +257,7 @@ const JoinStartup = () => {
                               className="form-control"
                               placeholder="Enter Pan Number"
                             />
+                            {<span className="text-danger">{errors.pan_number?.message}</span>}
                           </div>
                         </div>
                         <div className="col-sm-6">
@@ -240,6 +273,7 @@ const JoinStartup = () => {
                               className="form-control"
                               placeholder="Company Since"
                             />
+                            {<span className="text-danger">{errors.company_since?.message}</span>}
                           </div>
                         </div>
                         <div className="col-sm-6">
@@ -255,36 +289,7 @@ const JoinStartup = () => {
                               className="form-control"
                               placeholder="Number of Employees"
                             />
-                          </div>
-                        </div>
-                        <div className="col-sm-6">
-                          <div className="form-group">
-                            <label htmlFor="" className="small text-muted">
-                              password
-                            </label>
-
-                            <input
-                              {...register("password")}
-                              name="password"
-                              type="password"
-                              className="form-control"
-                              placeholder="Password"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-sm-6">
-                          <div className="form-group">
-                            <label htmlFor="" className="small text-muted">
-                              password
-                            </label>
-
-                            <input
-                              {...register("password_confirmation")}
-                              name="password_confirmation"
-                              type="password"
-                              className="form-control"
-                              placeholder="Password"
-                            />
+                            {<span className="text-danger">{errors.number_of_emplyees?.message}</span>}
                           </div>
                         </div>
                       </div>
@@ -333,6 +338,7 @@ const JoinStartup = () => {
                             className="form-control"
                             placeholder="Your Name"
                           />
+                          {<span className="text-danger">{errors.personal_name?.message}</span>}
                         </div>
                       </div>
                     </div>
@@ -349,6 +355,7 @@ const JoinStartup = () => {
                             className="form-control"
                             placeholder="Your Contact Number"
                           />
+                          {<span className="text-danger">{errors.personal_contact_number?.message}</span>}
                         </div>
                       </div>
                       <div className="col-sm-6">
@@ -363,8 +370,55 @@ const JoinStartup = () => {
                             className="form-control"
                             placeholder="Your Email Address"
                           />
+                          {<span className="text-danger">{errors.personal_email?.message}</span>}
                         </div>
                       </div>
+                      <div className="col-sm-12">
+                        <div className="form-group">
+                          <label htmlFor="" className="small text-muted">
+                            Enter Your Address
+                          </label>
+                          <input
+                            {...register("personal_address")}
+                            type="text"
+                            className="form-control"
+                            placeholder="Your Address"
+                          />
+                          {<span className="text-danger">{errors.personal_address?.message}</span>}
+                        </div>
+                      </div>
+                      <div className="col-sm-6">
+                          <div className="form-group">
+                            <label htmlFor="" className="small text-muted">
+                              Password
+                            </label>
+
+                            <input
+                              {...register("password")}
+                              name="password"
+                              type="password"
+                              className="form-control"
+                              placeholder="Password"
+                            />
+                            {<span className="text-danger">{errors.password?.message}</span>}
+                          </div>
+                        </div>
+                        <div className="col-sm-6">
+                          <div className="form-group">
+                            <label htmlFor="" className="small text-muted">
+                              Confirm password
+                            </label>
+
+                            <input
+                              {...register("password_confirmation")}
+                              name="password_confirmation"
+                              type="password"
+                              className="form-control"
+                              placeholder="Password"
+                            />
+                            {<span className="text-danger">{errors.password_confirmation?.message}</span>}
+                          </div>
+                        </div>
                     </div>
                     <div className="row">
                       <div className="col-sm-12 d-flex justify-content-between">
@@ -392,6 +446,80 @@ const JoinStartup = () => {
                     <div className="row">
                       <div className="col-sm-12">
                         <div className="titlewrapper">
+                          <h3 className="title font_p">Files</h3>
+                          <p className="text-muted small">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing
+                            elit. Corrupti incidunt repudiandae quo.
+                          </p>
+                        </div>
+                        <hr />
+                      </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-sm-6">
+                          <div className="form-group mb-3">
+                            <label htmlFor="isector">
+                              Document
+                            </label>
+                            <Controller
+                              name="document_category_id"
+                              control={control}
+                              render={({ field: { value } }) => (
+                                <Select
+                                  options={documentOptions}
+                                  value={documentOptions?.find(c => c.value === value)}
+                                  onChange={v => handleOptionChange(v)}
+                                  isMulti
+                                />
+                              )}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                    <div className="row">
+                      <div className="col-sm-12">
+                        <div className="form-group">
+                          <label htmlFor="" className="small text-muted">
+                            Upload
+                          </label>
+                          <input
+                            {...register("files")}
+                            type="file"
+                            className="form-control"
+                            placeholder="Your Name"
+                            multiple
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-sm-12 d-flex justify-content-between">
+                        <button
+                          type="button"
+                          className="btn btn-default"
+                          onClick={() => setActiveForm(2)}
+                        >
+                          Back
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn_p"
+                          onClick={() => setActiveForm(4)}
+                        >
+                          Continue
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeForm == 4 && (
+                  <div className="formwrapper">
+                    <div className="row">
+                      <div className="col-sm-12">
+                        <div className="titlewrapper">
                           <h3 className="title font_p">Hey</h3>
                           <p className="text-muted small">
                             Lorem ipsum dolor, sit amet consectetur adipisicing
@@ -407,49 +535,43 @@ const JoinStartup = () => {
                           <tbody>
                             <tr>
                               <td className="text-muted small">Startup Name</td>
-                              <td>{startup_name}</td>
+                              <td>{getValues("startup_name")}</td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Startup Category
                               </td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td className="text-muted small">
-                                Startup Subcategory
-                              </td>
-                              <td></td>
+                              <td>{getValues("company_category_id")}</td>
                             </tr>
                             <tr>
                               <td className="text-muted small">Provience</td>
-                              <td></td>
+                              <td>{getValues("province_id")}</td>
                             </tr>
                             <tr>
                               <td className="text-muted small">District</td>
-                              <td></td>
+                              <td>{getValues("district_id")}</td>
                             </tr>
                             <tr>
                               <td className="text-muted small">Municipality</td>
-                              <td></td>
+                              <td>{getValues("municipality_id")}</td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Startup Location
                               </td>
-                              <td></td>
+                              <td>{getValues("startup_name")}</td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Startup Contact Number
                               </td>
-                              <td></td>
+                              <td>{getValues("contact_number")}</td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Startup Email Address
                               </td>
-                              <td></td>
+                              <td>{getValues("email")}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -461,31 +583,31 @@ const JoinStartup = () => {
                               <td className="text-muted small">
                                 Person First Name
                               </td>
-                              <td></td>
+                              <td>{getValues("personal_name")}</td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Person Last Name
                               </td>
-                              <td></td>
+                              <td>{getValues("startup_name")}</td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Person Contact Number
                               </td>
-                              <td></td>
+                              <td>{getValues("startup_name")}</td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Person Email Address
                               </td>
-                              <td></td>
+                              <td>{getValues("startup_name")}</td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Person Address
                               </td>
-                              <td></td>
+                              <td>{getValues("startup_name")}</td>
                             </tr>
                           </tbody>
                         </table>
