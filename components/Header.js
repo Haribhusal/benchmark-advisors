@@ -136,7 +136,7 @@ const Header = () => {
                 </NavDropdown>
 
                 <NavDropdown
-                  title="startups"
+                  title="Investors"
                   className="customDropdown"
                   id="doxs"
                 >
