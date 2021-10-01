@@ -5,6 +5,7 @@ import Select from "react-select";
 import Link from "next/link";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { signup } from "../actions/auth";
 import { getCompanyCategory, getDocumentCategory, getStates, getDistricts, getMunicipalities } from "../actions/common";
 
 const schema = yup.object().shape({
@@ -18,9 +19,8 @@ const schema = yup.object().shape({
   personal_address: yup.string().required(),
   pan_status: yup.string().required(),
   company_since: yup.date().required(),
-  number_of_emplyees: yup.number().positive().integer().required(),
   password: yup.string().required().min(8).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, "Must contain at least one uppercase letter, number and special character"),
-  password_confirmation: yup.string().required().oneOf([yup.ref('password1')], 'Passwords must match'),
+  password_confirmation: yup.string().required().oneOf([yup.ref('password')], 'Passwords must match'),
 });
 
 const JoinStartup = () => {
@@ -46,7 +46,7 @@ const JoinStartup = () => {
     setValue("document_category_id", array);
   };
 
-  const onSubmit = e => console.log(e);
+  const onSubmit = e => dispatch(signup(e));
 
   useEffect(() => {
     dispatch(getCompanyCategory());
@@ -249,7 +249,6 @@ const JoinStartup = () => {
                             <label htmlFor="" className="small text-muted">
                               pan_number
                             </label>
-
                             <input
                               {...register("pan_number")}
                               name="pan_number"
@@ -595,19 +594,19 @@ const JoinStartup = () => {
                               <td className="text-muted small">
                                 Person Contact Number
                               </td>
-                              <td>{getValues("startup_name")}</td>
+                              <td>{getValues("personal_contact_number")}</td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Person Email Address
                               </td>
-                              <td>{getValues("startup_name")}</td>
+                              <td>{getValues("personal_email")}</td>
                             </tr>
                             <tr>
                               <td className="text-muted small">
                                 Person Address
                               </td>
-                              <td>{getValues("startup_name")}</td>
+                              <td>{getValues("personal_address")}</td>
                             </tr>
                           </tbody>
                         </table>
