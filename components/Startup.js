@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import Link from "next/link";
+import { getProfile } from "../actions/auth";
+
 const Startup = () => {
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.auth);
+  console.log(user)
+  useEffect(() => {
+    dispatch(getProfile())
+  }, [dispatch])
   return (
     <div className="investwrapper videowrapper rounded_medium">
       <div className="thumbnail">

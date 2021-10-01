@@ -1,12 +1,24 @@
+import React, { useEffect, useState } from "react";
 import { Tab } from "react-bootstrap";
+import { useSelector, useDispatch } from 'react-redux';
+import Link from "next/link";
+import { getProfile } from "../actions/auth";
 import Image from "next/image";
 import { Tabs } from "react-bootstrap";
 import Footer from "../components/Footer";
 import OurStory from "../components/OurStory";
-import React, { useEffect, useState } from "react";
 
 export default function AdvisoryAndConsulting() {
   const [showTooltip, setShowTooltip] = useState(false);
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.auth);
+  console.log(user)
+
+  console.log(user)
+  useEffect(() => {
+    dispatch(getProfile())
+  }, [dispatch])
   return (
     <>
       <main
@@ -26,7 +38,7 @@ export default function AdvisoryAndConsulting() {
               <div className="col-sm-8 d-flex align-items-center">
                 <div className="textwrapper mt-5">
                   <div className="subtitle f14 text-muted">STARTUPS</div>
-                  <h3 className="title font_p text_big mb-0">Clay Global</h3>
+                  <h3 className="title font_p text_big mb-0">{user?.startup_name}</h3>
                   <p className="text f14 text-muted my-3">
                     Please login as an investor to view the service details
                   </p>

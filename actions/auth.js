@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   SIGN_UP,
   LOGIN,
+  PROFILE,
 } from './types';
 
 // SIGNUP USER
@@ -40,4 +41,27 @@ export const login = (data) => (dispatch) => {
         payload: res.data,
       });
     })
+}
+
+// GET USER PROFILE
+export const getProfile = () => (dispatch) => {
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Brearer ${token}`,
+    },
+  };
+  try {
+  axios
+    .get("/api/startup/profile", config)
+    .then((res) => {
+      dispatch({
+        type: PROFILE,
+        payload: res.data,
+      });
+    })
+  } catch (error) {
+    console.log(error);
+  }
 }

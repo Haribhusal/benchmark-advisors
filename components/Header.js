@@ -1,14 +1,23 @@
 import Reat, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import Image from "next/image";
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { getProfile } from "../actions/auth";
 
 const Header = () => {
   const [loading, setLoading] = useState();
   const [docCategory, setDocCategory] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
   useEffect(() => {
+    dispatch(getProfile());
     setLoading(true);
     axios
       .get("https://benchmark.promotingnepal.com/api/document-category")
@@ -22,7 +31,35 @@ const Header = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [dispatch]);
+
+  const guestButtons = (
+    <>
+      <Link href="/login">
+        <a className="nav-link btn_get_investment">
+          Login <i className="las la-arrow-right"></i>
+        </a>
+      </Link>
+      <Link href="/join-startup">
+        <a className="nav-link btn_get_investment">
+          Signup <i className="las la-arrow-right"></i>
+        </a>
+      </Link>
+    </>
+  )
+
+  const userButtons = (
+    <>
+      <Link href="/startup">
+        <a className="nav-link btn_get_investment">
+          Profile <i className="las la-arrow-right"></i>
+        </a>
+      </Link>
+      <a className="nav-link btn_get_investment" onClick={() => {localStorage.removeItem("token"); router.push('/')}}>
+        Logout <i className="las la-arrow-right"></i>
+      </a>
+    </>
+  )
 
   return (
     <header className="px-3">
@@ -276,11 +313,7 @@ const Header = () => {
               <Nav className="ml-auto">
                 {/* <Nav.Link href="#link">Login</Nav.Link>
                 <Nav.Link href="#link">Sign up</Nav.Link> */}
-                <Link href="/join-startup">
-                  <a className="nav-link btn_get_investment">
-                    Get Investment <i className="las la-arrow-right"></i>
-                  </a>
-                </Link>
+                {isAuthenticated ? userButtons : guestButtons}
               </Nav>
             </Navbar.Collapse>
           </Container>

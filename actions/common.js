@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
     GET_COMPANY_CATEGORIES,
     GET_DOCUMTE_CATEGORIES,
+    GET_CATEGORY,
     GET_STATES,
     GET_DISTRICTS,
     GET_MUNICIPALITIES,
@@ -26,6 +27,17 @@ export const getDocumentCategory = () => dispatch => {
             });
         })
 };
+
+export const getCategory = () => dispatch => {
+    axios.get(`/api/document-category`)
+        .then(res => {
+            dispatch({
+                type: GET_CATEGORY,
+                payload: res.data
+            });
+        })
+};
+
 
 export const getStates = () => dispatch => {
     axios.get('/api/state/list')
