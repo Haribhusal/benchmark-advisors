@@ -56,12 +56,16 @@ const Footer = () => {
                     <div className="menu">
                       <ul>
                         <li className="text-muted f14">
+                          <i className="las la-map me-2"></i>
                           {siteSettings?.address}
                         </li>
                         <li className="text-muted f14">
+                          <i className="las la-envelope me-2"></i>
+
                           {siteSettings?.email}
                         </li>
                         <li className="text-muted f14">
+                          <i className="las la-phone me-2"></i>
                           {siteSettings?.mobile_no}, {siteSettings?.phone_no}
                         </li>
                       </ul>
@@ -76,20 +80,32 @@ const Footer = () => {
                       </h6>
                     </div>
                     <div className="menu">
-                      <ul>
+                      <ul className="d-flex socialLinks">
                         <li>
-                          <a target="_blank" href={siteSettings?.facebook_url}>
-                            <i className="lab la-facebook-f"></i> Facebook
+                          <a
+                            target="_blank"
+                            className="f14 text-muted"
+                            href={siteSettings?.facebook_url}
+                          >
+                            <i className="lab la-facebook-f"></i>
                           </a>
                         </li>
                         <li>
-                          <a target="_blank" href={siteSettings?.twitter_url}>
-                            <i className="lab la-twitter"></i> Twitter
+                          <a
+                            target="_blank"
+                            className="f14 text-muted"
+                            href={siteSettings?.twitter_url}
+                          >
+                            <i className="lab la-twitter"></i>
                           </a>
                         </li>
                         <li>
-                          <a target="_blank" href={siteSettings?.instagram_url}>
-                            <i className="lab la-instagram"></i> Instagram
+                          <a
+                            target="_blank"
+                            className="f14 text-muted"
+                            href={siteSettings?.instagram_url}
+                          >
+                            <i className="lab la-instagram"></i>
                           </a>
                         </li>
 
@@ -103,16 +119,14 @@ const Footer = () => {
                     <div className="titlewrapper">
                       <h6 className="title font_p f18 fw500">Tech Partner</h6>
                     </div>
-                    <div className="techpartner d-flex gap flex-column align-items-start">
+                    <div className="techpartner d-flex  flex-row align-items-center">
                       <Image
                         src="/images/tcs.svg"
                         height={70}
                         width={100}
                         priority
                       />
-                      <strong className="textwrapper">
-                        Techcare Softwares
-                      </strong>
+                      <span className="textwrapper">Techcare Softwares</span>
                     </div>
                   </div>
                 </div>

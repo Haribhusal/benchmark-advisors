@@ -1,4 +1,21 @@
-footer{
-    background-color: rgba(#fff, 0.9);
-    backdrop-filter: 100px;
+footer {
+  background-color: rgba(#fff, 0.9);
+  backdrop-filter: 100px;
+  .socialLinks {
+    li {
+      a {
+        i {
+          height: 40px;
+          width: 40px;
+          font-size: 25px;
+          background-color: $p;
+          color: #fff;
+          margin-right: 10px;
+          text-align: center;
+          line-height: 40px;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
 }
