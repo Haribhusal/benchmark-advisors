@@ -6,15 +6,9 @@ import {
 
 // SIGNUP USER
 export const signup = (data) => (dispatch) => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("token")
-      },
-    };
     const body = JSON.stringify(data);
     axios
-      .get("/api/document/list", config)
+      .get("/api/startup/signup", config)
       .then((res) => {
         dispatch({
           type: SIGN_UP,
@@ -22,3 +16,16 @@ export const signup = (data) => (dispatch) => {
         });
       })
   };
+
+// LOGIN USER
+export const login = (data) => (dispatch) => {
+    const body = JSON.stringify(data);
+    axios
+      .get("/api/startup/login", config)
+      .then((res) => {
+        dispatch({
+          type: LOGIN,
+          payload: res.data,
+        });
+      })
+  }
