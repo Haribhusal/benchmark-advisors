@@ -667,7 +667,7 @@ const JoinStartup = () => {
                         </button>
                         <input
                           type="Submit"
-                          value="Confirm and Submit"
+                          defaultValue="Confirm and Submit"
                           className="btn btn_p"
                         />
                       </div>

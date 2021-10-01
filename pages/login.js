@@ -7,7 +7,7 @@ export default function LoginForm() {
     const { register, handleSubmit, reset } = useForm()
     const dispatch = useDispatch()
 
-    const onSubmit = data => console.log(data)
+    const onSubmit = data => dispatch(login(data))
 
     return (
         <main
@@ -43,7 +43,6 @@ export default function LoginForm() {
                                 </label>
                                 <input
                                     {...register("email")}
-                                    name="personal_name"
                                     type="email"
                                     className="form-control"
                                     placeholder="Your Email"
@@ -59,7 +58,6 @@ export default function LoginForm() {
                                 </label>
                                 <input
                                     {...register("password")}
-                                    name="personal_contact_number"
                                     type="password"
                                     className="form-control"
                                     placeholder="Your Password"
@@ -78,7 +76,7 @@ export default function LoginForm() {
                             </button>
                             <input
                                 type="Submit"
-                                value="Submit"
+                                defaultValue="Submit"
                                 className="btn btn_p"
                             />
                         </div>

@@ -6,6 +6,7 @@ import {
 const initialState = {
     token: null,
     isAuthenticated: false,
+    message: null,
     data: null,
   };
   
@@ -15,9 +16,18 @@ const initialState = {
         return {
           ...state,
           ...action.payload,
-          token: action.payload.token,
-          data: action.payload.data,
+          message: action.payload?.message,
+          data: action.payload?.data,
         };
+        case LOGIN:
+          return {
+            ...state,
+            ...action.payload,
+            isAuthenticated: true,
+            token: action.payload?.data?.access_token,
+            message: action.payload?.message,
+            data: action.payload?.data,
+          }
         default:
           return state;
     }

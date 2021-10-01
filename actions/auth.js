@@ -28,9 +28,12 @@ export const signup = (data) => (dispatch) => {
 
 // LOGIN USER
 export const login = (data) => (dispatch) => {
-  const body = JSON.stringify(data);
+  var form_data = new FormData();
+  for ( var key in data ) {
+      form_data.append(key, data[key]);
+  }
   axios
-    .post("/api/startup/login", body, config)
+    .post("/api/startup/login", form_data)
     .then((res) => {
       dispatch({
         type: LOGIN,
