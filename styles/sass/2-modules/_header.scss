@@ -1,129 +1,121 @@
 header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(#fff, 0.9);
+  z-index: 9;
+  box-shadow: 0px 10px 30px rgba($p, 0.1);
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(20px);
 
+  // background-color: red;
 
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(#fff, 0.9);
-    z-index: 9;
-    box-shadow: 0px 10px 30px rgba($p, 0.1);
-    height: 10vh !important;
-    display: flex;
-    align-items: center;
-    backdrop-filter: blur(20px);
-
-    // background-color: red;
-
-    .customDropdown{
-
-        .dropdown-menu{
-            width: 450px;
-
-            .dropdown-item{
-                border-radius: 10px;
-                padding:  15px;
-                white-space: wrap;
-                overflow: hidden;
-                .info{
-                    p{
-                    }
-                }
-                &:hover{
-                    background-color: rgba($p, 0.08);
-                    .title{
-                        color: $p;
-                    }
-                }
-            }
-            
-            .dropdown_item_icon{
-                
-                border-radius: 10px !important;
-                .image{
-                    width: 150px;
-                    img{
-                        height: 70px;
-                        width: auto;
-                    }
-                }
-                position: relative;
-                cursor: pointer;
-                gap: 10px;
-                .arrow{
-                    position: absolute;
-                    right: 30px;
-                    opacity: 0;
-                    transition: all 0.5s ease;
-                }
-                &:hover{
-              
-
-                    .arrow{
-                        opacity: 1;
-                        right: 15px;
-                    }
-                }
-            }
-            
-        }
-    }
-    .headerWrapper {
-        width: 100%;
-    }
+  .customDropdown {
     .dropdown-menu {
-        padding: 15px;
+      width: 450px;
+
+      .dropdown-item {
         border-radius: 10px;
-       
-    }
-    .navbar {
-        padding: 0px;
-        background-color: transparent !important;
-        .nav-link {
-            font-size: 12px !important;
-            padding: 10px 20px !important;
-            cursor: pointer !important;
-            color: $t;
-            border-radius: 100px;
-            font-weight: 600;
-            text-transform: uppercase;
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-
-            &::before {
-                position: absolute;
-                height: 100%;
-                width: 100%;
-                content: "";
-                top: 0;
-                left: 0;
-                height: 100%;
-                width: 0%;
-                transition: all 0.5s ease;
-            }
-            &:hover {
-                color: $p !important;
-                background-color: rgba($p, 0.1);
-
-                &::before {
-                    position: absolute;
-                    height: 100%;
-                    width: 100%;
-                    background-color: rgba($p, 0.1);
-                    content: "";
-                    top: 0;
-                    left: 0;
-                    height: 100%;
-                    width: 100%;
-                }
-            }
+        padding: 15px;
+        white-space: wrap;
+        overflow: hidden;
+        .info {
+          p {
+          }
         }
-
-        .btn_get_investment {
-            &::before {
-                width: 100%;
-            }
+        &:hover {
+          background-color: rgba($p, 0.08);
+          .title {
+            color: $p;
+          }
         }
+      }
+
+      .dropdown_item_icon {
+        border-radius: 10px !important;
+        .image {
+          width: 150px;
+          img {
+            height: 70px;
+            width: auto;
+          }
+        }
+        position: relative;
+        cursor: pointer;
+        gap: 10px;
+        .arrow {
+          position: absolute;
+          right: 30px;
+          opacity: 0;
+          transition: all 0.5s ease;
+        }
+        &:hover {
+          .arrow {
+            opacity: 1;
+            right: 15px;
+          }
+        }
+      }
     }
+  }
+  .headerWrapper {
+    width: 100%;
+  }
+  .dropdown-menu {
+    padding: 15px;
+    border-radius: 10px;
+  }
+  .navbar {
+    padding: 0px;
+    background-color: transparent !important;
+    .nav-link {
+      font-size: 12px !important;
+      padding: 10px 20px !important;
+      cursor: pointer !important;
+      color: $t;
+      border-radius: 100px;
+      font-weight: 600;
+      text-transform: uppercase;
+      transition: all 0.5s ease;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        content: "";
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0%;
+        transition: all 0.5s ease;
+      }
+      &:hover {
+        color: $p !important;
+        background-color: rgba($p, 0.1);
+
+        &::before {
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          background-color: rgba($p, 0.1);
+          content: "";
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+
+    .btn_get_investment {
+      &::before {
+        width: 100%;
+      }
+    }
+  }
 }

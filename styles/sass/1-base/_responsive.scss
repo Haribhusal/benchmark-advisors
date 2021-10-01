@@ -1,0 +1,37 @@
+@media screen and (max-width: 992px) {
+  header {
+    height: auto !important;
+  }
+  .eventMainWrap {
+    grid-template-columns: 1fr !important;
+  }
+  .sliderItem {
+    padding: 15px 0 !important;
+  }
+  .hero .right {
+    right: 0 !important;
+  }
+  .navbar-collapse {
+    padding-bottom: 20px !important;
+    .btn_get_investment {
+      margin-bottom: 10px !important;
+    }
+  }
+  .howitworks {
+    .titlewrapper {
+      flex-direction: column !important;
+      justify-content: start !important;
+      align-items: flex-start !important;
+    }
+  }
+  .object_cover {
+    min-height: 100px !important;
+  }
+  footer {
+    .linkswrapper {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      justify-content: start !important;
+    }
+  }
+}

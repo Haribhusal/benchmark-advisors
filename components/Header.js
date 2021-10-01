@@ -36,30 +36,42 @@ const Header = () => {
   const guestButtons = (
     <>
       <Link href="/login">
-        <a className="nav-link btn_get_investment">
-          Login <i className="las la-arrow-right"></i>
+        <a
+          className="nav-link btn_get_investment"
+          style={{ marginRight: "15px" }}
+        >
+          Login
         </a>
       </Link>
       <Link href="/join-startup">
-        <a className="nav-link btn_get_investment">
+        <a className="btn_signup">
           Signup <i className="las la-arrow-right"></i>
         </a>
       </Link>
     </>
-  )
+  );
 
   const userButtons = (
     <>
       <Link href="/startup">
-        <a className="nav-link btn_get_investment">
-          Profile <i className="las la-arrow-right"></i>
+        <a
+          className="nav-link btn_get_investment"
+          style={{ marginRight: "15px" }}
+        >
+          <i className="las la-building"></i> Profile
         </a>
       </Link>
-      <a className="nav-link btn_get_investment" onClick={() => {localStorage.removeItem("token"); router.push('/')}}>
-        Logout <i className="las la-arrow-right"></i>
+      <a
+        className="nav-link btn_get_investment"
+        onClick={() => {
+          localStorage.removeItem("token");
+          router.push("/");
+        }}
+      >
+        <i class="las la-sign-out-alt"></i> Logout
       </a>
     </>
-  )
+  );
 
   return (
     <header className="px-3">

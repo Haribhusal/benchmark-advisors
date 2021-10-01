@@ -55,19 +55,17 @@ const Highlights = () => {
                         HIGHLIGHTS
                       </div>
                       <div className="date text-muted bg_p_dim text_p small">
-                        Event Date :{" "}
+                        <i className="las la-calendar"></i>
                         <span className="pl-1">
                           {highlights[0]?.published_date}
                         </span>
                       </div>
                     </div>
-                    <Link href={`/highlights/${highlights[0].title}`}>
-                      <a>
-                        <h3 className="title text_t f20 font_p">
-                          {highlights[0]?.title}
-                        </h3>
-                      </a>
-                    </Link>
+
+                    <h3 className="title text_t f20 font_p">
+                      {highlights[0]?.title}
+                    </h3>
+
                     <p className="text-muted f14">
                       {highlights[0]?.description.slice(0, 200)}...
                     </p>
@@ -105,14 +103,13 @@ const Highlights = () => {
                               <div className="subtitle fw300 f14 text_p">
                                 HIGHLIGHTS
                               </div>
-                              <Link href={`/highlights/${highlight?.title}`}>
-                                <a>
-                                  <h3 className="title text_t f18 font_p">
-                                    {highlight?.title}
-                                  </h3>
-                                </a>
-                              </Link>
+
+                              <h3 className="title text_t f18 font_p">
+                                {highlight?.title}
+                              </h3>
+
                               <p className="text-muted f14">
+                                <i className="las la-calendar"></i>
                                 {highlight?.published_date}
                               </p>
                             </div>

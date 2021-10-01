@@ -157,7 +157,7 @@ export default function SingleSubService() {
                 ))}
               </div>
             </div>
-
+            {/* 
             <div className="keycontacts">
               <div className="row">
                 <div className="col-sm-12">
@@ -194,6 +194,7 @@ export default function SingleSubService() {
                 ))}
               </div>
             </div>
+           */}
           </div>
         </section>
       </main>

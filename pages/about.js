@@ -35,32 +35,17 @@ export default function About() {
                     We Are Benchmark Advisors
                   </h3>
                   <p className="text f14 my-3">
-                    Lorem ipsum dolor sit amet, ipsum dolo dipiscing elit, sed
-                    do eiusmod tempor incididunt consectetur adipiscing
-                    elit.Lorem ipsum dolor sit amet, ipsum dolo dipiscing elit,
-                    sed do eiusmod tempor incididunt consectetur adipiscing elit
-                    lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet,
-                    ipsum dolo dipiscing elit, sed do eiusmod tempor incididunt
-                    consectetur adipiscing elit.Lorem ipsum dolor sit amet,
-                    ipsum dolo dipiscing elit, sed do eiusmod tempor incididunt
-                    consectetur adipiscing elit lorem ipsum dolor sit amet,Lorem
-                    ipsum dolor sit amet, ipsum dolo dipiscing elit, sed do
-                    eiusmod tempor incididunt consectetur adipiscing elit.Lorem
-                    ipsum dolor sit amet, ipsum dolo dipiscing elit, sed do
-                    eiusmod tempor incididunt consectetur adipiscing elit lorem
-                    ipsum dolor sit amet,Lorem ipsum dolor sit amet, ipsum dolo
-                    dipiscing elit, sed do eiusmod tempor incididunt consectetur
-                    adipiscing elit.Lorem ipsum dolor
-                  </p>
-                  <p className="text f14 my-3">
-                    {" "}
-                    sit amet, ipsum dolo dipiscing elit, sed do eiusmod tempor
-                    incididunt consectetur adipiscing elit lorem ipsum dolor sit
-                    amet,Lorem ipsum dolor sit amet, ipsum dolo dipiscing elit,
-                    sed do eiusmod tempor incididunt consectetur adipiscing
-                    elit.Lorem ipsum dolor sit amet, ipsum dolo dipiscing elit,
-                    sed do eiusmod tempor incididunt consectetur adipiscing elit
-                    lorem ipsum dolor sit amet,
+                    Benchmark Advisors (BMA) is an ambitious innovative company
+                    with a proven track record of tackling the business
+                    challenges and deliver solutions as required. With
+                    experienced Chartered Accountants as Founders, Benchmark has
+                    established itself as the prominent Business Consulting
+                    &amp; Advisory Company through solid client service, proven
+                    competitive strategies, and a group of people that bring
+                    dynamic energy to the clients and to the company. We are
+                    passionate about helping the entrepreneurs build their
+                    startup by helping them develop relevant strategies and
+                    Budgets.
                   </p>
                 </div>
               </div>

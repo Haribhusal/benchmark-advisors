@@ -15,3 +15,20 @@
   background-color: rgba($p, 0.08) !important;
   color: $p !important;
 }
+
+.btn_signup {
+  background-color: $p;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  color: #fff;
+  padding: 8px 15px;
+  font-size: 14px;
+  transition: all 0.5s ease;
+  text-transform: uppercase;
+  &:hover {
+    color: #fff;
+    border: 1px solid $p !important;
+    background-color: #fff;
+    color: $p;
+  }
+}
