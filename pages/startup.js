@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Tab } from "react-bootstrap";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
 import { getProfile } from "../actions/auth";
 import Image from "next/image";
@@ -13,12 +13,12 @@ export default function AdvisoryAndConsulting() {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
-  console.log(user)
+  console.log(user);
 
-  console.log(user)
+  console.log(user);
   useEffect(() => {
-    dispatch(getProfile())
-  }, [dispatch])
+    dispatch(getProfile());
+  }, [dispatch]);
   return (
     <>
       <main
@@ -38,19 +38,18 @@ export default function AdvisoryAndConsulting() {
               <div className="col-sm-8 d-flex align-items-center">
                 <div className="textwrapper mt-5">
                   <div className="subtitle f14 text-muted">STARTUPS</div>
-                  <h3 className="title font_p text_big mb-0">{user?.startup_name}</h3>
-                  <p className="text f14 text-muted my-3">
-                    Please login as an investor to view the service details
-                  </p>
+                  <h3 className="title font_p text_big mb-3">
+                    {user?.startup_name}
+                  </h3>
                 </div>
               </div>
               <div className="col-sm-4 d-flex align-items-center justify-content-end">
                 <div className="buttonwrapper">
                   <button className="btn btn_p rounded_big font_p text_w px-5 py-3">
-                    Invest Now{" "}
+                    Edit Profile
                     <span>
                       <i className="las la-arrow-right"></i>
-                    </span>{" "}
+                    </span>
                   </button>
                 </div>
               </div>
@@ -78,21 +77,27 @@ export default function AdvisoryAndConsulting() {
                   <ul className="">
                     <li className="item d-flex align-items-center justify-content-between">
                       <div className="label fw700 text-muted f12">
-                        Year of Incorporation
+                        Established
                       </div>
-                      <div className="info font_p f14">2018</div>
+                      <div className="info font_p f14">
+                        {user?.company_since}
+                      </div>
                     </li>
                     <li className="item  d-flex align-items-center justify-content-between">
                       <div className="label fw700 text-muted f12">
                         PAN/VAT Status
                       </div>
-                      <div className="info font_p f14">YES</div>
+                      <div className="info font_p f14">
+                        {user?.status == 1 ? "Yes" : "No"}
+                      </div>
                     </li>
                     <li className="item d-flex align-items-center justify-content-between">
                       <div className="label fw700 text-muted f12">
                         Total Imployees
                       </div>
-                      <div className="info font_p f14">50+</div>
+                      <div className="info font_p f14">
+                        {user?.number_of_emplyee}
+                      </div>
                     </li>
                     <li className="item d-flex align-items-center justify-content-between">
                       <div className="label fw700 text-muted f12">

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { login } from "../actions/auth";
 import { useRouter } from "next/router";
 
 export default function LoginForm() {
+  const { user } = useSelector((state) => state.auth);
+
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -12,7 +14,9 @@ export default function LoginForm() {
 
   const onSubmit = (data) => {
     dispatch(login(data));
-    router.push("/startup");
+    if (user) {
+      router.push("/startup");
+    }
   };
 
   return (

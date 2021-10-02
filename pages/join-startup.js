@@ -357,9 +357,9 @@ const JoinStartup = () => {
                             </label>
 
                             <input
+                              type="date"
                               {...register("company_since")}
                               name="company_since"
-                              type="date"
                               className="form-control"
                               placeholder="Company Since"
                             />
