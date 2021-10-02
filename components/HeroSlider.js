@@ -56,11 +56,7 @@ const HeroSlider = () => {
                           <a>
                             <button className="btn btn_p rounded_big font_p text_w btn_big btn_text_p">
                               Request for Proposal
-                              <Image
-                                src="/icons/right-arow.svg"
-                                height={15}
-                                width={15}
-                              />
+                              <i className="las la-arrow-right"></i>
                             </button>
                           </a>
                         </Link>
@@ -105,11 +101,7 @@ const HeroSlider = () => {
                           <a>
                             <button className="btn btn_p rounded_big font_p text_w btn_big btn_text_p">
                               Get Started
-                              <Image
-                                src="/icons/right-arow.svg"
-                                height={15}
-                                width={15}
-                              />
+                              <i className="las la-arrow-right"></i>
                             </button>
                           </a>
                         </Link>
@@ -153,11 +145,7 @@ const HeroSlider = () => {
                           <a>
                             <button className="btn btn_p rounded_big font_p text_w btn_big btn_text_p">
                               Request for Proposal
-                              <Image
-                                src="/icons/right-arow.svg"
-                                height={15}
-                                width={15}
-                              />
+                              <i className="las la-arrow-right"></i>
                             </button>
                           </a>
                         </Link>
@@ -201,11 +189,7 @@ const HeroSlider = () => {
                           <a>
                             <button className="btn btn_p rounded_big font_p text_w btn_big btn_text_p">
                               Get Started
-                              <Image
-                                src="/icons/right-arow.svg"
-                                height={15}
-                                width={15}
-                              />
+                              <i className="las la-arrow-right"></i>
                             </button>
                           </a>
                         </Link>

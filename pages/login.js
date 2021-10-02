@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { login } from "../actions/auth";
+import { useRouter } from "next/router";
 
 export default function LoginForm() {
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
+  const router = useRouter();
+  const [isRevealPwd, setIsRevealPwd] = useState(false);
 
-  const onSubmit = (data) => dispatch(login(data));
+  const onSubmit = (data) => {
+    dispatch(login(data));
+    router.push("/startup");
+  };
 
   return (
     <main
@@ -55,16 +61,28 @@ export default function LoginForm() {
                   </div>
                   <div className="row">
                     <div className="col-sm-12">
-                      <div className="form-group">
+                      <div className="form-group ">
                         <label htmlFor="" className="small text-muted">
                           Enter Password
                         </label>
-                        <input
-                          {...register("password")}
-                          type="password"
-                          className="form-control"
-                          placeholder="Your Password"
-                        />
+                        <div className="passwordWrapper">
+                          <input
+                            {...register("password")}
+                            className="form-control"
+                            placeholder="Your Password"
+                            type={isRevealPwd ? "text" : "password"}
+                          />
+                          <i
+                            class={
+                              isRevealPwd
+                                ? "las la-eye-slash toggleEye"
+                                : "las la-eye toggleEye"
+                            }
+                            onClick={() =>
+                              setIsRevealPwd((prevState) => !prevState)
+                            }
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
