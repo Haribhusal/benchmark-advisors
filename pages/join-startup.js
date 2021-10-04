@@ -6,6 +6,9 @@ import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { signup } from "../actions/auth";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 import {
   getCompanyCategory,
   getDocumentCategory,
@@ -50,6 +53,11 @@ const schema = yup.object().shape({
 });
 
 const JoinStartup = () => {
+  const [startDate, setStartDate] = useState(new Date());
+  console.log("testdattttte", startDate);
+
+  const [activeForm, setActiveForm] = useState(1);
+
   const {
     register,
     setValue,
@@ -57,8 +65,14 @@ const JoinStartup = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
-  const [activeForm, setActiveForm] = useState(1);
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onBlur",
+  });
+
+  const handleNext = () => {
+    setActiveForm(2);
+  };
   const [mystate, setMystate] = useState("");
   const [mydistrict, setMydistrict] = useState("");
   const dispatch = useDispatch();
@@ -98,7 +112,10 @@ const JoinStartup = () => {
     setValue("document_category_id", array);
   };
 
-  const onSubmit = (e) => dispatch(signup(e));
+  const onSubmit = (e) => {
+    console.log("e", e);
+    dispatch(signup(e));
+  };
 
   useEffect(() => {
     dispatch(getCompanyCategory());
@@ -356,13 +373,18 @@ const JoinStartup = () => {
                               Startup Established at
                             </label>
 
+                            {/* <DatePicker
+                              {...register("company_since")}
+                              value={startDate}
+                              onChange={(date) => setStartDate(date)}
+                              // dateFormat="MMMM d, yyyy h:mm aa"
+                            /> */}
+                            {/* 
                             <input
                               type="date"
-                              {...register("company_since")}
-                              name="company_since"
                               className="form-control"
                               placeholder="Company Since"
-                            />
+                            /> */}
                             {
                               <span className="text-danger">
                                 {errors.company_since?.message}
@@ -396,9 +418,9 @@ const JoinStartup = () => {
                     <div className="row">
                       <div className="col-sm-12 d-flex justify-content-between">
                         <button
-                          type="button"
+                          type="submit"
                           className="btn btn_p"
-                          onClick={() => setActiveForm(2)}
+                          onClick={() => handleNext()}
                         >
                           Continue
                         </button>
@@ -761,7 +783,7 @@ const JoinStartup = () => {
                           Back
                         </button>
                         <input
-                          onClick={setActiveForm(5)}
+                          // onClick={setActiveForm(5)}
                           type="Submit"
                           defaultValue="Confirm and Submit"
                           className="btn btn_p"

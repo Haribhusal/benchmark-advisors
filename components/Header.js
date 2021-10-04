@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { getProfile } from "../actions/auth";
 
 const Header = () => {
+  const [checkUser, setCheckUser] = useState();
   const [loading, setLoading] = useState();
   const [docCategory, setDocCategory] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -15,9 +16,14 @@ const Header = () => {
   const router = useRouter();
 
   const { isAuthenticated } = useSelector((state) => state.auth);
+  console.log("isayt", isAuthenticated);
+  useEffect(() => {
+    setCheckUser(isAuthenticated);
+  }, [isAuthenticated]);
 
   useEffect(() => {
-    dispatch(getProfile());
+    // dispatch(getProfile());
+
     setLoading(true);
     axios
       .get("https://benchmark.promotingnepal.com/api/document-category")
@@ -325,7 +331,7 @@ const Header = () => {
               <Nav className="ml-auto">
                 {/* <Nav.Link href="#link">Login</Nav.Link>
                 <Nav.Link href="#link">Sign up</Nav.Link> */}
-                {isAuthenticated ? userButtons : guestButtons}
+                {checkUser ? userButtons : guestButtons}
               </Nav>
             </Navbar.Collapse>
           </Container>

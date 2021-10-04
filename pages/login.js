@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { login } from "../actions/auth";
 import { useRouter } from "next/router";
+import { isEmpty } from "lodash";
 
 export default function LoginForm() {
   const { user } = useSelector((state) => state.auth);
+  console.log("user", user);
 
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
@@ -14,10 +16,12 @@ export default function LoginForm() {
 
   const onSubmit = (data) => {
     dispatch(login(data));
-    if (user) {
+  };
+  useEffect(() => {
+    if (!isEmpty(user?.access_token)) {
       router.push("/startup");
     }
-  };
+  }, [user]);
 
   return (
     <main

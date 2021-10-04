@@ -9,6 +9,7 @@ import Highlights from "../components/Highlights";
 import InvestNow from "../components/InvestNow";
 import JoinStartup from "../components/JoinStartup";
 import UpcomingEvents from "../components/UpcomingEvents";
+import Blog from "../components/Blog";
 import OurStory from "../components/OurStory";
 import Footer from "../components/Footer";
 import Head from "next/head";
@@ -52,6 +53,7 @@ export default function Home() {
         <JoinStartup />
         <UpcomingEvents />
         {/* <OurStory /> */}
+        <Blog />
       </main>
     </>
   );
