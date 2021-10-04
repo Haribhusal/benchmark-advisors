@@ -379,12 +379,13 @@ const JoinStartup = () => {
                               onChange={(date) => setStartDate(date)}
                               // dateFormat="MMMM d, yyyy h:mm aa"
                             /> */}
-                            {/* 
+                            
                             <input
                               type="date"
+                              {...register("company_since")}
                               className="form-control"
                               placeholder="Company Since"
-                            /> */}
+                            />
                             {
                               <span className="text-danger">
                                 {errors.company_since?.message}

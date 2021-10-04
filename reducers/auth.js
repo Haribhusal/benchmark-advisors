@@ -5,6 +5,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
+    isLoading: true,
     token: null,
     isAuthenticated: false,
     message: null,
@@ -19,6 +20,7 @@ const initialState = {
           ...action.payload,
           message: action.payload?.message,
           user: action.payload?.data,
+          isLoading: false,
         };
         case LOGIN:
           localStorage.setItem('token', action.payload?.data?.access_token);

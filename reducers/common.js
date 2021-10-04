@@ -2,6 +2,7 @@ import {
     GET_COMPANY_CATEGORIES,
     GET_DOCUMTE_CATEGORIES,
     GET_CATEGORY,
+    GET_SUB_SERVICES,
     GET_STATES,
     GET_DISTRICTS,
     GET_MUNICIPALITIES,
@@ -11,6 +12,7 @@ const initialState = {
     companyCategory: null,
     documentCategory: null,
     category: null,
+    subServices: null,
     states: null,
     districts: null,
     municipalities: null,
@@ -35,6 +37,12 @@ const initialState = {
                 ...state,
                 ...action.payload,
                 category: action.payload?.data,
+            };
+        case GET_SUB_SERVICES:
+            return {
+                ...state,
+                ...action.payload,
+                subServices: action.payload?.data,
             };
         case GET_STATES:
             return {

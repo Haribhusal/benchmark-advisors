@@ -1,64 +1,57 @@
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import axios from "axios";
-import { isEmpty } from "lodash";
-import { Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm, Controller } from "react-hook-form";
+import Select from "react-select";
+import { useRouter } from "next/router";
+import {
+  getCompanyCategory,
+  getStates,
+  getDistricts,
+  getMunicipalities,
+} from "../../actions/common";
 
 const ContactInformation = ({ nextStep, handleChange, values }) => {
   const {
     register,
+    control,
     formState: { errors },
   } = useForm();
 
-  const [companyCategory, setCompanyCategory] = useState();
-  const [state, setState] = useState();
-  const [district, setDistrict] = useState();
-  const [mun, setMun] = useState();
-  const [fiterState, setFilterState] = useState();
-  const [updateMun, setUpdateMun] = useState();
-  // district
-  const districtfilter = district
-    ?.filter((item) => item.state_id === Number(fiterState))
-    .map((item) => {
-      return item;
-    });
-  //mun
-  const munfilter = mun
-    ?.filter((item) => item.id === Number(updateMun))
-    .map((item) => {
-      return item;
-    });
-  useEffect(async () => {
-    await axios
-      .get("https://benchmark.promotingnepal.com/api/company-category/list")
-      .then((res) => {
-        setCompanyCategory(res.data.data);
-      });
-  }, []);
+  const [mystate, setMystate] = useState("");
+  const [mydistrict, setMydistrict] = useState("");
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const { slug } = router.query;
+  console.log(slug);
 
-  useEffect(async () => {
-    await axios
-      .get("https://benchmark.promotingnepal.com/api/state/list")
-      .then((res) => {
-        setState(res.data.data);
-      });
-  }, []);
+  const {
+    companyCategory,
+    states,
+    districts,
+    municipalities,
+  } = useSelector((state) => state.common);
 
-  useEffect(async () => {
-    await axios
-      .get("https://benchmark.promotingnepal.com/api/district/list")
-      .then((res) => {
-        setDistrict(res.data.data);
-      });
-  }, []);
+  const categoryOptions = companyCategory?.map((d) => ({
+    value: d.id,
+    label: d.title,
+  }));
+  const stateOptions = states?.map((d) => ({
+    value: d.id,
+    label: d.province_name,
+  }));
+  const districtOptions = districts
+    ?.filter((f) => f.state_id === mystate)
+    ?.map((d) => ({ value: d.id, label: d.district_name }));
+  const municipalityOptions = municipalities
+    ?.filter((f) => f.district_id === mydistrict)
+    ?.map((d) => ({ value: d.id, label: d.municipality_name }));
 
-  useEffect(async () => {
-    await axios
-      .get("https://benchmark.promotingnepal.com/api/municipality/list")
-      .then((res) => {
-        setMun(res.data.data);
-      });
-  }, []);
+  useEffect(() => {
+    dispatch(getCompanyCategory());
+    dispatch(getStates());
+    dispatch(getDistricts());
+    dispatch(getMunicipalities());
+  }, [dispatch]);
 
   const Continue = (e) => {
     e.preventDefault();
@@ -88,7 +81,6 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
                 id=""
                 className="form-control"
                 placeholder="Enter your First Name"
-                onChange={handleChange("fname")}
                 defaultValue={values.fname}
                 {...register("fname", { required: true })}
               />
@@ -99,12 +91,10 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
               <label htmlFor="lastname">Last Name</label>
               <input
                 type="text"
-                name=""
-                id=""
                 className="form-control"
                 placeholder="Enter your Last Name"
-                onChange={handleChange("lname")}
                 defaultValue={values.lname}
+                {...register("lname", { required: true })}
               />
             </div>
           </div>
@@ -119,8 +109,8 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
                 id=""
                 className="form-control"
                 placeholder="Enter your Email Address"
-                onChange={handleChange("email")}
                 defaultValue={values.email}
+                {...register("email", { required: true })}
               />
             </div>
           </div>
@@ -133,8 +123,8 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
                 id=""
                 className="form-control"
                 placeholder="Enter your Contact Number"
-                onChange={handleChange("phone")}
                 defaultValue={values.phone}
+                {...register("phone", { required: true })}
               />
             </div>
           </div>
@@ -149,8 +139,8 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
                 id=""
                 className="form-control"
                 placeholder="Enter your Company / Organization name"
-                onChange={handleChange("company_name")}
                 defaultValue={values.company_name}
+                {...register("company_name", { required: true })}
               />
             </div>
           </div>
@@ -163,47 +153,56 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
                 id=""
                 className="form-control"
                 placeholder="Enter your Role"
-                onChange={handleChange("role")}
                 defaultValue={values.role}
+                {...register("role", { required: true })}
               />
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col-sm-6">
-            {!isEmpty(mun) ? (
               <div className="loadingdata">
                 <div className="row">
                   <div className="col-sm-6">
                     <div className="form-group mb-3">
                       <label htmlFor="isector">Select Industry Sector</label>
-                      <select
-                        className="form-control"
-                        onChange={handleChange("company_category_id")}
-                      >
-                        {companyCategory?.map((item) => (
-                          <option value={item?.title} key={item?.id}>
-                            {item?.title}
-                          </option>
-                        ))}
-                      </select>
+                      <Controller
+                              name="company_category_id"
+                              control={control}
+                              render={({ field: { onChange, value } }) => (
+                                <Select
+                                  options={categoryOptions}
+                                  value={categoryOptions?.find(
+                                    (c) => c.value === value
+                                  )}
+                                  onChange={(v) => {
+                                    onChange(v.value);
+                                  }}
+                                />
+                              )}
+                            />
                     </div>
                   </div>
 
                   <div className="col-sm-6">
                     <div className="form-group mb-3">
                       <label htmlFor="isector">State</label>
-                      <select
-                        className="form-control"
-                        onChange={(e) => setFilterState(e.target.value)}
-                        defaultValue="hey"
-                      >
-                        {state?.map((item) => (
-                          <option value={item?.id} key={item?.id}>
-                            {item?.province_name}
-                          </option>
-                        ))}
-                      </select>
+                      <Controller
+                              name="province_id"
+                              control={control}
+                              render={({ field: { onChange, value } }) => (
+                                <Select
+                                  options={stateOptions}
+                                  value={stateOptions?.find(
+                                    (c) => c.value === value
+                                  )}
+                                  onChange={(v) => {
+                                    onChange(v.value);
+                                    setMystate(v.value);
+                                  }}
+                                />
+                              )}
+                            />
                     </div>
                   </div>
                 </div>
@@ -212,41 +211,47 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
                   <div className="col-sm-6">
                     <div className="form-group mb-3">
                       <label htmlFor="isector">District</label>
-                      <select
-                        className="form-control"
-                        onChange={(e) => setUpdateMun(e.target.value)}
-                      >
-                        {districtfilter?.map((item) => (
-                          <option value={item.id}>{item.district_name}</option>
-                        ))}
-                      </select>
+                      <Controller
+                              name="district_id"
+                              control={control}
+                              render={({ field: { onChange, value } }) => (
+                                <Select
+                                  options={districtOptions}
+                                  value={districtOptions?.find(
+                                    (v) => v.value === value
+                                  )}
+                                  onChange={(c) => {
+                                    onChange(c.value);
+                                    setMydistrict(c.value);
+                                  }}
+                                />
+                              )}
+                            />
                     </div>
                   </div>
 
                   <div className="col-sm-6">
                     <div className="form-group mb-3">
                       <label htmlFor="isector">Municipality</label>
-                      <select
-                        className="form-control"
-                        onChange={handleChange("municipality_id")}
-                      >
-                        {munfilter?.map((item) => (
-                          <option value={item.municipality_name}>
-                            {item.municipality_name}
-                          </option>
-                        ))}
-                      </select>
+                      <Controller
+                              name="municipality_id"
+                              control={control}
+                              render={({ field: { onChange, value } }) => (
+                                <Select
+                                  options={municipalityOptions}
+                                  value={municipalityOptions?.find(
+                                    (v) => v.value === value
+                                  )}
+                                  onChange={(c) => {
+                                    onChange(c.value);
+                                  }}
+                                />
+                              )}
+                            />
                     </div>
                   </div>
                 </div>
               </div>
-            ) : (
-              <div className="d-flex justify-content-center py-5 ">
-                <Spinner animation="border" role="status">
-                  <span className="visually-hidden"></span>
-                </Spinner>
-              </div>
-            )}
           </div>
 
           <div className="col-sm-6">
@@ -254,12 +259,9 @@ const ContactInformation = ({ nextStep, handleChange, values }) => {
               <label htmlFor="isector">Description</label>
               <textarea
                 className="form-control not_rounded_full"
-                name=""
-                id=""
-                cols=""
                 rows="5"
-                onChange={handleChange("description")}
                 defaultValue={values.description}
+                {...register("description", { required: true })}
               ></textarea>
             </div>
           </div>

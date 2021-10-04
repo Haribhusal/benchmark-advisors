@@ -3,6 +3,7 @@ import {
     GET_COMPANY_CATEGORIES,
     GET_DOCUMTE_CATEGORIES,
     GET_CATEGORY,
+    GET_SUB_SERVICES,
     GET_STATES,
     GET_DISTRICTS,
     GET_MUNICIPALITIES,
@@ -33,6 +34,16 @@ export const getCategory = () => dispatch => {
         .then(res => {
             dispatch({
                 type: GET_CATEGORY,
+                payload: res.data
+            });
+        })
+};
+
+export const getSubServices = (serviceSlug) => dispatch => {
+    axios.get(`/api/sub-service/${serviceSlug}`)
+        .then(res => {
+            dispatch({
+                type: GET_SUB_SERVICES,
                 payload: res.data
             });
         })
