@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
-import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/router";
+import { Spinner } from "react-bootstrap";
 
 import {
   getCompanyCategory,
@@ -18,40 +18,34 @@ import {
 import { proposalRequest } from "../../actions/proposal";
 
 const schema = yup.object().shape({
-  startup_name: yup.string().required(),
-  contact_number: yup
+  fname: yup.string().required("It is required"),
+  lname: yup.string().required(),
+  phone: yup
     .number()
     .positive()
     .integer()
     .required()
     .max(9999999999, "Mobile number must be 10 or less than 10 digits"),
   email: yup.string().email().required(),
-  pan_number: yup.number().positive().integer().required(),
-  personal_name: yup.string().required(),
-  personal_contact_number: yup
-    .number()
-    .positive()
-    .integer()
-    .required()
-    .max(9999999999, "Mobile number must be 10 or less than 10 digits"),
-  personal_email: yup.string().email().required(),
-  personal_address: yup.string().required(),
-  pan_status: yup.string().required(),
-  company_since: yup.date().required(),
+  company_name: yup.string().required(),
+  role: yup.string().required(),
+  description: yup.string().required(),
 });
 
 const Main = () => {
   const [enabled, setEnabled] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const Continue = () => {
     setActiveForm(activeForm + 1);
   };
-  // const handleChange = (e) => {setValue("is_client", e)}
+  const handleChange = (e) => { e.target.checked ? setValue("is_client", 1) : setValue("is_client", 0) }
   const Previous = () => {
     setActiveForm(activeForm - 1);
   };
 
   const [activeForm, setActiveForm] = useState(1);
+  const [successMessage, setSuccessMessage] = useState("You are done!")
 
   const {
     register,
@@ -80,6 +74,8 @@ const Main = () => {
     municipalities,
   } = useSelector((state) => state.common);
 
+  const { isLoading, message, submitted } = useSelector(state => state.proposal);
+
   const categoryOptions = companyCategory?.map((d) => ({
     value: d.id,
     label: d.title,
@@ -99,18 +95,18 @@ const Main = () => {
     ?.filter((f) => f.district_id === mydistrict)
     ?.map((d) => ({ value: d.id, label: d.municipality_name }));
 
-  const onSubmit = (e) => {
-    console.log(e);
-    dispatch(proposalRequest(e));
-  };
+  const onSubmit = (e) => {dispatch(proposalRequest(e, slug));setLoading(isLoading)};
 
   useEffect(() => {
+    submitted ? setActiveForm(5) : null;
+    message !== null ? setSuccessMessage(message) : null;
     dispatch(getCompanyCategory());
     dispatch(getDocumentCategory());
     dispatch(getStates());
     dispatch(getDistricts());
     dispatch(getMunicipalities());
-  }, [dispatch]);
+    setLoading(false)
+  }, [dispatch, submitted, message]);
 
   return (
     <main
@@ -273,8 +269,9 @@ const Main = () => {
                               id=""
                               className="form-control"
                               placeholder="Enter your First Name"
-                              {...register("fname", { required: true })}
+                              {...register("fname")}
                             />
+                            {<span className="text-danger">{errors.fname?.message}</span>}
                           </div>
                         </div>
                         <div className="col-sm-6">
@@ -284,8 +281,9 @@ const Main = () => {
                               type="text"
                               className="form-control"
                               placeholder="Enter your Last Name"
-                              {...register("lname", { required: true })}
+                              {...register("lname")}
                             />
+                            {<span className="text-danger">{errors.lname?.message}</span>}
                           </div>
                         </div>
                       </div>
@@ -299,8 +297,9 @@ const Main = () => {
                               id=""
                               className="form-control"
                               placeholder="Enter your Email Address"
-                              {...register("email", { required: true })}
+                              {...register("email")}
                             />
+                            {<span className="text-danger">{errors.email?.message}</span>}
                           </div>
                         </div>
                         <div className="col-sm-6">
@@ -312,8 +311,9 @@ const Main = () => {
                               id=""
                               className="form-control"
                               placeholder="Enter your Contact Number"
-                              {...register("phone", { required: true })}
+                              {...register("phone")}
                             />
+                            {<span className="text-danger">{errors.phone?.message}</span>}
                           </div>
                         </div>
                       </div>
@@ -329,8 +329,9 @@ const Main = () => {
                               id=""
                               className="form-control"
                               placeholder="Enter your Company / Organization name"
-                              {...register("company_name", { required: true })}
+                              {...register("company_name")}
                             />
+                            {<span className="text-danger">{errors.company_name?.message}</span>}
                           </div>
                         </div>
                         <div className="col-sm-6">
@@ -342,8 +343,9 @@ const Main = () => {
                               id=""
                               className="form-control"
                               placeholder="Enter your Role"
-                              {...register("role", { required: true })}
+                              {...register("role")}
                             />
+                            {<span className="text-danger">{errors.role?.message}</span>}
                           </div>
                         </div>
                       </div>
@@ -458,8 +460,9 @@ const Main = () => {
                             <textarea
                               className="form-control not_rounded_full"
                               rows="5"
-                              {...register("description", { required: true })}
+                              {...register("description")}
                             ></textarea>
+                            {<span className="text-danger">{errors.description?.message}</span>}
                           </div>
                         </div>
                       </div>
@@ -471,7 +474,7 @@ const Main = () => {
                               type="checkbox"
                               name="client"
                               id="client"
-                              // onChange={handleChange("is_client")}
+                              onChange={handleChange}
                             />
                             <label htmlFor="client" className="f16 font_p pl-2">
                               I am Benchmark Client
@@ -510,7 +513,7 @@ const Main = () => {
                           <input
                             type="file"
                             className="form-control"
-                            // onChange={handleChange("files")}
+                          // onChange={handleChange("files")}
                           />
                         </div>
                       </div>
@@ -665,12 +668,19 @@ const Main = () => {
                           >
                             <i className="las la-arrow-left ml-2"></i> Back
                           </button>
-                          <button
-                            className="btn btn_p btn_p"
-                            onClick={handleSubmit(onSubmit)}
-                          >
-                            Submit
-                          </button>
+                            <button
+                              className="btn btn_p btn_p"
+                              onClick={handleSubmit(onSubmit)}
+                              >
+                              {!loading ?
+                              "Submit" :
+                            <div className="d-flex justify-content-center py-5 ">
+                              <Spinner animation="border" role="status">
+                                <span className="visually-hidden"></span>
+                              </Spinner>
+                              Submit
+                            </div>}
+                            </button>
                         </div>
                       </div>
                     </div>
@@ -679,7 +689,7 @@ const Main = () => {
 
                 {activeForm == 5 && (
                   <div>
-                    <h1>You are done!</h1>
+                    <h1>{successMessage}</h1>
                   </div>
                 )}
               </form>

@@ -3,4 +3,13 @@ module.exports = {
   images: {
     domains: ["benchmark.promotingnepal.com"],
   },
-};
+  exportPathMap: async function (
+    defaultPathMap,
+    { dev, dir, outDir, distDir, buildId }
+  ) {
+    return {
+      '/': { page: '/' },
+      '/about': { page: '/about' },
+    }
+  },
+}
