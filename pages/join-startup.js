@@ -58,7 +58,7 @@ const schema = yup.object().shape({
 });
 
 const JoinStartup = () => {
-  const [successMessage, setSuccessMessage] = useState("Done !");
+  const [successMessage, setSuccessMessage] = useState("You are done!");
   const [startDate, setStartDate] = useState(new Date());
   const router = useRouter();
 
@@ -127,7 +127,7 @@ const JoinStartup = () => {
   };
 
   useEffect(() => {
-    signupsuccess ? setActiveForm(5) : null;
+    signupsuccess ? setActiveForm(4) : null;
     message !== null ? setSuccessMessage(message) : null;
     dispatch(getCompanyCategory());
     dispatch(getDocumentCategory());
@@ -832,6 +832,42 @@ const JoinStartup = () => {
                       </div>
                     </div>
                   </div>
+                )}
+
+                {activeForm == 5 && (
+                  <>
+                    <div>
+                      <div className="messateTitle d-flex gap align-items-center mb-4">
+                        <div className="img">
+                          <img src="/images/celebration.png" alt="" />
+                        </div>
+                        <div className="label">
+                          <h3 className="title font_p">{successMessage}</h3>
+                        </div>
+                      </div>
+                      <div className="body">
+                        <p className="text-muted">
+                          Thank you. Your Signup Request has been submitted
+                          successfully.
+                        </p>
+                        <div className="ref">
+                          <div className="text-muted">
+                            {/* Your Reference RFP ID is{" "} */}
+                            <span className="font_p"></span>
+                          </div>
+                        </div>
+                        <div className="buttonwwrapper mt-4">
+                          <Link href="#">
+                            <a>
+                              <button className="btn btn_p">
+                                <i className="las la-home"></i> Go to Homepage
+                              </button>
+                            </a>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </>
                 )}
               </form>
             </div>
