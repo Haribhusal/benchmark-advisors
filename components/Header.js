@@ -16,10 +16,19 @@ const Header = () => {
   const router = useRouter();
 
   const { isAuthenticated } = useSelector((state) => state.auth);
+
   useEffect(() => {
+    // console.log("logoutStatus", isAuthenticated);
+
     setCheckUser(isAuthenticated);
   }, [isAuthenticated]);
 
+  const logoutHanlder = () => {
+    setCheckUser(false);
+    localStorage.removeItem("token");
+    console.log("logoutStatus on click logout", isAuthenticated);
+    router.push("/");
+  };
   useEffect(() => {
     // dispatch(getProfile());
 
@@ -66,13 +75,7 @@ const Header = () => {
           <i className="las la-building"></i> Profile
         </a>
       </Link>
-      <a
-        className="nav-link btn_get_investment"
-        onClick={() => {
-          localStorage.removeItem("token");
-          router.push("/");
-        }}
-      >
+      <a className="nav-link btn_get_investment" onClick={logoutHanlder}>
         <i class="las la-sign-out-alt"></i> Logout
       </a>
     </>
@@ -328,6 +331,7 @@ const Header = () => {
                 </NavDropdown>
               </Nav>
               <Nav className="ml-auto">
+                <Nav.Link href="/investor/signup">Investor Signup</Nav.Link>
                 {/* <Nav.Link href="#link">Login</Nav.Link>
                 <Nav.Link href="#link">Sign up</Nav.Link> */}
                 {checkUser ? userButtons : guestButtons}

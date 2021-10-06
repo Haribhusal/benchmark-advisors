@@ -1,6 +1,7 @@
 import axios from "axios";
 import { SIGN_UP, LOGIN, PROFILE } from "./types";
 import { useRouter } from "next/router";
+import { responsiveFontSizes } from "@material-ui/core";
 
 // SIGNUP USER
 export const signup = (data) => (dispatch) => {

@@ -50,6 +50,92 @@ export default function About() {
                 </div>
               </div>
             </div>
+            <div className="row">
+              <div className="col-sm-12">
+                <div className="titlewrapper">
+                  <h3 className="title font_p">Our Team</h3>
+                </div>
+                <div className="text">
+                  <p className="text-muted">
+                    We have a strong team of around 30 professionals (including
+                    Chartered Accountants and MBA graduates) with rich
+                    experience of Advisory &amp; Consulting of Financial
+                    Institutions, Manufacturing industry, Real Estate, Trading
+                    Industry, Government Sector, Development Sector, Startup
+                    Sector, etc.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-12">
+                <div className="titlewrapper">
+                  <h5 className="title my-3 font_p">
+                    BRIEF PROFILE OF OUR CO-FOUNDERS
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-6">
+                <div className="teamwrapper">
+                  <div className="content">
+                    <figure>
+                      <img
+                        src="/images/member1.jpeg"
+                        alt=""
+                        className="img-fluid"
+                      />
+                    </figure>
+                    <div className="infobox">
+                      <h4 className="name font_p">Dipesh Shah</h4>
+                      <h6 className="text-muted font_p">
+                        Chartered Accountant
+                      </h6>
+                      <div className="textingo">
+                        Mr. Shah is a member of Institute of Chartered
+                        Accountants of Nepal. He has more than 10 years of
+                        working experience in India and Nepal. He has worked
+                        with corporates viz. Bharti Airtel Limited, Gurgaon and
+                        First Data Corporation, Mumbai. He has good working
+                        experience with startups in India viz. Flipkart and
+                        Udaan and several startups in Nepal. He currently
+                        supervises the Startup &amp; Investment Consulting and
+                        Development Sector Consulting.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-sm-6">
+                <div className="teamwrapper">
+                  <div className="content">
+                    <figure>
+                      <img
+                        src="/images/member2.jpeg"
+                        alt=""
+                        className="img-fluid"
+                      />
+                    </figure>
+                    <div className="infobox">
+                      <h4 className="name font_p">Mr. Bidur Luitel</h4>
+                      <h6 className="text-muted font_p">
+                        Chartered Accountant
+                      </h6>
+                      <div className="textingo">
+                        Mr. Bidur is a member of Institute of Chartered
+                        Accountants of Nepal. He has more than 11 years of
+                        working experience in Nepal. He has worked as a
+                        consultant and auditors of several Government
+                        Corporations, Financial Institutions and corporate
+                        houses of Nepal. He is the Business Advisory and
+                        Government Consulting Head of our company.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>
