@@ -16,7 +16,6 @@ const Header = () => {
   const router = useRouter();
 
   const { isAuthenticated } = useSelector((state) => state.auth);
-  console.log("isayt", isAuthenticated);
   useEffect(() => {
     setCheckUser(isAuthenticated);
   }, [isAuthenticated]);

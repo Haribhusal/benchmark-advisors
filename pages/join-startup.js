@@ -17,25 +17,29 @@ import {
   getDistricts,
   getMunicipalities,
 } from "../actions/common";
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const schema = yup.object().shape({
-  startup_name: yup.string().required(),
+  startup_name: yup.string().required("Startup Name is Required"),
   contact_number: yup
-    .number()
-    .positive()
-    .integer()
-    .required()
-    .max(9999999999, "Mobile number must be 10 or less than 10 digits"),
-  email: yup.string().email().required(),
+    .string()
+    .matches(phoneRegExp, "Phone number is not valid"),
+  email: yup
+    .string()
+    .email("Must be Valid Email")
+    .max(255)
+    .required("Startup Email is Required"),
   pan_number: yup.number().positive().integer().required(),
   personal_name: yup.string().required(),
   personal_contact_number: yup
-    .number()
-    .positive()
-    .integer()
-    .required()
-    .max(9999999999, "Mobile number must be 10 or less than 10 digits"),
-  personal_email: yup.string().email().required(),
+    .string()
+    .matches(phoneRegExp, "Phone number is not valid"),
+  personal_email: yup
+    .string()
+    .email("Must be Valid Email")
+    .max(255)
+    .required("Personal Email is Required"),
   personal_address: yup.string().required(),
   pan_status: yup.string().required(),
   company_since: yup.date().required(),
@@ -54,10 +58,9 @@ const schema = yup.object().shape({
 });
 
 const JoinStartup = () => {
-  const [successMessage, setSuccessMessage] = useState("Done !")
+  const [successMessage, setSuccessMessage] = useState("Done !");
   const [startDate, setStartDate] = useState(new Date());
   const router = useRouter();
-  console.log("testdattttte", startDate);
 
   const [activeForm, setActiveForm] = useState(1);
 
@@ -88,7 +91,9 @@ const JoinStartup = () => {
     municipalities,
   } = useSelector((state) => state.common);
 
-  const { isLoading, message, signupsuccess }  = useSelector(state => state.auth);
+  const { isLoading, message, signupsuccess } = useSelector(
+    (state) => state.auth
+  );
 
   const categoryOptions = companyCategory?.map((d) => ({
     value: d.id,
@@ -127,7 +132,7 @@ const JoinStartup = () => {
     dispatch(getCompanyCategory());
     dispatch(getDocumentCategory());
     dispatch(getStates());
-    dispatch(getDistricts()); 
+    dispatch(getDistricts());
     dispatch(getMunicipalities());
   }, [dispatch, signupsuccess, message]);
 
@@ -194,6 +199,7 @@ const JoinStartup = () => {
                               control={control}
                               render={({ field: { onChange, value } }) => (
                                 <Select
+                                  placeholder="Select Industry Sector"
                                   options={categoryOptions}
                                   value={categoryOptions?.find(
                                     (c) => c.value === value
@@ -214,6 +220,7 @@ const JoinStartup = () => {
                               control={control}
                               render={({ field: { onChange, value } }) => (
                                 <Select
+                                  placeholder="Select Province"
                                   options={stateOptions}
                                   value={stateOptions?.find(
                                     (c) => c.value === value
@@ -238,6 +245,7 @@ const JoinStartup = () => {
                               control={control}
                               render={({ field: { onChange, value } }) => (
                                 <Select
+                                  placeholder="Select District"
                                   options={districtOptions}
                                   value={districtOptions?.find(
                                     (v) => v.value === value
@@ -259,6 +267,7 @@ const JoinStartup = () => {
                               control={control}
                               render={({ field: { onChange, value } }) => (
                                 <Select
+                                  placeholder="Select Municipality"
                                   options={municipalityOptions}
                                   value={municipalityOptions?.find(
                                     (v) => v.value === value
@@ -385,7 +394,7 @@ const JoinStartup = () => {
                               onChange={(date) => setStartDate(date)}
                               // dateFormat="MMMM d, yyyy h:mm aa"
                             /> */}
-                            
+
                             <input
                               type="date"
                               {...register("company_since")}
@@ -593,7 +602,7 @@ const JoinStartup = () => {
                   </div>
                 )}
 
-                {activeForm == 3 && (
+                {/* {activeForm == 3 && (
                   <div className="formwrapper">
                     <div className="row">
                       <div className="col-sm-12">
@@ -666,9 +675,9 @@ const JoinStartup = () => {
                       </div>
                     </div>
                   </div>
-                )}
+                )} */}
 
-                {activeForm == 4 && (
+                {activeForm == 3 && (
                   <div className="formwrapper">
                     <div className="row">
                       <div className="col-sm-12">
@@ -784,7 +793,7 @@ const JoinStartup = () => {
                       <div className="col-sm-12 d-flex justify-content-between">
                         <button
                           type="button"
-                          onClick={() => setActiveForm(3)}
+                          onClick={() => setActiveForm(2)}
                           className="btn btn-default"
                         >
                           Back
@@ -800,21 +809,24 @@ const JoinStartup = () => {
                   </div>
                 )}
 
-                {activeForm == 5 && (
+                {activeForm == 4 && (
                   <div className="formwrapper">
                     <div className="row">
                       <div className="col-sm-12">
                         <div className="titlewrapper">
                           <h3 className="title font_p">Thank you!</h3>
-                          <p className="text-muted small">
-                            {successMessage}
-                          </p>
-                            <a onClick={() => {setActiveForm(1); router.push("/")}}>
-                              <button className="btn btn_p">
-                                {" "}
-                                <i className="las la-home"></i> Go to Homepage
-                              </button>
-                            </a>
+                          <p className="text-muted small">{successMessage}</p>
+                          <a
+                            onClick={() => {
+                              setActiveForm(1);
+                              router.push("/");
+                            }}
+                          >
+                            <button className="btn btn_p">
+                              {" "}
+                              <i className="las la-home"></i> Go to Homepage
+                            </button>
+                          </a>
                         </div>
                         <hr />
                       </div>
