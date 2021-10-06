@@ -5,6 +5,7 @@ import Select from "react-select";
 import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useRouter } from "next/router";
 import { signup } from "../actions/auth";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -53,7 +54,9 @@ const schema = yup.object().shape({
 });
 
 const JoinStartup = () => {
+  const [successMessage, setSuccessMessage] = useState("Done !")
   const [startDate, setStartDate] = useState(new Date());
+  const router = useRouter();
   console.log("testdattttte", startDate);
 
   const [activeForm, setActiveForm] = useState(1);
@@ -85,6 +88,8 @@ const JoinStartup = () => {
     municipalities,
   } = useSelector((state) => state.common);
 
+  const { isLoading, message, signupsuccess }  = useSelector(state => state.auth);
+
   const categoryOptions = companyCategory?.map((d) => ({
     value: d.id,
     label: d.title,
@@ -113,17 +118,18 @@ const JoinStartup = () => {
   };
 
   const onSubmit = (e) => {
-    console.log("e", e);
     dispatch(signup(e));
   };
 
   useEffect(() => {
+    signupsuccess ? setActiveForm(5) : null;
+    message !== null ? setSuccessMessage(message) : null;
     dispatch(getCompanyCategory());
     dispatch(getDocumentCategory());
     dispatch(getStates());
-    dispatch(getDistricts());
+    dispatch(getDistricts()); 
     dispatch(getMunicipalities());
-  }, [dispatch]);
+  }, [dispatch, signupsuccess, message]);
 
   return (
     <main
@@ -801,17 +807,14 @@ const JoinStartup = () => {
                         <div className="titlewrapper">
                           <h3 className="title font_p">Thank you!</h3>
                           <p className="text-muted small">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing
-                            elit. Corrupti incidunt repudiandae quo.
+                            {successMessage}
                           </p>
-                          <Link href="/">
-                            <a>
+                            <a onClick={() => {setActiveForm(1); router.push("/")}}>
                               <button className="btn btn_p">
                                 {" "}
                                 <i className="las la-home"></i> Go to Homepage
                               </button>
                             </a>
-                          </Link>
                         </div>
                         <hr />
                       </div>

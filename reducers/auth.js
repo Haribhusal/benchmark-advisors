@@ -10,6 +10,7 @@ const initialState = {
     isAuthenticated: false,
     message: null,
     user: null,
+    signupsuccess: null
   };
   
   export default function auth(state = initialState, action) {
@@ -21,6 +22,7 @@ const initialState = {
           message: action.payload?.message,
           user: action.payload?.data,
           isLoading: false,
+          signupsuccess: true,
         };
         case LOGIN:
           localStorage.setItem('token', action.payload?.data?.access_token);
