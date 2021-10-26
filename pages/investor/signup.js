@@ -54,8 +54,6 @@ const InvestorSignup = () => {
     });
     const dispatch = useDispatch();
 
-    console.log(errors, 'errors');
-
     const { isLoading, message, signupsuccess, errorMessage } = useSelector(
         (state) => state.investorSignup
     );
