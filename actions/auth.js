@@ -4,6 +4,8 @@ import {
     SIGN_UP_FAIL,
     SIGN_UP_SUCCESS,
     LOGIN,
+    LOGIN_FAIL,
+    LOGIN_SUCCESS,
     PROFILE,
 } from './types';
 import { useRouter } from 'next/router';
@@ -40,16 +42,25 @@ export const signup = (data) => (dispatch) => {
 
 // LOGIN USER
 export const login = (data) => (dispatch) => {
+    dispatch({ type: LOGIN });
     var form_data = new FormData();
     for (var key in data) {
         form_data.append(key, data[key]);
     }
-    axios.post('/api/startup/login', form_data).then((res) => {
-        dispatch({
-            type: LOGIN,
-            payload: res.data,
+    axios
+        .post('/api/startup/login', form_data)
+        .then((res) => {
+            dispatch({
+                type: LOGIN_SUCCESS,
+                payload: res.data,
+            });
+        })
+        .catch((err) => {
+            dispatch({
+                type: LOGIN_FAIL,
+                payload: err.response.data,
+            });
         });
-    });
 };
 
 // GET USER PROFILE

@@ -3,6 +3,8 @@ import {
     SIGN_UP_FAIL,
     SIGN_UP_SUCCESS,
     LOGIN,
+    LOGIN_FAIL,
+    LOGIN_SUCCESS,
     PROFILE,
 } from '../actions/types';
 
@@ -46,6 +48,11 @@ export default function auth(state = initialState, action) {
                     action.payload?.data?.email?.[0] || 'Something went wrong',
             };
         case LOGIN:
+            return {
+                ...state,
+                errorMessage: null,
+            };
+        case LOGIN_SUCCESS:
             localStorage.setItem('token', action.payload?.data?.access_token);
             return {
                 ...state,
@@ -54,6 +61,11 @@ export default function auth(state = initialState, action) {
                 token: action.payload?.data?.access_token,
                 message: action.payload?.message,
                 user: action.payload?.data,
+            };
+        case LOGIN_FAIL:
+            return {
+                ...state,
+                errorMessage: action.payload.message,
             };
         case PROFILE:
             return {
