@@ -42,7 +42,8 @@ export default function auth(state = initialState, action) {
             return {
                 ...state,
                 signupsuccess: null,
-                errorMessage: action.payload?.data?.email?.[0],
+                errorMessage:
+                    action.payload?.data?.email?.[0] || 'Something went wrong',
             };
         case LOGIN:
             localStorage.setItem('token', action.payload?.data?.access_token);

@@ -29,7 +29,8 @@ export default function investorSignup(state = initialState, action) {
         case INVESTOR_SIGNUP_FAIL:
             return {
                 ...state,
-                errorMessage: action.payload?.data?.email?.[0],
+                errorMessage:
+                    action.payload?.data?.email?.[0] || 'Something went wrong',
             };
         default:
             return state;
