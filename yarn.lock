@@ -162,7 +162,7 @@
     "@emotion/weak-memoize" "^0.2.5"
     stylis "^4.0.3"
 
-"@emotion/core@^10.0.22":
+"@emotion/core@^10.0.14", "@emotion/core@^10.0.22":
   version "10.1.1"
   resolved "https://registry.npmjs.org/@emotion/core/-/core-10.1.1.tgz"
   integrity sha512-ZMLG6qpXR8x031NXD8HJqugy/AZSkAuMxxqB46pmAR7ze47MhNJ56cdoX243QPZdGctrdfo+s08yZTiwaUcRKA==
@@ -3014,6 +3014,14 @@ react-slick@^0.28.1:
     json2mq "^0.2.0"
     lodash.debounce "^4.0.8"
     resize-observer-polyfill "^1.5.0"
+
+react-toast-notifications@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/react-toast-notifications/-/react-toast-notifications-2.5.1.tgz#30216eedb5608ec69719a818b9a2e09283e90074"
+  integrity sha512-eYuuiSPGLyuMHojRH2U7CbENvFHsvNia39pLM/s10KipIoNs14T7RIJk4aU2N+l++OsSgtJqnFObx9bpwLMU5A==
+  dependencies:
+    "@emotion/core" "^10.0.14"
+    react-transition-group "^4.4.1"
 
 react-transition-group@^4.3.0, react-transition-group@^4.4.0, react-transition-group@^4.4.2:
   version "4.4.2"
