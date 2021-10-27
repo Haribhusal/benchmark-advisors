@@ -1,6 +1,7 @@
 import axios from 'axios';
 // axios.defaults.baseURL = "https://benchmark.promotingnepal.com/api/";
-axios.defaults.baseURL = 'https://admin.bmanepal.com/api/document-category/api'/;
+axios.defaults.baseURL =
+    "https://admin.bmanepal.com/api/document-category/api'/";
 
 // if (sessionStorage.getItem("Token")) {
 //   axios.defaults.headers.common["Authorization"] =
