@@ -1,4 +1,5 @@
 import {
+    CLEAR_MESSAGES,
     SIGN_UP,
     SIGN_UP_FAIL,
     SIGN_UP_SUCCESS,
@@ -6,6 +7,12 @@ import {
     LOGIN_FAIL,
     LOGIN_SUCCESS,
     PROFILE,
+    PROFILE_UPDATE,
+    PROFILE_UPDATE_FAIL,
+    PROFILE_UPDATE_SUCCESS,
+    PASSWORD_UPDATE,
+    PASSWORD_UPDATE_FAIL,
+    PASSWORD_UPDATE_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
@@ -15,6 +22,7 @@ const initialState = {
     message: null,
     user: null,
     signupsuccess: null,
+    successMessage: null,
     errorMessage: null,
 };
 
@@ -73,6 +81,55 @@ export default function auth(state = initialState, action) {
                 ...action.payload,
                 isAuthenticated: true,
                 user: action.payload?.data,
+            };
+        case PROFILE_UPDATE:
+            return {
+                ...state,
+                isLoading: true,
+                successMessage: null,
+                errorMessage: null,
+            };
+        case PROFILE_UPDATE_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                errorMessage: action.payload?.message || 'Something went wrong',
+            };
+        case PROFILE_UPDATE_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                successMessage:
+                    action.payload?.successMessage ||
+                    'Profile Updated Successfully',
+            };
+        case PASSWORD_UPDATE:
+            return {
+                ...state,
+                isLoading: true,
+                successMessage: null,
+                errorMessage: null,
+            };
+        case PASSWORD_UPDATE_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                errorMessage: action.payload?.message || 'Something went wrong',
+            };
+        case PASSWORD_UPDATE_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                successMessage:
+                    action.payload?.successMessage ||
+                    'Profile Updated Successfully',
+            };
+        case CLEAR_MESSAGES:
+            return {
+                ...state,
+                isLoading: null,
+                successMessage: null,
+                errorMessage: null,
             };
         default:
             return state;

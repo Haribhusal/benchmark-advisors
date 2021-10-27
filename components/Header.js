@@ -15,6 +15,8 @@ const Header = () => {
     const dispatch = useDispatch();
     const router = useRouter();
 
+    console.log(router, 'router');
+
     const { isAuthenticated } = useSelector((state) => state.auth);
 
     useEffect(() => {
@@ -69,9 +71,20 @@ const Header = () => {
         </Nav>
     );
 
+    const profileRoutes = () => {
+        switch (router.pathname) {
+            case '/investor/edit-profile':
+                return '/investor-profile';
+            case '/investor-profile':
+                return '/investor/edit-profile';
+            default:
+                return '/startup';
+        }
+    };
+
     const userButtons = (
         <>
-            <Link href='/startup'>
+            <Link href={profileRoutes()}>
                 <a
                     className='nav-link btn_get_investment'
                     style={{ marginRight: '15px' }}

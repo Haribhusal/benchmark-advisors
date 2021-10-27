@@ -6,6 +6,9 @@ import {
     LOGIN,
     LOGIN_FAIL,
     LOGIN_SUCCESS,
+    PROFILE_UPDATE,
+    PROFILE_UPDATE_SUCCESS,
+    PROFILE_UPDATE_FAIL,
 } from './types';
 
 // SIGNUP USER
@@ -53,6 +56,33 @@ export const investorLogin = (data) => (dispatch) => {
         .catch((err) => {
             dispatch({
                 type: LOGIN_FAIL,
+                payload: err.response.data,
+            });
+        });
+};
+
+// Update Startup PROFILE
+export const updateInvestorProfile = (data) => (dispatch) => {
+    dispatch({ type: PROFILE_UPDATE });
+    const token = localStorage.getItem('token');
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Brearer ${token}`,
+        },
+    };
+
+    axios
+        .post('/api/investor/update-profile', data, config)
+        .then((res) => {
+            dispatch({
+                type: PROFILE_UPDATE_SUCCESS,
+                payload: res.data,
+            });
+        })
+        .catch((err) => {
+            dispatch({
+                type: PROFILE_UPDATE_FAIL,
                 payload: err.response.data,
             });
         });
