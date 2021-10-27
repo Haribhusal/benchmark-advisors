@@ -1,20 +1,14 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import React, { useEffect } from 'react';
 import { isEmpty } from 'lodash';
 import { Tab } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { Tabs } from 'react-bootstrap';
-import Footer from '../components/Footer';
-import OurStory from '../components/OurStory';
-import React, { useState, useEffect } from 'react';
 
-export default function AdvisoryAndConsulting() {
+const AdvisoryAndConsulting = () => {
     const router = useRouter();
 
-    const { data, errorMessage, successMessage } = useSelector(
-        (state) => state.auth
-    );
+    const { data } = useSelector((state) => state.auth);
 
     useEffect(() => {
         if (!data || isEmpty(data?.access_token)) {
@@ -52,7 +46,7 @@ export default function AdvisoryAndConsulting() {
                             <div className='col-sm-7 d-flex align-items-center'>
                                 <div className='textwrapper'>
                                     <h3 className='title font_p text_big mb-0'>
-                                        {data.investor_name}
+                                        {data?.investor_name || ''}
                                     </h3>
                                     <p className='text f14 text-muted my-3'>
                                         CEO at Vayner Media
@@ -79,7 +73,7 @@ export default function AdvisoryAndConsulting() {
                                                 alt=''
                                             />
                                             <span className='data text-muted f14'>
-                                                {data.email}
+                                                {data?.email || ''}
                                             </span>
                                         </div>
                                     </div>
@@ -436,4 +430,6 @@ export default function AdvisoryAndConsulting() {
             </main>
         </>
     );
-}
+};
+
+export default AdvisoryAndConsulting;
