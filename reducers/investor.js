@@ -7,6 +7,7 @@ import {
 const initialState = {
     investor: null,
     signupsuccess: null,
+    successMessage: null,
     errorMessage: null,
 };
 
@@ -24,6 +25,7 @@ export default function investorSignup(state = initialState, action) {
                 ...action.payload,
                 investor: action.payload?.data,
                 signupsuccess: true,
+                successMessage: action.payload?.message,
                 errorMessage: null,
             };
         case INVESTOR_SIGNUP_FAIL:

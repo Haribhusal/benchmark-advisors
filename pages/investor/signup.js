@@ -54,9 +54,8 @@ const InvestorSignup = () => {
     });
     const dispatch = useDispatch();
 
-    const { isLoading, message, signupsuccess, errorMessage } = useSelector(
-        (state) => state.investorSignup
-    );
+    const { isLoading, message, signupsuccess, successMessage, errorMessage } =
+        useSelector((state) => state.investorSignup);
 
     const onSubmit = (e) => {
         dispatch(signUpInvestor(e));
@@ -64,11 +63,11 @@ const InvestorSignup = () => {
 
     useEffect(() => {
         if (errorMessage) addToast(errorMessage, { appearance: 'error' });
-    }, [dispatch, errorMessage]);
-
-    // useEffect(() => {
-    //     message !== null ? setSuccessMessage(message) : null;
-    // }, [dispatch, signupsuccess, message]);
+        if (successMessage)
+            addToast(successMessage, {
+                appearance: 'success',
+            });
+    }, [dispatch, errorMessage, successMessage]);
 
     return (
         <main
