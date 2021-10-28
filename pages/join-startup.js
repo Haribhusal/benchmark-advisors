@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 import Link from 'next/link';
 import Select from 'react-select';
+import { isEmpty, isNumber } from 'lodash';
 import { useRouter } from 'next/router';
 import { signup } from '../actions/auth';
 import DatePicker from 'react-datepicker';
@@ -24,6 +25,11 @@ const phoneRegExp =
 
 const schema = yup.object().shape({
     startup_name: yup.string().required('Startup Name is Required'),
+    company_category_id: yup.string().required('Industry Sector is Required'),
+    province_id: yup.string().required('State/Province is Required'),
+    district_id: yup.string().required('District Name is Required'),
+    municipality_id: yup.string().required('Municipality Name is Required'),
+    number_of_emplyee: yup.string().required('Number of employee is Required'),
     contact_number: yup
         .string()
         .matches(phoneRegExp, 'Phone number is not valid'),
@@ -32,7 +38,7 @@ const schema = yup.object().shape({
         .email('Must be Valid Email')
         .max(255)
         .required('Startup Email is Required'),
-    personal_name: yup.string().required(),
+    personal_name: yup.string().required('Personal Name is Required'),
     personal_contact_number: yup
         .string()
         .matches(phoneRegExp, 'Phone number is not valid'),
@@ -43,7 +49,10 @@ const schema = yup.object().shape({
         .required('Personal Email is Required'),
     personal_address: yup.string().required(),
     pan_status: yup.string().required(),
-    company_since: yup.date().required(),
+    company_since: yup
+        .date()
+        .required()
+        .typeError('Established date is not a valid date'),
     password: yup
         .string()
         .required()
@@ -53,7 +62,7 @@ const schema = yup.object().shape({
             'Must contain at least one uppercase letter, number and special character'
         ),
     password_confirmation: yup
-        .string()
+        .string('Password is Required')
         .required()
         .oneOf([yup.ref('password')], 'Passwords must match'),
     acceptTerms: yup.bool().oneOf([true], 'Accept Ts & Cs is required'),
@@ -73,16 +82,62 @@ const JoinStartup = () => {
         setValue,
         getValues,
         control,
+        trigger,
         handleSubmit,
         formState: { errors },
     } = useForm({
         resolver: yupResolver(schema),
-        mode: 'onBlur',
+        mode: 'onChange',
     });
+
+    const isFormDisabled = () => {
+        if (activeForm === 1) {
+            const stringValues = getValues([
+                'startup_name',
+                'personal_address',
+                'contact_number',
+                'email',
+                'pan_status',
+                'company_since',
+                'number_of_emplyee',
+            ]);
+
+            const numberValues = getValues([
+                'company_category_id',
+                'province_id',
+                'district_id',
+                'municipality_id',
+            ]);
+
+            const isTextEmpty = stringValues.some((val) => {
+                return isEmpty(val);
+            });
+            const isIdEmpty = numberValues.some((val) => {
+                return !isNumber(val);
+            });
+
+            return isTextEmpty || isIdEmpty;
+        }
+        if (activeForm === 2) {
+            const formValues = getValues([
+                'personal_name',
+                'personal_contact_number',
+                'personal_email',
+                'password',
+                'password_confirmation',
+            ]);
+
+            return formValues.some((val) => {
+                return isEmpty(val);
+            });
+        }
+        return true;
+    };
 
     const handleNext = () => {
         setActiveForm(2);
     };
+
     const [mystate, setMystate] = useState('');
     const [mydistrict, setMydistrict] = useState('');
     const dispatch = useDispatch();
@@ -143,6 +198,8 @@ const JoinStartup = () => {
         dispatch(getDistricts());
         dispatch(getMunicipalities());
     }, [dispatch, signupsuccess, message]);
+
+    console.log({ errors }, 'company since');
 
     return (
         <main
@@ -245,6 +302,15 @@ const JoinStartup = () => {
                                                                 />
                                                             )}
                                                         />
+                                                        {
+                                                            <span className='text-danger'>
+                                                                {
+                                                                    errors
+                                                                        .company_category_id
+                                                                        ?.message
+                                                                }
+                                                            </span>
+                                                        }
                                                     </div>
                                                 </div>
                                                 <div className='col-sm-6'>
@@ -284,6 +350,15 @@ const JoinStartup = () => {
                                                                 />
                                                             )}
                                                         />
+                                                        {
+                                                            <span className='text-danger'>
+                                                                {
+                                                                    errors
+                                                                        .province_id
+                                                                        ?.message
+                                                                }
+                                                            </span>
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
@@ -326,6 +401,15 @@ const JoinStartup = () => {
                                                                 />
                                                             )}
                                                         />
+                                                        {
+                                                            <span className='text-danger'>
+                                                                {
+                                                                    errors
+                                                                        .district_id
+                                                                        ?.message
+                                                                }
+                                                            </span>
+                                                        }
                                                     </div>
                                                 </div>
                                                 <div className='col-sm-6'>
@@ -362,6 +446,15 @@ const JoinStartup = () => {
                                                                 />
                                                             )}
                                                         />
+                                                        {
+                                                            <span className='text-danger'>
+                                                                {
+                                                                    errors
+                                                                        .municipality_id
+                                                                        ?.message
+                                                                }
+                                                            </span>
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
@@ -575,7 +668,7 @@ const JoinStartup = () => {
                                                             <span className='text-danger'>
                                                                 {
                                                                     errors
-                                                                        .number_of_emplyees
+                                                                        .number_of_emplyee
                                                                         ?.message
                                                                 }
                                                             </span>
@@ -588,9 +681,26 @@ const JoinStartup = () => {
                                         <div className='row'>
                                             <div className='col-sm-12 d-flex justify-content-between'>
                                                 <button
+                                                    disabled={isFormDisabled()}
                                                     type='submit'
                                                     className='btn btn_p'
-                                                    onClick={() => handleNext()}
+                                                    onClick={() => {
+                                                        trigger([
+                                                            'startup_name',
+                                                            'company_category_id',
+                                                            'province_id',
+                                                            'district_id',
+                                                            'municipality_id',
+                                                            'personal_address',
+                                                            'contact_number',
+                                                            'email',
+                                                            'pan_status',
+                                                            'pan_number',
+                                                            'company_since',
+                                                            'number_of_emplyee',
+                                                        ]);
+                                                        handleNext();
+                                                    }}
                                                 >
                                                     Continue
                                                 </button>
@@ -794,11 +904,19 @@ const JoinStartup = () => {
                                                     Back
                                                 </button>
                                                 <button
+                                                    disabled={isFormDisabled()}
                                                     type='button'
                                                     className='btn btn_p'
-                                                    onClick={() =>
-                                                        setActiveForm(3)
-                                                    }
+                                                    onClick={() => {
+                                                        trigger([
+                                                            'personal_name',
+                                                            'personal_contact_number',
+                                                            'personal_email',
+                                                            'password',
+                                                            'password_confirmation',
+                                                        ]);
+                                                        setActiveForm(3);
+                                                    }}
                                                 >
                                                     Continue
                                                 </button>
@@ -1025,28 +1143,39 @@ const JoinStartup = () => {
 
                                         <div className='row'>
                                             <div className='col-sm-12'>
-                                                <div className='form-group d-flex align-items-start'>
-                                                    <input
-                                                        type='checkbox'
-                                                        id='agreed'
-                                                        {...register(
-                                                            'acceptTerms'
-                                                        )}
-                                                        className='m-0 mr-2'
-                                                        placeholder='Startup Location'
-                                                    />
-                                                    <label
-                                                        htmlFor='agreed'
-                                                        className='small text-muted'
-                                                    >
-                                                        I accept to the
-                                                        <Link href='#'>
-                                                            <a>
-                                                                Terms and
-                                                                Condition
-                                                            </a>
-                                                        </Link>
-                                                    </label>
+                                                <div className='form-group'>
+                                                    <div className='d-flex align-items-start'>
+                                                        <input
+                                                            type='checkbox'
+                                                            id='agreed'
+                                                            {...register(
+                                                                'acceptTerms'
+                                                            )}
+                                                            className='m-0 mr-2'
+                                                            placeholder='Startup Location'
+                                                        />
+                                                        <label
+                                                            htmlFor='agreed'
+                                                            className='small text-muted'
+                                                        >
+                                                            I accept to the
+                                                            <Link href='#'>
+                                                                <a>
+                                                                    Terms and
+                                                                    Condition
+                                                                </a>
+                                                            </Link>
+                                                        </label>
+                                                    </div>
+                                                    {
+                                                        <span className='text-danger'>
+                                                            {
+                                                                errors
+                                                                    .acceptTerms
+                                                                    ?.message
+                                                            }
+                                                        </span>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
