@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { login } from '../actions/auth';
+import { investorLogin } from '../../actions/investor';
 import { useRouter } from 'next/router';
 import { isEmpty } from 'lodash';
 import { useToasts } from 'react-toast-notifications';
@@ -17,11 +17,11 @@ export default function LoginForm() {
     const [isRevealPwd, setIsRevealPwd] = useState(false);
 
     const onSubmit = (data) => {
-        dispatch(login(data));
+        dispatch(investorLogin(data));
     };
     useEffect(() => {
         if (!isEmpty(user?.access_token)) {
-            router.push('/startup');
+            router.push('/investor-profile');
         }
     }, [user]);
 
@@ -57,8 +57,8 @@ export default function LoginForm() {
                                                     Login
                                                 </h3>
                                                 <p className='text-muted small'>
-                                                    Provide us the startup login
-                                                    detals
+                                                    Provide us the investor
+                                                    login detals
                                                 </p>
                                             </div>
                                             <hr />
