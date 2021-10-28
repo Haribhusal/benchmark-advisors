@@ -15,7 +15,6 @@ export default function SingleSubService() {
   const handleShow = () => setShow(true);
 
   const router = useRouter();
-<<<<<<< HEAD
   const { slug } = router.query;
   const [features, setFeatures] = useState();
   const [team, setTeam] = useState();
@@ -41,29 +40,6 @@ export default function SingleSubService() {
         console.log(error);
       });
   }, [slug]);
-=======
-  const { slug } = router.query
-  const [subService, setSubService] = useState()
-  const [features, setFeatures] = useState()
-  const[teammember,setTeamMember] = useState()
-
-  useEffect(() => {
-    axios.get(`https://benchmark.promotingnepal.com/api/team/featurelist/${slug}`)
-    .then(response => {
-      console.log("response", response.data)
-      const features = response.data.featureList;
-      const teams = response.data.teamList;
-      console.log('features', features)
-      console.log('teams', teams)
-      setFeatures(features);
-      setTeamMember(teams)
-    }).catch(error => {
-      
-      console.log(error)
-    })
-  
-  }, [slug])
->>>>>>> 813a98cc9996c3d4c513e02139e0ddedfb390121
 
   const onSubmit = async (data, e) => {
     console.log("from data", props.id);
