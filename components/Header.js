@@ -324,7 +324,7 @@ const Header = () => {
                                         </Link>
                                     </NavDropdown.Item>
                                     <NavDropdown.Item>
-                                        <Link href='/'>
+                                        <Link href='investors'>
                                             <a>
                                                 <div className='dropdown_item_icon d-flex'>
                                                     <p className='text-muted f16 mb-0'>

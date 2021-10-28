@@ -6,6 +6,7 @@ import {
     GET_STATES,
     GET_DISTRICTS,
     GET_MUNICIPALITIES,
+    GET_STARTUP_LIST,
 } from '../actions/types';
 
 const initialState = {
@@ -16,9 +17,10 @@ const initialState = {
     states: null,
     districts: null,
     municipalities: null,
-  };
-  
-  export default function common(state = initialState, action) {
+    startupList: null,
+};
+
+export default function common(state = initialState, action) {
     switch (action.type) {
         case GET_COMPANY_CATEGORIES:
             return {
@@ -46,9 +48,9 @@ const initialState = {
             };
         case GET_STATES:
             return {
-            ...state,
-            ...action.payload,
-            states: action.payload?.data,
+                ...state,
+                ...action.payload,
+                states: action.payload?.data,
             };
         case GET_DISTRICTS:
             return {
@@ -62,8 +64,13 @@ const initialState = {
                 ...action.payload,
                 municipalities: action.payload?.data,
             };
+        case GET_STARTUP_LIST:
+            return {
+                ...state,
+                ...action.payload,
+                startupList: action.payload?.data,
+            };
         default:
-          return state;
+            return state;
     }
-  }
-  
+}

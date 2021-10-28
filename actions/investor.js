@@ -87,3 +87,27 @@ export const updateInvestorProfile = (data) => (dispatch) => {
             });
         });
 };
+
+// Get list of investors
+export const getInvestorList = () => (dispatch) => {
+    const token = localStorage.getItem('token');
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Brearer ${token}`,
+        },
+    };
+
+    axios
+        .get(`/api/investors/list/`, config)
+        .then((res) => {
+            dispatch({
+                type: GET_STARTUP_LIST,
+                payload: res.data,
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};

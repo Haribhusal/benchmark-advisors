@@ -28,6 +28,7 @@ export const GET_SUB_SERVICES = 'GET_SUB_SERVICES';
 export const GET_STATES = 'GET_STATES';
 export const GET_DISTRICTS = 'GET_DISTRICTS';
 export const GET_MUNICIPALITIES = 'GET_MUNICIPALITIES';
+export const GET_STARTUP_LIST = 'GET_STARTUP_LIST';
 
 // proposal
 export const PROPOSAL_REQUEST = 'PROPOSAL_REQUEST';

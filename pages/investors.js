@@ -1,34 +1,66 @@
-import Image from "next/image";
-import Footer from "../components/Footer";
-import Link from "next/link";
-import OurStory from "../components/OurStory";
+import { isEmpty } from 'lodash';
+import { useRouter } from 'next/router';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getInvestorList } from '../actions/investor';
+
+import Image from 'next/image';
+import Footer from '../components/Footer';
+import Link from 'next/link';
+import OurStory from '../components/OurStory';
 
 export default function AdvisoryAndConsulting() {
-  return (
-    <>
-      <main
-        className="page"
-        style={{
-          backgroundImage: "url('/background/bg.png')",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-        }}
-        className="py-5"
-      >
-        <section className="iconImage py-5">
-          <div className="container">
-            <div className="row">
-              <div className="col-sm-6 d-flex align-items-center">
-                <div className="textwrapper">
-                  <div className="subtitle f14 text-muted">INVESTORS</div>
-                  <h3 className="title font_p text_big mb-5">Investors</h3>
-                  <p className="text f14 my-3">
-                    Lorem ipsum dolor sit amet, ipsum dolo dipiscing elit, sed
-                    do eiusmod tempor incididunt consectetur adipiscing elit
-                  </p>
-                  {/* <div className="buttonwrapper">
+    const router = useRouter();
+    const dispatch = useDispatch();
+
+    const { user, data } = useSelector((state) => state.auth);
+    const { startupList } = useSelector((state) => state.common);
+
+    console.log({ user, startupList }, 'user');
+
+    useEffect(() => {
+        if (!data) {
+            router.push('/');
+        }
+        if (isEmpty(data?.investor_name)) {
+            router.push('/startup');
+        }
+    }, [user]);
+
+    useEffect(() => {
+        dispatch(getInvestorList());
+    }, [dispatch]);
+
+    return (
+        <>
+            <main
+                className='page'
+                style={{
+                    backgroundImage: "url('/background/bg.png')",
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundAttachment: 'fixed',
+                }}
+                className='py-5'
+            >
+                <section className='iconImage py-5'>
+                    <div className='container'>
+                        <div className='row'>
+                            <div className='col-sm-6 d-flex align-items-center'>
+                                <div className='textwrapper'>
+                                    <div className='subtitle f14 text-muted'>
+                                        INVESTORS
+                                    </div>
+                                    <h3 className='title font_p text_big mb-5'>
+                                        Investors
+                                    </h3>
+                                    <p className='text f14 my-3'>
+                                        Lorem ipsum dolor sit amet, ipsum dolo
+                                        dipiscing elit, sed do eiusmod tempor
+                                        incididunt consectetur adipiscing elit
+                                    </p>
+                                    {/* <div className="buttonwrapper">
                     <button className="btn btn_p rounded_big font_p text_w px-5 py-3">
                       Become One{" "}
                       <span>
@@ -37,35 +69,37 @@ export default function AdvisoryAndConsulting() {
                       </span>{" "}
                     </button>
                   </div> */}
-                </div>
-              </div>
-              <div className="col-sm-6">
-                <div className="imagewrapper text-center">
-                  <Image
-                    src="/images/angel-investors.png"
-                    height={400}
-                    width={350}
-                    priority
-                  ></Image>
-                </div>
-              </div>
-            </div>
+                                </div>
+                            </div>
+                            <div className='col-sm-6'>
+                                <div className='imagewrapper text-center'>
+                                    <Image
+                                        src='/images/angel-investors.png'
+                                        height={400}
+                                        width={350}
+                                        priority
+                                    ></Image>
+                                </div>
+                            </div>
+                        </div>
 
-            <div className="row">
+                        {/* <div className="row">
               <div className="col-sm-12">
                 <h3 className="title">Investors Revealing soon...</h3>
               </div>
-            </div>
-
-            {/* <div className="row">
-              <div className="col-sm-12">
-                <div className="textwrapper">
-                  <div className="font_p f19 ">115 Total Investors</div>
-                </div>
-              </div>
             </div> */}
 
-            {/* <div className="row">
+                        <div className='row'>
+                            <div className='col-sm-12'>
+                                <div className='textwrapper'>
+                                    <div className='font_p f19 '>
+                                        115 Total Investors
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* <div className="row">
               <div className="col-sm-12">
                 <div className="textwrapper my-3">
                   <div className="subtitle f14 fw100 text-muted">
@@ -75,7 +109,7 @@ export default function AdvisoryAndConsulting() {
               </div>
             </div> */}
 
-            {/* <div className="row">
+                        {/* <div className="row">
               <div className="col-sm-4">
                 <div className="investorwrapper bg_white rounded_medium">
                   <div className="invested">Rs. 20,00,000</div>
@@ -206,7 +240,7 @@ export default function AdvisoryAndConsulting() {
               </div>
             </div> */}
 
-            {/* <div className="row">
+                        {/* <div className="row">
               <div className="col-sm-12">
                 <div className="textwrapper my-3">
                   <div className="subtitle f14 fw100 text-muted">
@@ -215,7 +249,7 @@ export default function AdvisoryAndConsulting() {
                 </div>
               </div>
             </div> */}
-            {/* <div className="otherInvestors">
+                        {/* <div className="otherInvestors">
               <div className="row ">
                 <div className="col-sm-3">
                   <div className="investorwrapper bg_white rounded_medium">
@@ -260,9 +294,9 @@ export default function AdvisoryAndConsulting() {
                 </div>
               </div>
             </div> */}
-          </div>
-        </section>
-      </main>
-    </>
-  );
+                    </div>
+                </section>
+            </main>
+        </>
+    );
 }
