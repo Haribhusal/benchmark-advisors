@@ -15,6 +15,7 @@ export default function SingleSubService() {
   const handleShow = () => setShow(true);
 
   const router = useRouter();
+<<<<<<< HEAD
   const { slug } = router.query;
   const [features, setFeatures] = useState();
   const [team, setTeam] = useState();
@@ -40,6 +41,29 @@ export default function SingleSubService() {
         console.log(error);
       });
   }, [slug]);
+=======
+  const { slug } = router.query
+  const [subService, setSubService] = useState()
+  const [features, setFeatures] = useState()
+  const[teammember,setTeamMember] = useState()
+
+  useEffect(() => {
+    axios.get(`https://benchmark.promotingnepal.com/api/team/featurelist/${slug}`)
+    .then(response => {
+      console.log("response", response.data)
+      const features = response.data.featureList;
+      const teams = response.data.teamList;
+      console.log('features', features)
+      console.log('teams', teams)
+      setFeatures(features);
+      setTeamMember(teams)
+    }).catch(error => {
+      
+      console.log(error)
+    })
+  
+  }, [slug])
+>>>>>>> 813a98cc9996c3d4c513e02139e0ddedfb390121
 
   const onSubmit = async (data, e) => {
     console.log("from data", props.id);
@@ -165,6 +189,7 @@ export default function SingleSubService() {
                 </div>
               </div>
               <div className="row">
+<<<<<<< HEAD
                 {team?.map((member) => (
                   <div className="col-sm-6" key={member?.id}>
                     <div className="contactWrapper mb-4 bg_white d-flex">
@@ -176,22 +201,47 @@ export default function SingleSubService() {
                           <h5 className="name title font_p">{member?.name}</h5>
                           <p className="text-muted mb-3 f14">
                             {member?.designation}
+=======
+                {teammember?.map((member) => (
+                  <div className="col-sm-6" >
+                    <div className="contactWrapper mb-4 bg_white d-flex">
+                      <div className="image">
+                        <img src={member.imagepath} alt="" />
+                      </div>
+                      <div className="d-flex align-items-center p-4">
+                        <div className="">
+                          <h5 className="name title font_p">{member.name}</h5>
+                          <p className="text-muted mb-3 f14">
+                            {member.designation}
+>>>>>>> 813a98cc9996c3d4c513e02139e0ddedfb390121
                           </p>
                           <div className="contacts">
                             <div className="item text-muted f14">
                               <i className="las la-phone f16 mr-2"></i>
+<<<<<<< HEAD
                               {member?.phone}
                             </div>
                             <div className="item text-muted f14">
                               <i className="las la-envelope f16 mr-2"></i>
                               {member?.email}
+=======
+                              {member.phone}
+                            </div>
+                            <div className="item text-muted f14">
+                              <i className="las la-envelope f16 mr-2"></i>
+                              {member.email}
+>>>>>>> 813a98cc9996c3d4c513e02139e0ddedfb390121
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
+<<<<<<< HEAD
                 ))}
+=======
+              ))} 
+>>>>>>> 813a98cc9996c3d4c513e02139e0ddedfb390121
               </div>
             </div>
            */}
